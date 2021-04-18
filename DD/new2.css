@@ -70,7 +70,7 @@ html {
 	font-family: Microsoft YaHei,sans-serif;
 	z-index: 0;
 	line-height: 1.5;
-	background-color: #DAF7A6;
+	background-color: #04202c;
 	background-size: cover;
 	background-position: 50% 50%;
 	background-attachment: fixed;
@@ -95,7 +95,7 @@ a:hover {
 }
 
 b {
-	background-color: #DAF7A6
+	background-color: #04202c
 }
 
 ::selection {
@@ -222,7 +222,7 @@ b {
 	text-decoration: none;
 	font-size: 90%;
 	vertical-align: middle central;
-	color: #000;
+	color: #fff;
 	letter-spacing: .5px;
 	text-align: center;
 	-webkit-transition: .2s linear;
