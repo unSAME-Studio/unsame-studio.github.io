@@ -1,0 +1,13 @@
+@charset "utf-8";
+body   {
+	font-family: sen;
+}
+div {
+	max-width: 600px;
+	margin: auto;
+	text-align: center;
+}
+table {
+	margin: auto;
+
+}
