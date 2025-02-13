@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- add font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="images/seagull/SeagullSquareIcon.ico">
+
+    <title>Gulltastrophe - Coming Soon</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1774bc;
+            color: white;
+            font-family: "Outfit", sans-serif;
+            font-weight: 400;
+            font-optical-sizing: auto;
+            font-style: normal;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo-container {
+            width: 100%;
+            box-sizing: border-box;
+            height: 50vh; /* Make logo container take up half the viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+        }
+
+        .logo {
+            width: 100%;
+            max-width: 1000px; /* Increased from 800px */
+            height: auto;
+            max-height: 40vh; /* Increased from 30vh */
+            object-fit: contain;
+            margin: 20;
+            display: block;
+            transition: transform 0.3s;
+            background: none;
+        }
+
+        .logo:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .trailer {
+            margin: 40px auto;
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16/9;
+        }
+
+        .screenshots-container {
+            position: relative;
+            margin: 40px 0;
+            padding: 0 40px;
+        }
+
+        .screenshots {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 20px 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .screenshots::-webkit-scrollbar {
+            display: none;
+        }
+
+        .screenshot-link {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 169px;
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .screenshot {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .screenshot-link:hover .screenshot {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Overlay with zoom icon */
+        .screenshot-link::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: rgba(0, 0, 0, 0.0);
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .screenshot-link:hover::after {
+            opacity: 1;
+        }
+
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background 0.3s;
+            z-index: 2;
+        }
+
+        .scroll-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .scroll-left {
+            left: 0;
+        }
+
+        .scroll-right {
+            right: 0;
+        }
+
+        .description {
+            max-width: 800px;
+            margin: 40px auto;
+            line-height: 1.6;
+            font-size: 1.4em;
+            padding: 0 20px;
+        }
+
+        .coming-soon {
+            font-size: clamp(2em, 12vw, 3em);
+            font-weight: bold;
+            margin: 40px 0;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .platforms {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .platform-logo {
+            width: 200px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0);
+            object-fit: contain;
+            transition: transform 0.2s;
+        }
+
+        .platform-logo:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            margin-bottom: 20px; /* Reduced to accommodate press kit button */
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                max-height: 20vh;
+            }
+            
+            .screenshots-container {
+                padding: 0 20px;
+            }
+            
+            .platform-logo {
+                width: 150px;
+                height: 45px;
+            }
+        }
+
+        /* New Press Kit Button Styles */
+        .press-kit-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 40px 0;
+        }
+
+        .press-kit-button {
+            width: 200px;
+            height: 200px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .press-kit-label {
+            color: #1774bc;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .press-kit-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .press-kit-button:hover {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(90deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Banner Logo -->
+        <div class="logo-container">
+            <img src="images/seagull/TitleLogo.png" alt="Gulltastrophe Logo" class="logo">
+        </div>
+
+        <!-- Trailer -->
+        <!-- <iframe class="trailer" src="https://youtu.be/ila6mWyYMIg?si=-4Lftb7lIYrYkd1p" frameborder="0" allowfullscreen></iframe> -->
+        <iframe class="trailer" src="https://www.youtube.com/embed/ila6mWyYMIg?si=SYIZumMw3XnePK9_" title="trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+        <!-- Screenshots -->
+        <div class="screenshots-container">
+            <button class="scroll-btn scroll-left" onclick="scrollScreenshots('left')">←</button>
+            <div class="screenshots">
+                <a href="images/seagull/screenshots (1).png" target="_blank" class="screenshot-link">
+                    <img src="images/seagull/screenshots (1).png" alt="Screenshot 1" class="screenshot">
+                </a>
+                <a href="images/seagull/screenshots (2).png" target="_blank" class="screenshot-link">
+                    <img src="images/seagull/screenshots (2).png" alt="Screenshot 2" class="screenshot">
+                </a>
+                <a href="images/seagull/screenshots (3).png" target="_blank" class="screenshot-link">
+                    <img src="images/seagull/screenshots (3).png" alt="Screenshot 3" class="screenshot">
+                </a>
+                <a href="images/seagull/screenshots (4).png" target="_blank" class="screenshot-link">
+                    <img src="images/seagull/screenshots (4).png" alt="Screenshot 4" class="screenshot">
+                </a>
+                <a href="images/seagull/screenshots (5).png" target="_blank" class="screenshot-link">
+                    <img src="images/seagull/screenshots (5).png" alt="Screenshot 5" class="screenshot">
+                </a>
+            </div>
+            <button class="scroll-btn scroll-right" onclick="scrollScreenshots('right')">→</button>
+        </div>
+
+        <!-- Description -->
+        <div class="description">
+            <p>Gull-Tastrophe is a 3D action adventure game where you play as a seagull!</p>
+            <p>Humans have taken over your island as a vacation spot. Fly, Dash, and Poop on people. Kick all of them out and take back your island!</p>
+        </div>
+
+        <!-- Coming Soon -->
+        <div class="coming-soon">Coming Soon</div>
+
+        <!-- Platform Logos -->
+        <div class="platforms">
+            <img src="images/platforms/steam.png" alt="Steam" class="platform-logo">
+            <img src="images/platforms/epicgames.png" alt="Epic Games" class="platform-logo">
+        </div>
+
+        <!-- Social Media Links (now without press kit) -->
+        <div class="social-links">
+            <a href="#" class="social-icon">
+                <img src="images/platforms/icons8-twitter-bird-48.png" alt="Twitter">
+            </a>
+            <a href="#" class="social-icon">
+                <img src="images/platforms/icons8-discord-50.png" alt="Discord">
+            </a>
+            <a href="#" class="social-icon">
+                <img src="images/platforms/icons8-bluesky-48.png" alt="Bluesky">
+            </a>
+            <a href="#" class="social-icon">
+                <img src="images/platforms/icons8-email-48.png" alt="Email">
+            </a>
+        </div>
+
+        <!-- New Press Kit Button -->
+        <div class="press-kit-container">
+            <a href="#" class="press-kit-button">
+                <img src="images/seagull/presskitbtn.png" alt="Press Kit">
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function scrollScreenshots(direction) {
+            const container = document.querySelector('.screenshots');
+            const scrollAmount = 330;
+            if (direction === 'left') {
+                container.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            } else {
+                container.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    </script>
+</body>
+</html>
