@@ -30,7 +30,7 @@
         import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
         // Configuration
-        const NUM_SEAGULLS = 2;
+        const NUM_SEAGULLS = 5;
         const DEPTH_RANGE = [-3, -1];
         const X_RANGE = [-5, 5];
         const Y_START_RANGE = [-8, -3];
@@ -61,52 +61,51 @@
             return Math.random() * (max - min) + min;
         }
 
-        // Modified seagull creation function
-        function createSeagull(originalModel) {
-            // Create a deep clone of the original model
-            const seagull = THREE.SkeletonUtils.clone(originalModel);
-            
-            // Set initial scale
-            seagull.scale.set(0.5, 0.5, 0.5);
-            
-            // Set initial position
-            seagull.position.set(
-                randomRange(X_RANGE[0], X_RANGE[1]),
-                randomRange(Y_START_RANGE[0], Y_START_RANGE[1]),
-                randomRange(DEPTH_RANGE[0], DEPTH_RANGE[1])
-            );
-            
-            // Store animation properties
-            seagull.userData = {
-                rotationSpeed: randomRange(0.005, 0.015),
-                floatSpeed: randomRange(0.003, 0.007)
-            };
-            
-            scene.add(seagull);
-            return seagull;
-        }
-
         // Load the model
         const loader = new GLTFLoader();
         loader.load('images/Seagull.glb', (gltf) => {
-            const originalModel = gltf.scene;
-            
-            // Create seagulls one by one
+            console.log('GLTF model loaded:', gltf); // Debug log
+
+            // Create seagulls
             for (let i = 0; i < NUM_SEAGULLS; i++) {
-                const newSeagull = originalModel.clone();
-                newSeagull.position.set(
+                // Clone the entire gltf scene
+                const seagullScene = gltf.scene.clone();
+                
+                // Debug log
+                console.log(`Creating seagull ${i}:`, seagullScene);
+
+                // Set transform group position
+                seagullScene.position.set(
                     randomRange(X_RANGE[0], X_RANGE[1]),
                     randomRange(Y_START_RANGE[0], Y_START_RANGE[1]),
                     randomRange(DEPTH_RANGE[0], DEPTH_RANGE[1])
                 );
-                newSeagull.userData = {
+
+                // Scale the entire group
+                seagullScene.scale.set(0.5, 0.5, 0.5);
+
+                // Store animation properties
+                seagullScene.userData = {
                     rotationSpeed: randomRange(0.005, 0.015),
-                    floatSpeed: randomRange(0.003, 0.007)
+                    floatSpeed: randomRange(0.003, 0.007),
+                    startingX: seagullScene.position.x, // Store initial X position
+                    startingZ: seagullScene.position.z  // Store initial Z position
                 };
-                scene.add(newSeagull);
-                seagulls.push(newSeagull);
+
+                // Add to scene and array
+                scene.add(seagullScene);
+                seagulls.push(seagullScene);
+
+                // Debug log
+                console.log(`Seagull ${i} position:`, seagullScene.position);
             }
-        }, undefined, (error) => {
+        }, 
+        // Loading progress
+        (xhr) => {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        },
+        // Error handling
+        (error) => {
             console.error('Error loading model:', error);
         });
 
@@ -116,8 +115,7 @@
         function animate() {
             requestAnimationFrame(animate);
 
-            // Update each seagull
-            seagulls.forEach(seagull => {
+            seagulls.forEach((seagull, index) => {
                 if (seagull && seagull.position) {
                     // Update rotation
                     seagull.rotation.y += seagull.userData.rotationSpeed;
@@ -129,6 +127,9 @@
                     if (seagull.position.y > maxHeight) {
                         seagull.position.y = Y_START_RANGE[0];
                         seagull.position.x = randomRange(X_RANGE[0], X_RANGE[1]);
+                        
+                        // Debug log
+                        console.log(`Seagull ${index} reset to:`, seagull.position);
                     }
                 }
             });
