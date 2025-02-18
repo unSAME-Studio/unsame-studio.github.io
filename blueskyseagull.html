@@ -29,7 +29,7 @@
     </style>
 </head>
 <body>
-    <!-- <div id="info">Floating Seagull</div> -->
+    <div id="info">Click to enter Seagull Town...</div>
     <script type="importmap">
         {
             "imports": {
@@ -65,10 +65,10 @@
         const sound = new THREE.Audio(listener);
 
         const audioLoader = new THREE.AudioLoader();
-        audioLoader.load('path/to/your/audio.mp3', function(buffer) {
-        sound.setBuffer(buffer);
-        sound.setLoop(false);
-        sound.setVolume(0.5);
+        audioLoader.load('audios/funkytown.ogg', function(buffer) {
+            sound.setBuffer(buffer);
+            sound.setLoop(true);
+            sound.setVolume(0.5);
         });
 
         document.addEventListener('click', function() {
