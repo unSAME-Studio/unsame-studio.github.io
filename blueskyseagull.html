@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Floating Seagull</title>
+    <!-- Twitter Card Info -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://unsame.fun/blueskyseagull">
+    <meta name="twitter:title" content="Seagull Town">
+    <meta name="twitter:description" content="Seagull Town is a 3D tactical seagull town game where you play as a seagull. It's time to cause a gull-tastrophe...">
+    <meta name="twitter:image" content="https://unsame.fun/images/gulltastrophe.png">
+
+    <!-- Open Graph Info -->
+    <meta property="og:title" content="Seagull Town">
+    <meta property="og:description" content="Seagull Town is a 3D tactical seagull town game where you play as a seagull. It's time to cause a gull-tastrophe...">
+    <meta property="og:image" content="https://unsame.fun/images/gulltastrophe.png">
+    <meta property="og:url" content="https://unsame.fun/blueskyseagull">
+
+    <title>Seagull Town</title>
     <style>
         body { margin: 0; }
         canvas { display: block; }
@@ -49,16 +62,19 @@
         const listener = new THREE.AudioListener();
         camera.add(listener);
 
-        // Create an Audio source
         const sound = new THREE.Audio(listener);
 
-        // Load the audio file
         const audioLoader = new THREE.AudioLoader();
-        audioLoader.load('audios/funkytown.ogg', function(buffer) {
-            sound.setBuffer(buffer);
-            sound.setLoop(false);
-            sound.setVolume(0.5);
+        audioLoader.load('path/to/your/audio.mp3', function(buffer) {
+        sound.setBuffer(buffer);
+        sound.setLoop(false);
+        sound.setVolume(0.5);
+        });
+
+        document.addEventListener('click', function() {
+        if (!sound.isPlaying) {
             sound.play();
+        }
         });
 
         // Camera position
