@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Floating Seagulls</title>
+    <title>Floating Seagull</title>
     <style>
         body { margin: 0; }
         canvas { display: block; }
@@ -10,13 +10,13 @@
             top: 10px;
             width: 100%;
             text-align: center;
-            color: white;
+            color: #1774bc;
             font-family: Arial, sans-serif;
         }
     </style>
 </head>
 <body>
-    <div id="info">Floating Seagulls</div>
+    <!-- <div id="info">Floating Seagull</div> -->
     <script type="importmap">
         {
             "imports": {
@@ -29,16 +29,10 @@
         import * as THREE from 'three';
         import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-        // Configuration
-        const NUM_SEAGULLS = 5;
-        const DEPTH_RANGE = [-3, -1];
-        const X_RANGE = [-5, 5];
-        const Y_START_RANGE = [-8, -3];
-
         // Scene setup
         const scene = new THREE.Scene();
         scene.background = new THREE.Color("#1774bc");
-        
+
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -54,81 +48,39 @@
         // Camera position
         camera.position.z = 5;
 
-        // Seagull array to store all instances
-        let seagulls = [];
-
-        function randomRange(min, max) {
-            return Math.random() * (max - min) + min;
-        }
-
-        // Create container for each seagull
-        function createSeagullContainer(originalModel) {
-            // Create a container group
-            const container = new THREE.Group();
-            
-            // Clone the model and add to container
-            const seagullModel = originalModel.clone();
-            container.add(seagullModel);
-            
-            // Set random position for container
-            container.position.set(
-                randomRange(X_RANGE[0], X_RANGE[1]),
-                randomRange(Y_START_RANGE[0], Y_START_RANGE[1]),
-                randomRange(DEPTH_RANGE[0], DEPTH_RANGE[1])
-            );
-            
-            // Scale the container
-            container.scale.set(0.5, 0.5, 0.5);
-            
-            // Add custom properties
-            container.userData = {
-                rotationSpeed: randomRange(0.005, 0.015),
-                floatSpeed: randomRange(0.003, 0.007)
-            };
-            
-            return container;
-        }
-
-        // Load the model
+        // Seagull object
+        let seagull;
         const loader = new GLTFLoader();
         loader.load('images/Seagull.glb', (gltf) => {
-            // Get the first mesh from the model
-            let originalModel = gltf.scene;
-            
-            // Create seagulls
-            for (let i = 0; i < NUM_SEAGULLS; i++) {
-                const seagullContainer = createSeagullContainer(originalModel);
-                scene.add(seagullContainer);
-                seagulls.push(seagullContainer);
-                
-                console.log(`Created seagull ${i} at:`, seagullContainer.position);
-            }
+            seagull = gltf.scene;
+            seagull.scale.set(0.5, 0.5, 0.5);
+            scene.add(seagull);
         }, undefined, (error) => {
             console.error('Error loading model:', error);
         });
 
+        // Animation variables
+        const rotationSpeed = 0.01;
+        const floatSpeed = 0.005;
+        const resetHeight = -5;
         const maxHeight = 5;
 
         // Animation loop
         function animate() {
             requestAnimationFrame(animate);
 
-            seagulls.forEach((container, index) => {
-                if (container) {
-                    // Rotate the container
-                    container.rotation.y += container.userData.rotationSpeed;
-                    
-                    // Move the container up
-                    container.position.y += container.userData.floatSpeed;
-                    
-                    // Reset when too high
-                    if (container.position.y > maxHeight) {
-                        container.position.y = Y_START_RANGE[0];
-                        container.position.x = randomRange(X_RANGE[0], X_RANGE[1]);
-                        console.log(`Reset seagull ${index} to:`, container.position);
-                    }
+            if (seagull) {
+                // Rotate horizontally
+                seagull.rotation.y += rotationSpeed;
+
+                // Move upward
+                seagull.position.y += floatSpeed;
+
+                // Reset position when too high
+                if (seagull.position.y > maxHeight) {
+                    seagull.position.y = resetHeight;
                 }
-            });
+            }
 
             renderer.render(scene, camera);
         }
