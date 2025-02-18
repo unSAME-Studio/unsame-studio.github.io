@@ -45,6 +45,22 @@
         directionalLight.position.set(5, 5, 5);
         scene.add(directionalLight);
 
+        // Create an AudioListener and add it to the camera
+        const listener = new THREE.AudioListener();
+        camera.add(listener);
+
+        // Create an Audio source
+        const sound = new THREE.Audio(listener);
+
+        // Load the audio file
+        const audioLoader = new THREE.AudioLoader();
+        audioLoader.load('audios/funkytown.ogg', function(buffer) {
+            sound.setBuffer(buffer);
+            sound.setLoop(false);
+            sound.setVolume(0.5);
+            sound.play();
+        });
+
         // Camera position
         camera.position.z = 5;
 
@@ -58,6 +74,7 @@
         }, undefined, (error) => {
             console.error('Error loading model:', error);
         });
+        
 
         // Animation variables
         const rotationSpeed = 0.01;
