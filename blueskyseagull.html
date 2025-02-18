@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Floating Seagull</title>
+    <title>Floating Seagulls</title>
     <style>
         body { margin: 0; }
         canvas { display: block; }
@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-    <div id="info">Floating Seagull</div>
+    <div id="info">Floating Seagulls</div>
     <script type="importmap">
         {
             "imports": {
@@ -29,8 +29,16 @@
         import * as THREE from 'three';
         import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
+        // Configuration
+        const NUM_SEAGULLS = 5;  // Change this to control number of seagulls
+        const DEPTH_RANGE = [-3, -1];  // Z-axis range
+        const X_RANGE = [-5, 5];      // X-axis range
+        const Y_START_RANGE = [-8, -3]; // Starting Y positions
+
         // Scene setup
         const scene = new THREE.Scene();
+        scene.background = new THREE.Color("#1774bc");
+        
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -46,39 +54,68 @@
         // Camera position
         camera.position.z = 5;
 
-        // Seagull object
-        let seagull;
+        // Seagull array to store all instances
+        const seagulls = [];
+
+        // Helper function to get random number in range
+        function randomRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // Function to create a seagull with random position
+        function createSeagull(gltf) {
+            const seagull = gltf.scene.clone();
+            seagull.scale.set(0.5, 0.5, 0.5);
+            
+            // Set random initial position
+            seagull.position.x = randomRange(X_RANGE[0], X_RANGE[1]);
+            seagull.position.y = randomRange(Y_START_RANGE[0], Y_START_RANGE[1]);
+            seagull.position.z = randomRange(DEPTH_RANGE[0], DEPTH_RANGE[1]);
+            
+            // Add some variation to rotation
+            seagull.rotation.y = randomRange(0, Math.PI * 2);
+            
+            // Add custom properties for animation
+            seagull.userData = {
+                rotationSpeed: randomRange(0.005, 0.015),
+                floatSpeed: randomRange(0.003, 0.007)
+            };
+            
+            scene.add(seagull);
+            seagulls.push(seagull);
+        }
+
+        // Load seagull model
         const loader = new GLTFLoader();
         loader.load('images/Seagull.glb', (gltf) => {
-            seagull = gltf.scene;
-            seagull.scale.set(0.5, 0.5, 0.5);
-            scene.add(seagull);
+            // Create multiple seagulls
+            for (let i = 0; i < NUM_SEAGULLS; i++) {
+                createSeagull(gltf);
+            }
         }, undefined, (error) => {
             console.error('Error loading model:', error);
         });
 
-        // Animation variables
-        const rotationSpeed = 0.01;
-        const floatSpeed = 0.005;
-        const resetHeight = -5;
-        const maxHeight = 5;
+        const maxHeight = 5;  // Height at which seagulls reset
 
         // Animation loop
         function animate() {
             requestAnimationFrame(animate);
 
-            if (seagull) {
-                // Rotate horizontally
-                seagull.rotation.y += rotationSpeed;
+            seagulls.forEach(seagull => {
+                // Rotate horizontally at custom speed
+                seagull.rotation.y += seagull.userData.rotationSpeed;
 
-                // Move upward
-                seagull.position.y += floatSpeed;
+                // Move upward at custom speed
+                seagull.position.y += seagull.userData.floatSpeed;
 
                 // Reset position when too high
                 if (seagull.position.y > maxHeight) {
-                    seagull.position.y = resetHeight;
+                    seagull.position.y = Y_START_RANGE[0];
+                    // Randomize X position when resetting
+                    seagull.position.x = randomRange(X_RANGE[0], X_RANGE[1]);
                 }
-            }
+            });
 
             renderer.render(scene, camera);
         }
