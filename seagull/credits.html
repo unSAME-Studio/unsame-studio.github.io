@@ -31,125 +31,6 @@
             padding: 20px;
         }
 
-        .logo-container {
-            width: 100%;
-            box-sizing: border-box;
-            height: 50vh; /* Make logo container take up half the viewport height */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: none;
-        }
-
-        .logo {
-            width: 100%;
-            max-width: 1000px; /* Increased from 800px */
-            height: auto;
-            max-height: 40vh; /* Increased from 30vh */
-            object-fit: contain;
-            margin: 20;
-            display: block;
-            transition: transform 0.3s;
-            background: none;
-        }
-
-        .logo:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
-
-        .trailer {
-            margin: 40px auto;
-            width: 100%;
-            max-width: 800px;
-            aspect-ratio: 16/9;
-        }
-
-        .screenshots-container {
-            position: relative;
-            margin: 40px 0;
-            padding: 0 40px;
-        }
-
-        .screenshots {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 20px 0;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .screenshots::-webkit-scrollbar {
-            display: none;
-        }
-
-        .screenshot-link {
-            flex: 0 0 auto;
-            width: 300px;
-            height: 169px;
-            position: relative;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .screenshot {
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
-            display: block;
-        }
-
-        .screenshot-link:hover .screenshot {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        /* Overlay with zoom icon */
-        .screenshot-link::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            background: rgba(0, 0, 0, 0.0);
-            padding: 10px;
-            border-radius: 50%;
-        }
-
-        .screenshot-link:hover::after {
-            opacity: 1;
-        }
-
-        .scroll-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            color: white;
-            padding: 15px;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: background 0.3s;
-            z-index: 2;
-        }
-
-        .scroll-btn:hover {
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        .scroll-left {
-            left: 0;
-        }
-
-        .scroll-right {
-            right: 0;
-        }
-
         .description {
             max-width: 800px;
             margin: 40px auto;
@@ -164,102 +45,6 @@
             margin: 40px 0;
             text-transform: uppercase;
             letter-spacing: 4px;
-        }
-
-        .platforms {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-            padding: 0 20px;
-        }
-
-        .platform-logo {
-            width: 200px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0);
-            object-fit: contain;
-            transition: transform 0.2s;
-        }
-
-        .platform-logo:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 40px 0;
-            margin-bottom: 20px; /* Reduced to accommodate press kit button */
-            flex-wrap: wrap;
-        }
-
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            background: none;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-
-        .social-icon:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
-
-        @media (max-width: 768px) {
-            .logo {
-                max-height: 20vh;
-            }
-            
-            .screenshots-container {
-                padding: 0 20px;
-            }
-            
-            .platform-logo {
-                width: 150px;
-                height: 45px;
-            }
-        }
-
-        /* New Press Kit Button Styles */
-        .press-kit-container {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0 40px 0;
-        }
-
-        .press-kit-button {
-            width: 200px;
-            height: 200px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.5s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .press-kit-label {
-            color: #1774bc;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .press-kit-button img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .press-kit-button:hover {
-            animation: spin 4s linear infinite;
         }
 
         a:link {
@@ -295,6 +80,110 @@
             }
         }
 
+        .credits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #ff5f6d, #ffc371);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .external-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        .icon-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            min-width: 80px; /* Prevent shrinking */
+            margin-right: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .masked-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center; /* Center the image */
+        }
+
+        .icon-mask {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .member-role {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Different masks for different team members */
+        .mask-circle {
+            -webkit-mask-image: url('../images/seagull/Pooplower.png');
+            mask-image: url('../images/seagull/Pooplower.png');
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+        }
+
     </style>
 </head>
 <body>
@@ -304,7 +193,108 @@
 
         <!-- Description -->
         <div class="description">
-            <p>Gulltastrophe is developed by Team Seagull, a part of unSAME studio</p>
+            <p>Gulltastrophe is developed by Team Seagull</p>
+        </div>
+        
+        <div class="team-grid">
+            <!-- Sam Feng -->
+            <div class="team-member">
+                <div class="icon-container">
+                    <img src="../images/seagull/credits/Sam Feng.png" alt="Sam Feng" class="masked-icon mask-circle">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Sam Feng</div>
+                    <div class="member-role">Designer, Programmer</div>
+                </div>
+            </div>
+            
+            <!-- Yiyang Lu -->
+            <div class="team-member">
+                <div class="icon-container">
+                    <img src="../images/seagull/credits/Yiyang Lu.png" alt="Yiyang Lu" class="masked-icon mask-circle">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Yiyang Lu</div>
+                    <div class="member-role">Designer, Programmer</div>
+                </div>
+            </div>
+            
+            <!-- Davide Zhu -->
+            <div class="team-member">
+                <div class="icon-container">
+                    <img src="../images/seagull/credits/Davide Zhu.png" alt="Davide Zhu" class="masked-icon mask-circle">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Davide Zhu</div>
+                    <div class="member-role">Sound Designer</div>
+                </div>
+            </div>
+            
+            <!-- Manas Sara -->
+            <div class="team-member">
+                <div class="icon-container">
+                    <img src="../images/seagull/credits/Manas Sara.png" alt="Manas Sara" class="masked-icon mask-circle">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Manas Sara</div>
+                    <div class="member-role">Programmer, Designer</div>
+                </div>
+            </div>
+            
+            <!-- Mohesha Bajpai -->
+            <div class="team-member">
+                <div class="icon-container">
+                    <img src="../images/seagull/credits/Mohesha Bajpai.png" alt="Mohesha Bajpai" class="masked-icon mask-circle">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Mohesha Bajpai</div>
+                    <div class="member-role">Level Designer, Artist</div>
+                </div>
+            </div>
+            
+            <!-- Manoj Sara -->
+            <div class="team-member">
+                <div class="icon-container">
+                    <img src="../images/seagull/credits/Manoj Sara.png" alt="Manoj Sara" class="masked-icon mask-circle">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Manoj Sara</div>
+                    <div class="member-role">Programmer</div>
+                </div>
+            </div>
+            
+            <!-- Eizi Yu -->
+            <div class="team-member">
+                <div class="icon-container">
+                    <img src="../images/seagull/segullicon.png" alt="Eizi Yu" class="masked-icon mask-circle">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Eizi Yu</div>
+                    <div class="member-role">Designer <span class="external-tag">EXTERNAL</span></div>
+                </div>
+            </div>
+            
+            <!-- Franco Toledo -->
+            <div class="team-member">
+                <div class="icon-container">
+                    <img src="../images/seagull/segullicon.png" alt="Franco Toledo" class="masked-icon mask-circle">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Franco Toledo</div>
+                    <div class="member-role">Music Composer <span class="external-tag">EXTERNAL</span></div>
+                </div>
+            </div>
+            
+            <!-- Sammie Chen -->
+            <div class="team-member">
+                <div class="icon-container">
+                    <img src="../images/seagull/segullicon.png" alt="Sammie Chen" class="masked-icon mask-circle">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Sammie Chen</div>
+                    <div class="member-role">UX Designer <span class="external-tag">EXTERNAL</span></div>
+                </div>
+            </div>
         </div>
 
         <div class="description">
