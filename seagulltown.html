@@ -72,9 +72,23 @@
         });
 
         document.addEventListener('click', function() {
-        if (!sound.isPlaying) {
-            sound.play();
-        }
+            if (!sound.isPlaying) {
+                sound.play();
+            }
+
+            // Calculate click position in 3D space
+            const mouse = new THREE.Vector2();
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            const raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects([scene], true);
+
+            if (intersects.length > 0) {
+                const point = intersects[0].point;
+                spawnSeagull(point);
+            }
         });
 
         // Camera position
@@ -90,7 +104,14 @@
         }, undefined, (error) => {
             console.error('Error loading model:', error);
         });
-        
+
+        function spawnSeagull(position) {
+            if (seagullModel) {
+                const seagull = seagullModel.clone();
+                seagull.position.copy(position);
+                scene.add(seagull);
+            }
+        }
 
         // Animation variables
         const rotationSpeed = 0.01;
