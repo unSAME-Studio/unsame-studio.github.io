@@ -75,20 +75,6 @@
             if (!sound.isPlaying) {
                 sound.play();
             }
-
-            // Calculate click position in 3D space
-            const mouse = new THREE.Vector2();
-            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-            const raycaster = new THREE.Raycaster();
-            raycaster.setFromCamera(mouse, camera);
-            const intersects = raycaster.intersectObjects([scene], true);
-
-            if (intersects.length > 0) {
-                const point = intersects[0].point;
-                spawnSeagull(point);
-            }
         });
 
         // Camera position
@@ -105,13 +91,33 @@
             console.error('Error loading model:', error);
         });
 
-        function spawnSeagull(position) {
-            if (seagullModel) {
-                const seagull = seagullModel.clone();
-                seagull.position.copy(position);
-                scene.add(seagull);
+        // Raycaster and mouse vector
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        function onMouseClick(event) {
+            // Calculate mouse position in normalized device coordinates
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            // Update the raycaster with the camera and mouse position
+            raycaster.setFromCamera(mouse, camera);
+
+            // Calculate objects intersecting the ray
+            const intersects = raycaster.intersectObjects(scene.children, true);
+
+            if (intersects.length > 0) {
+                const intersect = intersects[0];
+                const position = intersect.point;
+
+                // Move the seagull to the clicked position
+                if (seagull) {
+                    seagull.position.copy(position);
+                }
             }
         }
+        
+        window.addEventListener('click', onMouseClick);
 
         // Animation variables
         const rotationSpeed = 0.01;
