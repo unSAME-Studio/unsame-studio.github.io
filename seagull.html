@@ -384,8 +384,146 @@
             mask-size: contain;
         }
 
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+
+        .slider-track {
+            position: absolute;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 2px;
+        }
+
+        .slider-handle {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .slider-handle:hover {
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        .slider-handle:active {
+            transform: translateY(-50%) scale(1.2);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
     </style>
 </head>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const screenshotsContainer = document.getElementById('screenshots');
+        const screenshotFolder = 'images/seagull/screenshots/screenshots';
+        const screenshotCount = 8; // Number of screenshots
+
+        for (let i = 1; i <= screenshotCount; i++) {
+            const screenshotLink = document.createElement('a');
+            screenshotLink.href = `${screenshotFolder} (${i}).png`;
+            screenshotLink.target = '_blank';
+            screenshotLink.className = 'screenshot-link';
+
+            const screenshotImg = document.createElement('img');
+            screenshotImg.src = `${screenshotFolder} (${i}).png`;
+            screenshotImg.alt = `Screenshot ${i}`;
+            screenshotImg.className = 'screenshot';
+
+            screenshotLink.appendChild(screenshotImg);
+            screenshotsContainer.appendChild(screenshotLink);
+        }
+
+        const screenshots = document.querySelector('.screenshots');
+        const sliderHandle = document.querySelector('.slider-handle');
+        const sliderTrack = document.querySelector('.slider-track');
+        const container = document.querySelector('.screenshots-container');
+
+        // Initialize slider position
+        updateSliderPosition();
+
+        // Update slider position when scrolling
+        screenshots.addEventListener('scroll', function() {
+            updateSliderPosition();
+        });
+
+        // Mouse wheel scroll with increased speed
+        container.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            screenshots.scrollLeft += e.deltaY * 3; // Increased multiplier for faster scrolling
+            updateSliderPosition();
+        });
+
+        let isDragging = false;
+        let startX;
+        let scrollStartPosition;
+
+        function updateSliderPosition() {
+            const scrollPercentage = screenshots.scrollLeft / (screenshots.scrollWidth - screenshots.clientWidth);
+            const maxHandlePosition = sliderTrack.clientWidth - sliderHandle.clientWidth;
+            sliderHandle.style.left = `${scrollPercentage * maxHandlePosition}px`;
+        }
+
+        function updateScrollPosition(x) {
+            const boundingRect = sliderTrack.getBoundingClientRect();
+            const percentage = Math.max(0, Math.min(1, (x - boundingRect.left) / boundingRect.width));
+            const maxScroll = screenshots.scrollWidth - screenshots.clientWidth;
+            screenshots.scrollLeft = maxScroll * percentage;
+        }
+
+        sliderHandle.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX - sliderHandle.offsetLeft;
+            sliderHandle.style.transform = 'translateY(-50%) scale(1.2)';
+            document.body.style.userSelect = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            
+            const boundingRect = sliderTrack.getBoundingClientRect();
+            const x = Math.max(boundingRect.left, Math.min(e.clientX, boundingRect.right));
+            updateScrollPosition(x);
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            sliderHandle.style.transform = 'translateY(-50%)';
+            document.body.style.userSelect = '';
+        });
+
+        // Initial position update
+        setTimeout(updateSliderPosition, 100);
+    });
+
+    function scrollScreenshots(direction) {
+        const container = document.querySelector('.screenshots');
+        const scrollAmount = 330;
+        if (direction === 'left') {
+            container.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        } else {
+            container.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    }
+</script>
 <body>
     <div class="container">
         <!-- Banner Logo -->
@@ -411,7 +549,7 @@
         <iframe class="trailer" src="https://www.youtube.com/embed/ila6mWyYMIg?si=SYIZumMw3XnePK9_" title="trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
         <!-- Screenshots -->
-        <div class="screenshots-container">
+        <!-- <div class="screenshots-container">
             <button class="scroll-btn scroll-left" onclick="scrollScreenshots('left')">⟨</button>
             <div class="screenshots">
                 <a href="images/seagull/screenshots (1).png" target="_blank" class="screenshot-link">
@@ -431,6 +569,18 @@
                 </a>
             </div>
             <button class="scroll-btn scroll-right" onclick="scrollScreenshots('right')">⟩</button>
+        </div> -->
+        <div class="screenshots-container">
+            <button class="scroll-btn scroll-left" onclick="scrollScreenshots('left')">⟨</button>
+            <div class="screenshots" id="screenshots">
+                <!-- Screenshots will be dynamically added here -->
+            </div>
+            <button class="scroll-btn scroll-right" onclick="scrollScreenshots('right')">⟩</button>
+            <!-- Add this new slider container -->
+            <!-- <div class="slider-container">
+                <div class="slider-track"></div>
+                <div class="slider-handle"></div>
+            </div> -->
         </div>
 
         <!-- Description -->
@@ -461,7 +611,7 @@
             <a href="https://x.com/unsamestudio" target=”_blank” class="social-icon">
                 <img src="images/platforms/icons8-twitter-bird-48.png" alt="Twitter">
             </a>
-            <a href="https://bsky.app/profile/unsamestudio.bsky.social" target=”_blank” class="social-icon">
+            <a href="https://bsky.app/profile/unsame.fun" target=”_blank” class="social-icon">
                 <img src="images/platforms/icons8-bluesky-48.png" alt="Bluesky">
             </a>
             <a href="mailto:unsamestudio@gmail.com" target=”_blank” class="social-icon">
