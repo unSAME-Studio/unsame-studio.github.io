@@ -100,20 +100,38 @@
             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-            // Update the raycaster with the camera and mouse position
-            raycaster.setFromCamera(mouse, camera);
+            // Convert screen coordinates to 3D world position
+            const vector = new THREE.Vector3(mouse.x, mouse.y, 0);
+            vector.unproject(camera);
+            const dir = vector.sub(camera.position).normalize();
+            const distance = -camera.position.z / dir.z;
+            const pos = camera.position.clone().add(dir.multiplyScalar(distance));
 
-            // Calculate objects intersecting the ray
-            const intersects = raycaster.intersectObjects(scene.children, true);
+            if (seagull) {
+                seagull.position.copy(pos);
+                
+                // Add silly effects
+                // Random rotation
+                seagull.rotation.x = Math.random() * Math.PI * 2;
+                seagull.rotation.z = Math.random() * Math.PI * 2;
+                
+                // Random color
+                seagull.traverse((child) => {
+                    if (child.isMesh) {
+                        child.material.color = new THREE.Color(
+                            Math.random(),
+                            Math.random(),
+                            Math.random()
+                        );
+                    }
+                });
 
-            if (intersects.length > 0) {
-                const intersect = intersects[0];
-                const position = intersect.point;
-
-                // Move the seagull to the clicked position
-                if (seagull) {
-                    seagull.position.copy(position);
-                }
+                // Bouncy scale animation
+                const originalScale = 0.5;
+                seagull.scale.set(originalScale * 2, originalScale * 2, originalScale * 2);
+                setTimeout(() => {
+                    seagull.scale.set(originalScale, originalScale, originalScale);
+                }, 200);
             }
         }
         

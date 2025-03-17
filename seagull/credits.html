@@ -112,6 +112,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
+            justify-items: center;
         }
 
         .team-member {
@@ -121,12 +122,28 @@
             border-radius: 10px;
             padding: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-align: left;
+            border: none;
+            color: white;
         }
 
         .team-member:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             background: rgba(255, 255, 255, 0.1);
+        }
+
+        .team-member:active {
+            transform: translateY(0px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .member-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            width: 100%;
         }
 
         .external-tag {
@@ -206,124 +223,144 @@
 
         <!-- Description -->
         <div class="description">
-            <p>Gulltastrophe is developed by Team Seagull</p>
+            <p>Gulltastrophe is developed by Team Seagull and <a href="https://unsame.fun">unSAME studio</a></p>
         </div>
         
         <div class="team-grid">
             <!-- Yiyang Lu -->
-            <div class="team-member">
-                <div class="icon-container">
-                    <img src="../images/seagull/credits/Yiyang Lu.png" alt="Yiyang Lu" class="masked-icon mask-circle">
+            <a href="https://unsame.fun/team/yiyang" class="member-link">
+                <div class="team-member">
+                    <div class="icon-container">
+                        <img src="../images/seagull/credits/Yiyang Lu.png" alt="Yiyang Lu" class="masked-icon mask-circle">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">Yiyang Lu</div>
+                        <div class="member-role">Lead Programmer, Designer</div>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <div class="member-name">Yiyang Lu</div>
-                    <div class="member-role">Lead Programmer, Designer</div>
-                </div>
-            </div>
+            </a>
 
             <!-- Sam Feng -->
-            <div class="team-member">
-                <div class="icon-container">
-                    <img src="../images/seagull/credits/Sam Feng.png" alt="Sam Feng" class="masked-icon mask-circle">
+            <a href="https://samfeng.carrd.co" class="member-link">
+                <div class="team-member">
+                    <div class="icon-container">
+                        <img src="../images/seagull/credits/Sam Feng.png" alt="Sam Feng" class="masked-icon mask-circle">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">Sam Feng</div>
+                        <div class="member-role">Game Designer, Director</div>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <div class="member-name">Sam Feng</div>
-                    <div class="member-role">Lead Designer, Programmer</div>
-                </div>
-            </div>
+            </a>
             
             <!-- Davide Zhu -->
-            <div class="team-member">
-                <div class="icon-container">
-                    <img src="../images/seagull/credits/Davide Zhu.png" alt="Davide Zhu" class="masked-icon mask-circle">
+            <a href="https://unsame.fun/team/davide" class="member-link">
+                <div class="team-member">
+                    <div class="icon-container">
+                        <img src="../images/seagull/credits/Davide Zhu.png" alt="Davide Zhu" class="masked-icon mask-circle">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">Davide Zhu</div>
+                        <div class="member-role">Sound Designer</div>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <div class="member-name">Davide Zhu</div>
-                    <div class="member-role">Sound Designer</div>
-                </div>
-            </div>
+            </a>
             
             <!-- Manas Sara -->
-            <div class="team-member">
-                <div class="icon-container">
-                    <img src="../images/seagull/credits/Manas Sara.png" alt="Manas Sara" class="masked-icon mask-circle">
+            <a href="https://unsame.fun/team/manas" class="member-link">
+                <div class="team-member">
+                    <div class="icon-container">
+                        <img src="../images/seagull/credits/Manas Sara.png" alt="Manas Sara" class="masked-icon mask-circle">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">Manas Sara</div>
+                        <div class="member-role">Programmer, Designer</div>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <div class="member-name">Manas Sara</div>
-                    <div class="member-role">Programmer, Designer</div>
-                </div>
-            </div>
+            </a>
             
             <!-- Mohesha Bajpai -->
-            <div class="team-member">
-                <div class="icon-container">
-                    <img src="../images/seagull/credits/Mohesha Bajpai.png" alt="Mohesha Bajpai" class="masked-icon mask-circle">
+            <a href="https://unsame.fun/team/mohesha" class="member-link">
+                <div class="team-member">
+                    <div class="icon-container">
+                        <img src="../images/seagull/credits/Mohesha Bajpai.png" alt="Mohesha Bajpai" class="masked-icon mask-circle">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">Mohesha Bajpai</div>
+                        <div class="member-role">Level Designer, Artist</div>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <div class="member-name">Mohesha Bajpai</div>
-                    <div class="member-role">Level Designer, Artist</div>
-                </div>
-            </div>
+            </a>
             
             <!-- Manoj Sara -->
-            <div class="team-member">
-                <div class="icon-container">
-                    <img src="../images/seagull/credits/Manoj Sara.png" alt="Manoj Sara" class="masked-icon mask-circle">
+            <a href="https://unsame.fun/team/manoj" class="member-link">
+                <div class="team-member">
+                    <div class="icon-container">
+                        <img src="../images/seagull/credits/Manoj Sara.png" alt="Manoj Sara" class="masked-icon mask-circle">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">Manoj Sara</div>
+                        <div class="member-role">Programmer</div>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <div class="member-name">Manoj Sara</div>
-                    <div class="member-role">Programmer</div>
-                </div>
-            </div>
+            </a>
             
             <!-- Eizi Yu -->
-            <div class="team-member">
-                <div class="icon-container">
-                    <img src="../images/icons/Eizi.jpg" alt="Eizi Yu" class="masked-icon mask-circle">
+            <a href="https://unsame.fun/team/eizi" class="member-link">
+                <div class="team-member">
+                    <div class="icon-container">
+                        <img src="../images/icons/Eizi.jpg" alt="Eizi Yu" class="masked-icon mask-circle">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">Eizi Yu</div>
+                        <div class="member-role">Marketing, Designer</div>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <div class="member-name">Eizi Yu</div>
-                    <div class="member-role">Marketing, Designer</div>
-                </div>
-            </div>
+            </a>
             
             <!-- Franco Toledo -->
-            <div class="team-member">
-                <div class="icon-container">
-                    <img src="../images/icons/Franco.jpg" alt="Franco Toledo" class="masked-icon mask-circle">
+            <a href="https://unsame.fun/team/franco" class="member-link">
+                <div class="team-member">
+                    <div class="icon-container">
+                        <img src="../images/icons/Franco.jpg" alt="Franco Toledo" class="masked-icon mask-circle">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">Franco Toledo</div>
+                        <div class="member-role">Music Composer <span class="external-tag">EXTERNAL</span></div>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <div class="member-name">Franco Toledo</div>
-                    <div class="member-role">Music Composer <span class="external-tag">EXTERNAL</span></div>
-                </div>
-            </div>
+            </a>
 
             <!-- Gabriel Gallegos -->
-            <div class="team-member">
-                <div class="icon-container">
-                    <img src="../images/seagull/credits/Gabriel Gallegos.jpg" alt="Gabriel Gallegos" class="masked-icon mask-circle">
+            <a href="https://unsame.fun/team/gabriel" class="member-link">
+                <div class="team-member">
+                    <div class="icon-container">
+                        <img src="../images/seagull/credits/Gabriel Gallegos.jpg" alt="Gabriel Gallegos" class="masked-icon mask-circle">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">Gabriel Gallegos</div>
+                        <div class="member-role">Music Composer <span class="external-tag">EXTERNAL</span></div>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <div class="member-name">Gabriel Gallegos</div>
-                    <div class="member-role">Music Composer <span class="external-tag">EXTERNAL</span></div>
-                </div>
-            </div>
+            </a>
             
             <!-- Sammie Chen -->
-            <div class="team-member">
-                <div class="icon-container">
-                    <img src="../images/seagull/credits/Sammie Chen.jpg" alt="Sammie Chen" class="masked-icon mask-circle">
+            <a href="https://unsame.fun/team/sammie" class="member-link">
+                <div class="team-member">
+                    <div class="icon-container">
+                        <img src="../images/seagull/credits/Sammie Chen.jpg" alt="Sammie Chen" class="masked-icon mask-circle">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-name">Sammie Chen</div>
+                        <div class="member-role">UX Designer <span class="external-tag">EXTERNAL</span></div>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <div class="member-name">Sammie Chen</div>
-                    <div class="member-role">UX Designer <span class="external-tag">EXTERNAL</span></div>
-                </div>
-            </div>
+            </a>
         </div>
 
         <div class="description">
             <center>
-                <a href="https://unsame.fun/seagull">Back to Seagull Town</a>
+                <a href="https://unsame.fun/seagull">Back to Gulltastrophe</a>
             </center>
         </div>
 

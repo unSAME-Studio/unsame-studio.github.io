@@ -141,26 +141,33 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
             color: white;
-            padding: 15px;
+            padding: 20px;
             cursor: pointer;
             border-radius: 50%;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             z-index: 2;
         }
 
         .scroll-btn:hover {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .scroll-left {
-            left: 0;
+            left: -10px;
         }
 
         .scroll-right {
-            right: 0;
+            right: -10px;
         }
 
         .description {
@@ -405,7 +412,7 @@
 
         <!-- Screenshots -->
         <div class="screenshots-container">
-            <button class="scroll-btn scroll-left" onclick="scrollScreenshots('left')">←</button>
+            <button class="scroll-btn scroll-left" onclick="scrollScreenshots('left')">⟨</button>
             <div class="screenshots">
                 <a href="images/seagull/screenshots (1).png" target="_blank" class="screenshot-link">
                     <img src="images/seagull/screenshots (1).png" alt="Screenshot 1" class="screenshot">
@@ -423,7 +430,7 @@
                     <img src="images/seagull/screenshots (5).png" alt="Screenshot 5" class="screenshot">
                 </a>
             </div>
-            <button class="scroll-btn scroll-right" onclick="scrollScreenshots('right')">→</button>
+            <button class="scroll-btn scroll-right" onclick="scrollScreenshots('right')">⟩</button>
         </div>
 
         <!-- Description -->
@@ -468,7 +475,7 @@
                 •
                 <a href="mailto:unsamestudio@gmail.com">Email Us</a>
                 •
-                <a href="https://unsame.fun/seagulltown">Town</a>
+                <a href="https://unsame.fun/seagull/town">Seagull Town</a>
             </center>
         </div>
 
