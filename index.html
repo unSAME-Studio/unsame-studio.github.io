@@ -215,7 +215,48 @@
       color: #888;
     }
 
-    /* Media Queries for Responsiveness */
+    /* Soundtrack Button Styles */
+    .soundtrack-button {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(45deg, #2b2b2b, #1a1a1a);
+      padding: 15px 25px;
+      border-radius: 12px;
+      margin: 40px auto;
+      max-width: 600px;  /* Changed from 400px */
+      width: 90%;        /* Added to ensure responsiveness */
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      color: white;
+    }
+
+    .soundtrack-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .soundtrack-icon {
+      width: 48px;       /* Changed from 40px */
+      height: 48px;      /* Changed from 40px */
+      margin-right: 20px; /* Changed from 15px */
+    }
+
+    .soundtrack-text {
+      text-align: left;
+    }
+
+    .soundtrack-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .soundtrack-subtitle {
+      font-size: 0.9rem;
+      color: #888;
+    }
+
     @media (max-width: 768px) {
       .logo {
         width: 200px;
@@ -285,6 +326,24 @@
       .social-icon {
         width: 22px;
         height: 22px;
+      }
+
+      .soundtrack-button {
+        margin: 30px 20px;
+        padding: 12px 20px;
+      }
+
+      .soundtrack-icon {
+        width: 40px;    /* Changed from 32px */
+        height: 40px;   /* Changed from 32px */
+      }
+
+      .soundtrack-title {
+        font-size: 1rem;
+      }
+
+      .soundtrack-subtitle {
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -383,6 +442,15 @@
     </div>
   </div>
   
+  <!-- Soundtrack Player Button -->
+  <a href="https://unsame.fun/music" class="soundtrack-button">
+    <img src="images/unSAMEMusic.png" alt="Soundtrack" class="soundtrack-icon">
+    <div class="soundtrack-text">
+      <div class="soundtrack-title">unSAME Soundtrack Player</div>
+      <div class="soundtrack-subtitle">Listen to the soundtracks from different unSAME games, made by our talented artists!</div>
+    </div>
+  </a>
+
   <footer>
     &copy; 2019-2025 unSAME studio. All rights reserved.
   </footer>
