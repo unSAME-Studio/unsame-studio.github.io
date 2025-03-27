@@ -254,28 +254,28 @@
         audioUrl: "https://unsame.fun/audios/music/Fix A Problem.mp3"
       },
       {
-        id: 4,
+        id: 2,
         title: "Blue Moon",
         gameId: "plug-it-in",
         composerId: "arx",
         audioUrl: "https://unsame.fun/audios/music/bluemoon.ogg"
       },
       {
-        id: 5,
+        id: 3,
         title: "Cables Mellow",
         gameId: "plug-it-in",
         composerId: "arx",
         audioUrl: "https://unsame.fun/audios/music/cables mellow.ogg"
       },
       {
-        id: 6,
+        id: 4,
         title: "Cha Cha",
         gameId: "plug-it-in",
         composerId: "arx",
         audioUrl: "https://unsame.fun/audios/music/chacha.ogg"
       },
       {
-        id: 7,
+        id: 5,
         title: "I Forgot My Math Quiz",
         gameId: "plug-it-in",
         composerId: "arx",
@@ -284,14 +284,14 @@
 
       // Songs from "Gulltastrophe"
       {
-        id: 2,
+        id: 6,
         title: "Menu",
         gameId: "gulltastrophe",
         composerId: "shape-shop",
         audioUrl: "https://unsame.fun/audios/music/Seagull Menu.mp3"
       },
       {
-        id: 3,
+        id: 7,
         title: "Time for Chaos",
         gameId: "gulltastrophe",
         composerId: "shawntrrttll",
@@ -592,6 +592,7 @@
       const [showPlaylist, setShowPlaylist] = useState(false);
       const [transitioning, setTransitioning] = useState(false);
       const [isLoading, setIsLoading] = useState(true);
+      const [isChanging, setIsChanging] = useState(false);
       
       const audioRef = useRef(null);
       const intervalRef = useRef(null);
@@ -663,8 +664,13 @@
       }, [showPlaylist]);
 
       const handleTrackChange = (track) => {
+        if (isChanging) return; // Prevent changing while already changing
+        
+        setIsChanging(true);
         setTransitioning(true);
         setIsLoading(true);
+        setProgress(0);
+        setDuration(0);
         
         // Update URL with the song ID
         updateURLWithSongId(track.id);
@@ -672,43 +678,57 @@
         // Delay changing track to allow for transition animation
         setTimeout(() => {
           setCurrentTrack(track);
-          setProgress(0);
-          setDuration(0);
           if (progressBarRef.current) {
             progressBarRef.current.style.backgroundSize = "0% 100%";
           }
           
-          setIsPlaying(true); // Set playing state to true
+          setIsPlaying(true);
+          
           // Need to manually call play after setting new src
           setTimeout(() => {
-            const playPromise = audioRef.current.play();
+            if (!audioRef.current) return;
             
+            const playPromise = audioRef.current.play();
             if (playPromise !== undefined) {
               playPromise
                 .then(() => {
                   startTimer();
+                  setIsChanging(false);
                 })
                 .catch(error => {
                   console.error("Error playing audio:", error);
                   setIsPlaying(false);
+                  setIsChanging(false);
                 });
             }
           }, 100);
+          
           setTransitioning(false);
         }, 500);
       };
 
-      const startTimer = () => {
+      const playNextTrack = useCallback(() => {
+        const currentIndex = completeData.findIndex(track => track.id === currentTrack.id);
+        const nextIndex = (currentIndex + 1) % completeData.length;
+        handleTrackChange(completeData[nextIndex]);
+      }, [currentTrack.id, completeData]); // Add dependencies
+
+      const onAudioEnded = useCallback(() => {
+        clearInterval(intervalRef.current);
+        playNextTrack();
+      }, [playNextTrack]); // Add playNextTrack as dependency
+
+      const startTimer = useCallback(() => {
         clearInterval(intervalRef.current);
         
         intervalRef.current = setInterval(() => {
-          if (audioRef.current.ended) {
-            playNextTrack();
+          if (audioRef.current?.ended) {
+            onAudioEnded();
           } else {
-            setProgress(audioRef.current.currentTime);
+            setProgress(audioRef.current?.currentTime || 0);
           }
-        }, 100); // Update more frequently for smoother progress
-      };
+        }, 100);
+      }, [onAudioEnded]);
 
       const onLoadedMetadata = () => {
         setDuration(audioRef.current.duration);
@@ -734,12 +754,6 @@
           clearInterval(intervalRef.current);
           setIsPlaying(false);
         }
-      };
-
-      const playNextTrack = () => {
-        const currentIndex = completeData.findIndex(track => track.id === currentTrack.id);
-        const nextIndex = (currentIndex + 1) % completeData.length;
-        handleTrackChange(completeData[nextIndex]);
       };
 
       const playPrevTrack = () => {
@@ -861,10 +875,16 @@
               src={currentTrack.audioUrl}
               preload="auto"
               onLoadedMetadata={onLoadedMetadata}
-              onEnded={() => playNextTrack()} // Updated to call playNextTrack when the song ends
+              onEnded={onAudioEnded}
               onLoadStart={() => setIsLoading(true)}
-              onPlay={() => setIsLoading(false)}
-              onError={() => setIsLoading(false)}
+              onPlay={() => {
+                setIsLoading(false);
+                startTimer(); // Add this to ensure timer starts on play
+              }}
+              onError={() => {
+                setIsLoading(false);
+                setIsChanging(false);
+              }}
             />
             
             {/* Progress Bar */}
