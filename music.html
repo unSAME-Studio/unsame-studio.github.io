@@ -186,7 +186,7 @@
   <div id="root"></div>
   
   <script type="text/babel">
-    const { useState, useEffect, useRef } = React;
+    const { useState, useEffect, useRef, useCallback } = React; // Added useCallback
     
     // Common arrays for games and composers
     const games = [
@@ -376,6 +376,152 @@
         audioUrl: "https://unsame.fun/audios/music/SushiLoveNightcore.mp3"
       }
     ];
+
+    // Define icons/assets for each game
+    const gameIcons = {
+      "gulltastrophe": [
+        { src: "https://unsame.fun/images/playericons/seagull.png", width: 30, rotation: [-20, 20] },
+        { src: "https://unsame.fun/images/playericons/seagullheart.png", width: 25, rotation: [-30, 30] }
+      ],
+      "plug-it-in": [
+        { src: "https://unsame.fun/images/playericons/mini_all.png", width: 30, rotation: [-30, 30] },
+        { src: "https://unsame.fun/images/playericons/mini_one.png", width: 30, rotation: [-30, 30] },
+        { src: "https://unsame.fun/images/playericons/mini_two.png", width: 30, rotation: [-30, 30] }
+      ],
+      "love-stickin": [
+        { src: "https://unsame.fun/images/playericons/stickinheart.png", width: 30, rotation: [-20, 20] },
+      ],
+      "portarumaku": [
+        { src: "https://unsame.fun/images/playericons/portaruwitch.png", width: 30, rotation: [-20, 20] },
+      ]
+    };
+
+    // Beat detection component
+    const BeatDetector = ({ audioRef, gameId, onBeat }) => {
+      const lastBeatTime = useRef(0);
+      const lastVolume = useRef(0);
+      const animationFrameRef = useRef(null);
+    
+      // Simple beat detection based on volume changes
+      useEffect(() => {
+        let isActive = true;
+    
+        const detectBeat = () => {
+          if (!isActive || !audioRef.current) return;
+    
+          try {
+            // Get current volume level from audio element
+            const currentVolume = audioRef.current.volume * audioRef.current.playbackRate;
+            const now = Date.now();
+            
+            // Detect sudden volume increases as beats
+            if (currentVolume > lastVolume.current * 1.1 && now - lastBeatTime.current > 300) {
+              lastBeatTime.current = now;
+              onBeat();
+            }
+            
+            lastVolume.current = currentVolume;
+            animationFrameRef.current = requestAnimationFrame(detectBeat);
+          } catch (error) {
+            console.warn("Beat detection error:", error);
+          }
+        };
+    
+        detectBeat();
+    
+        return () => {
+          isActive = false;
+          if (animationFrameRef.current) {
+            cancelAnimationFrame(animationFrameRef.current);
+          }
+        };
+      }, [onBeat]);
+    
+      // Trigger beats on regular intervals as fallback
+      useEffect(() => {
+        const interval = setInterval(() => {
+          const now = Date.now();
+          if (now - lastBeatTime.current > 500) { // Fallback beat every 500ms
+            lastBeatTime.current = now;
+            onBeat();
+          }
+        }, 500);
+    
+        return () => clearInterval(interval);
+      }, [onBeat]);
+    
+      return null;
+    };
+
+    // Floating icon component
+    const FloatingIcon = ({ icon, startPosition, onAnimationEnd }) => {
+      const [position, setPosition] = useState(startPosition);
+      const [rotation, setRotation] = useState(0);
+      const [isVisible, setIsVisible] = useState(true);
+      
+      useEffect(() => {
+        // Random rotation between min and max values
+        const randomRotation = icon.rotation[0] + Math.random() * (icon.rotation[1] - icon.rotation[0]);
+        setRotation(randomRotation);
+        
+        // Random horizontal position adjustment (slight drift)
+        const horizontalDrift = -10 + Math.random() * 20; // -10px to +10px
+        
+        // Animation timing
+        const animationDuration = 2000 + Math.random() * 1000; // 2-3 seconds
+        
+        // Start animation
+        let animationTimer;
+        let startTime = Date.now();
+        
+        const animate = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = elapsed / animationDuration;
+          
+          if (progress < 1) {
+            // Parabolic trajectory with slight horizontal drift
+            const verticalProgress = Math.sin(progress * Math.PI); // 0 -> 1 -> 0 curve
+            const newY = startPosition.y - (verticalProgress * 200); // Up to 200px above starting point
+            const newX = startPosition.x + (progress * horizontalDrift);
+            
+            setPosition({ x: newX, y: newY });
+            animationTimer = requestAnimationFrame(animate);
+          } else {
+            setIsVisible(false);
+            setTimeout(() => onAnimationEnd(), 100); // Clean up after animation
+          }
+        };
+        
+        animationTimer = requestAnimationFrame(animate);
+        
+        return () => {
+          if (animationTimer) {
+            cancelAnimationFrame(animationTimer);
+          }
+        };
+      }, []);
+      
+      if (!isVisible) return null;
+      
+      return (
+        <div 
+          className="absolute z-10 pointer-events-none"
+          style={{
+            left: `${position.x}px`,
+            top: `${position.y}px`,
+            transform: `rotate(${rotation}deg)`,
+            transition: 'transform 0.3s ease'
+          }}
+        >
+          <img 
+            src={icon.src} 
+            alt="Game icon" 
+            width={icon.width}
+            className="drop-shadow-lg opacity-90"
+          />
+        </div>
+      );
+    };
 
     // Helper function to get complete song information
     const getCompleteSongData = () => {
@@ -610,8 +756,46 @@
         audioRef.current.currentTime = newTime;
       };
 
+      // State for floating icons
+      const [floatingIcons, setFloatingIcons] = useState([]);
+      const containerRef = useRef(null);
+
+      // Handle beat detection
+      const handleBeat = useCallback(() => {
+        if (!containerRef.current || !gameIcons[currentTrack.gameId]) return;
+        
+        // Get container dimensions
+        const containerRect = containerRef.current.getBoundingClientRect();
+        
+        // Choose a random icon from the game's set
+        const gameIconSet = gameIcons[currentTrack.gameId];
+        if (!gameIconSet || gameIconSet.length === 0) return;
+        
+        const randomIcon = gameIconSet[Math.floor(Math.random() * gameIconSet.length)];
+        
+        // Random starting position (at the bottom of the container)
+        const startX = containerRect.width * 0.25 + Math.random() * (containerRect.width * 0.5);
+        const startY = containerRect.height + 20; // Start below the visible area
+        
+        // Create new icon with unique ID
+        const newIcon = {
+          id: Date.now(),
+          icon: randomIcon,
+          position: { x: startX, y: startY }
+        };
+        
+        // Add to state
+        setFloatingIcons(prev => [...prev, newIcon]);
+      }, [currentTrack.gameId]);
+
+      // Remove icon after animation
+      const removeIcon = useCallback((id) => {
+        setFloatingIcons(prev => prev.filter(icon => icon.id !== id));
+      }, []);
+
+
       return (
-        <div className="flex flex-col items-center justify-center h-screen w-full overflow-hidden relative">
+        <div ref={containerRef} className="flex flex-col items-center justify-center h-screen w-full overflow-hidden relative">
           {/* Background Media (Image/Video) with blur effect */}
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-md z-10"></div>
@@ -671,7 +855,7 @@
               src={currentTrack.audioUrl}
               preload="auto"
               onLoadedMetadata={onLoadedMetadata}
-              onEnded={playNextTrack}
+              onEnded={() => playNextTrack()} // Updated to call playNextTrack when the song ends
               onLoadStart={() => setIsLoading(true)}
               onPlay={() => setIsLoading(false)}
               onError={() => setIsLoading(false)}
@@ -874,6 +1058,25 @@
               </div>
             </div>
           </div>
+
+          {/* Beat Detector */}
+          {isPlaying && !isLoading && (
+            <BeatDetector
+              audioRef={audioRef}
+              gameId={currentTrack.gameId}
+              onBeat={handleBeat}
+            />
+          )}
+          
+          {/* Floating Icons */}
+          {floatingIcons.map(item => (
+            <FloatingIcon
+              key={item.id}
+              icon={item.icon}
+              startPosition={item.position}
+              onAnimationEnd={() => removeIcon(item.id)}
+            />
+          ))}
         </div>
       );
     };
