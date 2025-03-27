@@ -245,26 +245,13 @@
 
     // Song data referencing games and composers by string ID
     const songData = [
+      // Songs from "PLUG IT IN"
       {
         id: 1,
         title: "Fix A Problem",
         gameId: "plug-it-in",
         composerId: "arx",
         audioUrl: "https://unsame.fun/audios/music/Fix A Problem.mp3"
-      },
-      {
-        id: 2,
-        title: "Menu",
-        gameId: "gulltastrophe",
-        composerId: "shape-shop",
-        audioUrl: "https://unsame.fun/audios/music/Seagull Menu.mp3"
-      },
-      {
-        id: 3,
-        title: "Time for Chaos",
-        gameId: "gulltastrophe",
-        composerId: "shawntrrttll",
-        audioUrl: "https://unsame.fun/audios/music/Time for Chaos.mp3"
       },
       {
         id: 4,
@@ -294,6 +281,22 @@
         composerId: "arx",
         audioUrl: "https://unsame.fun/audios/music/mathquiz.ogg"
       },
+
+      // Songs from "Gulltastrophe"
+      {
+        id: 2,
+        title: "Menu",
+        gameId: "gulltastrophe",
+        composerId: "shape-shop",
+        audioUrl: "https://unsame.fun/audios/music/Seagull Menu.mp3"
+      },
+      {
+        id: 3,
+        title: "Time for Chaos",
+        gameId: "gulltastrophe",
+        composerId: "shawntrrttll",
+        audioUrl: "https://unsame.fun/audios/music/Time for Chaos.mp3"
+      },
       {
         id: 8,
         title: "Home",
@@ -301,6 +304,8 @@
         composerId: "shawntrrttll",
         audioUrl: "https://unsame.fun/audios/music/Seagull Hub.mp3"
       },
+
+      // Songs from "Runway"
       {
         id: 9,
         title: "BAMF -Instrumental-",
@@ -329,13 +334,17 @@
         composerId: "arx",
         audioUrl: "https://unsame.fun/audios/music/Signal_Game Edit.mp3"
       },
+
+      // Songs from "Love Stickin'"
       {
         id: 13,
         title: "Love Stickin'",
         gameId: "love-stickin",
-        composerId: "shawntrrttll", 
+        composerId: "shawntrrttll",
         audioUrl: "https://unsame.fun/audios/music/Love Stickin.mp3"
       },
+
+      // Songs from "Portarumaku"
       {
         id: 14,
         title: "Round and Round",
@@ -350,6 +359,8 @@
         composerId: "arx",
         audioUrl: "https://unsame.fun/audios/music/round and round(Pixel Mix).mp3"
       },
+
+      // Songs from "SUSHI unROLL"
       {
         id: 16,
         title: "Sushi Love",
@@ -437,6 +448,33 @@
       
       const isMobile = useMobileDetect();
 
+      // 1. Add this after your useState declarations to get the initial song from URL
+      useEffect(() => {
+        const songIdFromURL = getSongIdFromURL();
+        if (songIdFromURL) {
+          const songFromURL = completeData.find(song => song.id.toString() === songIdFromURL);
+          if (songFromURL) {
+            setCurrentTrack(songFromURL);
+            // Auto-play when someone arrives via a shared link (optional)
+            setTimeout(() => {
+              if (audioRef.current) {
+                const playPromise = audioRef.current.play();
+                if (playPromise !== undefined) {
+                  playPromise
+                    .then(() => {
+                      startTimer();
+                      setIsPlaying(true);
+                    })
+                    .catch(error => {
+                      console.error("Error auto-playing audio:", error);
+                    });
+                }
+              }
+            }, 1000);
+          }
+        }
+      }, []);
+      
       // Update progress bar fill based on current progress
       useEffect(() => {
         if (progressBarRef.current && duration > 0) {
@@ -475,6 +513,9 @@
       const handleTrackChange = (track) => {
         setTransitioning(true);
         setIsLoading(true);
+        
+        // Update URL with the song ID
+        updateURLWithSongId(track.id);
         
         // Delay changing track to allow for transition animation
         setTimeout(() => {
@@ -836,6 +877,24 @@
         </div>
       );
     };
+
+    // Function to update URL with the current song ID
+    const updateURLWithSongId = (songId) => {
+      const url = new URL(window.location);
+      url.hash = `song=${songId}`;
+      window.history.replaceState({}, '', url);
+    };
+
+    // Function to get song ID from URL hash
+    const getSongIdFromURL = () => {
+      const hash = window.location.hash;
+      if (hash && hash.includes('song=')) {
+        return hash.split('song=')[1];
+      }
+      return null;
+    };
+
+    // Inside the UnSAMEMusicPlayer component, make these modifications:
 
     // Render the app
     const container = document.getElementById('root');
