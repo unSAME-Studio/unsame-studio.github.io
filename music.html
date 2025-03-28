@@ -736,6 +736,9 @@
       const [transitioning, setTransitioning] = useState(false);
       const [isLoading, setIsLoading] = useState(true);
       const [isChanging, setIsChanging] = useState(false);
+      const [showVideo, setShowVideo] = useState(true); // Add this line
+      const [showFloatingIcons, setShowFloatingIcons] = useState(true); // Add this line
+      const [isShuffle, setIsShuffle] = useState(false); // Add this line
       
       const audioRef = useRef(null);
       const intervalRef = useRef(null);
@@ -852,9 +855,19 @@
 
       const playNextTrack = useCallback(() => {
         const currentIndex = completeData.findIndex(track => track.id === currentTrack.id);
-        const nextIndex = (currentIndex + 1) % completeData.length;
+        let nextIndex;
+        
+        if (isShuffle) {
+          // Generate random index excluding current song
+          let availableIndices = Array.from({length: completeData.length}, (_, i) => i)
+            .filter(i => i !== currentIndex);
+          nextIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+        } else {
+          nextIndex = (currentIndex + 1) % completeData.length;
+        }
+        
         handleTrackChange(completeData[nextIndex]);
-      }, [currentTrack.id, completeData]); // Add dependencies
+      }, [currentTrack.id, completeData, isShuffle]); // Add isShuffle to dependencies
 
       const onAudioEnded = useCallback(() => {
         clearInterval(intervalRef.current);
@@ -963,7 +976,7 @@
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-md z-10"></div>
             <div className={`w-full h-full transition-opacity duration-1000 ${transitioning ? 'opacity-0' : 'opacity-100'}`}>
-              {currentTrack.game.hasVideo ? (
+              {currentTrack.game.hasVideo && showVideo ? (
                 <video 
                   src={currentTrack.game.videoUrl} 
                   poster={currentTrack.game.coverArt}
@@ -1149,14 +1162,89 @@
             </div>
           </div>
           
-          {/* Playlist Toggle - Centered */}
-          <button 
-            onClick={() => setShowPlaylist(!showPlaylist)}
-            className={`playlist-btn z-10 px-4 py-2 border border-white border-opacity-20 rounded-full
-                    bg-white bg-opacity-10 backdrop-blur-md hover:bg-opacity-20 transition-colors text-white mx-auto ${isMobile ? 'text-base' : ''}`}
-          >
-            {showPlaylist ? "Hide Playlist" : "Show Playlist"}
-          </button>
+          {/* Playlist and Settings Controls */}
+          <div className="z-10 flex items-center justify-center space-x-3">
+            <button 
+              onClick={() => setShowPlaylist(!showPlaylist)}
+              className={`playlist-btn px-4 py-2 border border-white border-opacity-20 rounded-full
+                      bg-white bg-opacity-10 backdrop-blur-md hover:bg-opacity-20 transition-colors text-white ${isMobile ? 'text-base' : ''}`}
+            >
+              {showPlaylist ? "Hide Playlist" : "Show Playlist"}
+            </button>
+
+            <button 
+              onClick={() => setShowVideo(!showVideo)}
+              className={`btn-bounce px-2 py-2 border border-white border-opacity-20 rounded-full
+                      bg-white bg-opacity-10 backdrop-blur-md hover:bg-opacity-20 transition-colors text-white ${isMobile ? 'text-base' : ''}`}
+              title="Toggle Video Background"
+              style={{ width: '40px', height: '40px' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                {showVideo ? (
+                  <>
+                    <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                  </>
+                ) : (
+                  <>
+                    <path d="M17 17H19C20.1046 17 21 16.1046 21 15V9C21 7.89543 20.1046 7 19 7H17"></path>
+                    <rect x="3" y="7" width="14" height="10" rx="2" ry="2"></rect>
+                    <line x1="9" y1="12" x2="11" y2="12"></line>
+                  </>
+                )}
+              </svg>
+            </button>
+
+            <button 
+              onClick={() => setShowFloatingIcons(!showFloatingIcons)}
+              className={`btn-bounce px-2 py-2 border border-white border-opacity-20 rounded-full
+                      bg-white bg-opacity-10 backdrop-blur-md hover:bg-opacity-20 transition-colors text-white ${isMobile ? 'text-base' : ''}`}
+              title="Toggle Floating Icons"
+              style={{ width: '40px', height: '40px' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                {showFloatingIcons ? (
+                  <>
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    <line x1="9" y1="10" x2="15" y2="10"></line>
+                  </>
+                ) : (
+                  <>
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    <line x1="9" y1="10" x2="9.01" y2="10"></line>
+                    <line x1="12" y1="10" x2="12.01" y2="10"></line>
+                    <line x1="15" y1="10" x2="15.01" y2="10"></line>
+                  </>
+                )}
+              </svg>
+            </button>
+
+            <button 
+                onClick={() => setIsShuffle(!isShuffle)}
+                className={`btn-bounce text-white p-2 rounded-full transition-colors w-8 h-8 flex items-center justify-center
+                          ${isShuffle ? 'bg-white bg-opacity-30' : 'bg-white bg-opacity-20'} 
+                          hover:bg-opacity-30 border border-white border-opacity-20`}
+                title="Toggle Shuffle"
+                style={{ width: '40px', height: '40px' }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  {isShuffle ? (
+                    <>
+                      <polyline points="16 3 21 3 21 8"></polyline>
+                      <line x1="4" y1="20" x2="21" y2="3"></line>
+                      <polyline points="21 16 21 21 16 21"></polyline>
+                      <line x1="15" y1="15" x2="21" y2="21"></line>
+                      <line x1="4" y1="4" x2="9" y2="9"></line>
+                    </>
+                  ) : (
+                    <>
+                      <polyline points="4 4 19 4 19 19"></polyline>
+                      <polyline points="15 19 19 19 19 15"></polyline>
+                    </>
+                  )}
+                </svg>
+              </button>
+          </div>
           
           {/* Playlist */}
           <div 
@@ -1237,7 +1325,7 @@
           </div>
 
           {/* Beat Detector */}
-          {isPlaying && !isLoading && (
+          {isPlaying && !isLoading && showFloatingIcons && (
             <BeatDetector
               audioRef={audioRef}
               gameId={currentTrack.gameId}
@@ -1246,7 +1334,7 @@
           )}
           
           {/* Floating Icons */}
-          {floatingIcons.map(item => (
+          {showFloatingIcons && floatingIcons.map(item => (
             <FloatingIcon
               key={item.id}
               icon={item.icon}
