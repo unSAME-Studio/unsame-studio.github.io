@@ -234,13 +234,43 @@
         url: "https://unsame.itch.io/sushi-unroll",
         coverArt: "https://unsame.fun/images/SUSHI unROLL.png",
         hasVideo: false
+      },
+      { 
+        id: "emotionless", 
+        title: "emotionless", 
+        url: "https://unsame.itch.io/emotionless",
+        coverArt: "https://unsame.fun/images/emotionless.png",
+        hasVideo: false
+      },
+      {
+        id: "the-ameboa_effect",
+        title: "The Ameboa Effect",
+        url: "https://unsame.itch.io/the-amoeba-effect",
+        coverArt: "https://unsame.fun/images/ameboa.png",
+        hasVideo: false
+      },
+      {
+        id: "problematic-train",
+        title: "Problematic Train",
+        url: "https://unsame.itch.io/problematic-train",
+        coverArt: "https://unsame.fun/images/problematictrain.png",
+        hasVideo: false
+      },
+      {
+        id: "system-8",
+        title: "System 8",
+        url: "https://unsame.itch.io/project-8",
+        coverArt: "https://unsame.fun/images/system8.png",
+        hasVideo: true,
+        videoUrl: "https://unsame.fun/videos/previews/system8.mp4"
       }
     ];
 
     const composers = [
       { id: "shawntrrttll", name: "Shawntrrttll", url: "https://soundcloud.com/franco-toledo" },
       { id: "arx", name: "Arx", url: "https://soundcloud.com/arxgame" },
-      { id: "shape-shop", name: "ShapeShop", url: "https://soundcloud.com/shap3shop" }
+      { id: "shape-shop", name: "ShapeShop", url: "https://soundcloud.com/shap3shop" },
+      { id: "salilpt", name: "SalilPT", url: "#"}
     ];
 
     // Song data referencing games and composers by string ID
@@ -374,31 +404,61 @@
         gameId: "sushi-unroll",
         composerId: "arx",
         audioUrl: "https://unsame.fun/audios/music/SushiLoveNightcore.mp3"
+      },
+
+      // Songs from "emotionless"
+      {
+        id: 18,
+        title: "Menu",
+        gameId: "emotionless",
+        composerId: "shawntrrttll",
+        audioUrl: "https://unsame.fun/audios/music/emotionless/emotionless_menu.mp3"
+      },
+      {
+        id: 19,
+        title: "Room",
+        gameId: "emotionless",
+        composerId: "shawntrrttll",
+        audioUrl: "https://unsame.fun/audios/music/emotionless/emotionless_room.mp3"
+      },
+      {
+        id: 20,
+        title: "Doctor",
+        gameId: "emotionless",
+        composerId: "shawntrrttll",
+        audioUrl: "https://unsame.fun/audios/music/emotionless/emotionless_doctor.mp3"
+      },
+      {
+        id: 21,
+        title: "Love",
+        gameId: "emotionless",
+        composerId: "shawntrrttll",
+        audioUrl: "https://unsame.fun/audios/music/emotionless/emotionless_love.mp3"
       }
     ];
 
     // Define icons/assets for each game
     const gameIcons = {
       "gulltastrophe": [
-        { src: "https://unsame.fun/images/playericons/seagull.png", width: 80, rotation: [-30, 30] },
-        { src: "https://unsame.fun/images/playericons/seagullheart.png", width: 40, rotation: [-30, 30] }
+        { src: "https://unsame.fun/images/playericons/seagull.png", width: 80 },
+        { src: "https://unsame.fun/images/playericons/seagullheart.png", width: 40 }
       ],
       "plug-it-in": [
-        { src: "https://unsame.fun/images/playericons/mini_all.png", width: 40, rotation: [-30, 30] },
-        { src: "https://unsame.fun/images/playericons/mini_one.png", width: 40, rotation: [-30, 30] },
-        { src: "https://unsame.fun/images/playericons/mini_two.png", width: 40, rotation: [-30, 30] }
+        { src: "https://unsame.fun/images/playericons/mini_all.png", width: 40 },
+        { src: "https://unsame.fun/images/playericons/mini_one.png", width: 40 },
+        { src: "https://unsame.fun/images/playericons/mini_two.png", width: 40 }
       ],
       "love-stickin": [
-        { src: "https://unsame.fun/images/playericons/stickinheart.png", width: 40, rotation: [-30, 30] },
+        { src: "https://unsame.fun/images/playericons/stickinheart.png", width: 40 },
       ],
       "portarumaku": [
-        { src: "https://unsame.fun/images/playericons/portaruwitch.png", width: 60, rotation: [-30, 30] },
+        { src: "https://unsame.fun/images/playericons/portaruwitch.png", width: 60 },
       ],
       "sushi-unroll": [
-        { src: "https://unsame.fun/images/playericons/salmon.png", width: 60, rotation: [-30, 30] },
-        { src: "https://unsame.fun/images/playericons/shrimp.png", width: 60, rotation: [-30, 30] },
-        { src: "https://unsame.fun/images/playericons/zucchini.png", width: 60, rotation: [-30, 30] },
-        { src: "https://unsame.fun/images/playericons/sushi_roll_piece.png", width: 40, rotation: [-30, 30] }
+        { src: "https://unsame.fun/images/playericons/salmon.png", width: 60 },
+        { src: "https://unsame.fun/images/playericons/shrimp.png", width: 60 },
+        { src: "https://unsame.fun/images/playericons/zucchini.png", width: 60 },
+        { src: "https://unsame.fun/images/playericons/sushi_roll_piece.png", width: 40 }
       ]
     };
 
@@ -467,7 +527,8 @@
       
       useEffect(() => {
         // Random rotation between min and max values
-        const randomRotation = icon.rotation[0] + Math.random() * (icon.rotation[1] - icon.rotation[0]);
+        const maxRotation = 30; // Maximum rotation in degrees
+        const randomRotation = -maxRotation + Math.random() * (maxRotation * 2);
         setRotation(randomRotation);
         
         // Random horizontal position adjustment (slight drift)

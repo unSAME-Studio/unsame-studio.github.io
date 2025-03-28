@@ -1,0 +1,198 @@
+{
+    "games": [
+      { 
+        "id": "gulltastrophe", 
+        "title": "Gulltastrophe", 
+        "url": "https://unsame.fun/seagull",
+        "coverArt": "https://unsame.fun/images/gulltastrophe.png",
+        "hasVideo": true,
+        "videoUrl": "https://unsame.fun/videos/previews/seagull.mp4"
+      },
+      { 
+        "id": "plug-it-in", 
+        "title": "PLUG IT IN", 
+        "url": "https://unsame.itch.io/plug-it-in",
+        "coverArt": "https://unsame.fun/images/plug.png",
+        "hasVideo": true,
+        "videoUrl": "https://unsame.fun/videos/previews/plugitin.mp4"
+      },
+      { 
+        "id": "runway", 
+        "title": "Runway", 
+        "url": "https://unsame.itch.io/runway",
+        "coverArt": "https://unsame.fun/images/Runway.png",
+        "hasVideo": true,
+        "videoUrl": "https://unsame.fun/videos/previews/runway.mp4"
+      },
+      { 
+        "id": "love-stickin", 
+        "title": "Love Stickin'", 
+        "url": "https://samfeng.itch.io/love-stickin",
+        "coverArt": "https://unsame.fun/images/ItchCoverLove.png",
+        "hasVideo": false
+      },
+      { 
+        "id": "portarumaku", 
+        "title": "Portarumaku", 
+        "url": "https://weisa.itch.io/portarumaku",
+        "coverArt": "https://unsame.fun/images/portarumaku.png",
+        "hasVideo": false
+      },
+      { 
+        "id": "sushi-unroll", 
+        "title": "SUSHI unROLL", 
+        "url": "https://unsame.itch.io/sushi-unroll",
+        "coverArt": "https://unsame.fun/images/SUSHI unROLL.png",
+        "hasVideo": false
+      }
+    ],
+    "composers": [
+      { "id": "shawntrrttll", "name": "Shawntrrttll", "url": "https://soundcloud.com/franco-toledo" },
+      { "id": "arx", "name": "Arx", "url": "https://soundcloud.com/arxgame" },
+      { "id": "shape-shop", "name": "ShapeShop", "url": "https://soundcloud.com/shap3shop" }
+    ],
+    "songs": [
+      {
+        "id": 1,
+        "title": "Fix A Problem",
+        "gameId": "plug-it-in",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/Fix A Problem.mp3"
+      },
+      {
+        "id": 2,
+        "title": "Blue Moon",
+        "gameId": "plug-it-in",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/bluemoon.ogg"
+      },
+      {
+        "id": 3,
+        "title": "Cables Mellow",
+        "gameId": "plug-it-in",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/cables mellow.ogg"
+      },
+      {
+        "id": 4,
+        "title": "Cha Cha",
+        "gameId": "plug-it-in",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/chacha.ogg"
+      },
+      {
+        "id": 5,
+        "title": "I Forgot My Math Quiz",
+        "gameId": "plug-it-in",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/mathquiz.ogg"
+      },
+      {
+        "id": 6,
+        "title": "Menu",
+        "gameId": "gulltastrophe",
+        "composerId": "shape-shop",
+        "audioUrl": "https://unsame.fun/audios/music/Seagull Menu.mp3"
+      },
+      {
+        "id": 7,
+        "title": "Time for Chaos",
+        "gameId": "gulltastrophe",
+        "composerId": "shawntrrttll",
+        "audioUrl": "https://unsame.fun/audios/music/Time for Chaos.mp3"
+      },
+      {
+        "id": 8,
+        "title": "Home",
+        "gameId": "gulltastrophe",
+        "composerId": "shawntrrttll",
+        "audioUrl": "https://unsame.fun/audios/music/Seagull Hub.mp3"
+      },
+      {
+        "id": 9,
+        "title": "BAMF -Instrumental-",
+        "gameId": "runway",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/BAMF -instrumental-.mp3"
+      },
+      {
+        "id": 10,
+        "title": "Billed By A Box -Game Edit-",
+        "gameId": "runway",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/BilledByABox_Gameedit.mp3"
+      },
+      {
+        "id": 11,
+        "title": "Game Over -Game Edit-",
+        "gameId": "runway",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/GameOver_Game Edit.mp3"
+      },
+      {
+        "id": 12,
+        "title": "Signal -Game Edit-",
+        "gameId": "runway",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/Signal_Game Edit.mp3"
+      },
+      {
+        "id": 13,
+        "title": "Love Stickin'",
+        "gameId": "love-stickin",
+        "composerId": "shawntrrttll",
+        "audioUrl": "https://unsame.fun/audios/music/Love Stickin.mp3"
+      },
+      {
+        "id": 14,
+        "title": "Round and Round",
+        "gameId": "portarumaku",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/round and round.mp3"
+      },
+      {
+        "id": 15,
+        "title": "Round and Round -Pixel Mix-",
+        "gameId": "portarumaku",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/round and round(Pixel Mix).mp3"
+      },
+      {
+        "id": 16,
+        "title": "Sushi Love",
+        "gameId": "sushi-unroll",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/SushiLove.mp3"
+      },
+      {
+        "id": 17,
+        "title": "Sushi Love -Nightcore Remix-",
+        "gameId": "sushi-unroll",
+        "composerId": "arx",
+        "audioUrl": "https://unsame.fun/audios/music/SushiLoveNightcore.mp3"
+      }
+    ],
+    "gameIcons": {
+      "gulltastrophe": [
+        { "src": "https://unsame.fun/images/playericons/seagull.png", "width": 80 },
+        { "src": "https://unsame.fun/images/playericons/seagullheart.png", "width": 40 }
+      ],
+      "plug-it-in": [
+        { "src": "https://unsame.fun/images/playericons/mini_all.png", "width": 40 },
+        { "src": "https://unsame.fun/images/playericons/mini_one.png", "width": 40 },
+        { "src": "https://unsame.fun/images/playericons/mini_two.png", "width": 40 }
+      ],
+      "love-stickin": [
+        { "src": "https://unsame.fun/images/playericons/stickinheart.png", "width": 40 }
+      ],
+      "portarumaku": [
+        { "src": "https://unsame.fun/images/playericons/portaruwitch.png", "width": 60 }
+      ],
+      "sushi-unroll": [
+        { "src": "https://unsame.fun/images/playericons/salmon.png", "width": 60 },
+        { "src": "https://unsame.fun/images/playericons/shrimp.png", "width": 60 },
+        { "src": "https://unsame.fun/images/playericons/zucchini.png", "width": 60 },
+        { "src": "https://unsame.fun/images/playericons/sushi_roll_piece.png", "width": 40 }
+      ]
+    }
+  }
