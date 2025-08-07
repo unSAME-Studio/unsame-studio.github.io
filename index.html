@@ -207,6 +207,116 @@
       fill: white;
     }
 
+    /* Navigation Bar Styles */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(18, 18, 18, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 15px 0;
+      transition: transform 0.3s ease;
+    }
+
+    .navbar.hidden {
+      transform: translateY(-100%);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .nav-logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-link:hover {
+      color: #4CAF50;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .nav-toggle span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      transition: 0.3s;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Mobile Navigation Styles */
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: rgba(18, 18, 18, 0.98);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        gap: 0;
+        padding: 20px 0;
+      }
+
+      .nav-menu.active {
+        left: 0;
+      }
+
+      .nav-menu li {
+        padding: 15px 0;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+    }
+
+    /* Add padding to body to account for fixed navbar */
+    body {
+      padding-top: 70px;
+    }
+
     footer {
       text-align: center;
       padding: 40px 0;
@@ -349,8 +459,26 @@
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <img src="images/unSAMEBot.png" alt="unSAME Logo" class="nav-logo">
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#games" class="nav-link">Games</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-toggle" id="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
   <!-- Hero Section with Video Background -->
-  <section class="hero">
+  <section class="hero" id="home">
     <video autoplay muted loop>
       <source src="videos/Collagev1.mp4" type="video/mp4">
     </video>
@@ -358,7 +486,7 @@
   </section>
 
   <!-- Games Section -->
-  <h2 class="section-title">Games</h2>
+  <h2 class="section-title" id="games">Games</h2>
   <div class="games-container">
     <!-- Game 1 -->
     <a href="https://unsame.fun/seagull" class="game-item">
@@ -367,6 +495,14 @@
         <source src="videos/previews/seagull.mp4" type="video/mp4">
       </video>
       <img src="images/logos/gulltastrophe.png" alt="Gulltastrophe" class="game-logo">
+    </a>
+
+    <a href="https://unsame.itch.io/give-me-your-hands" class="game-item">
+      <img src="images/banner/handsBG.png" alt="GIVE ME YOUR HANDS" class="game-background">
+      <video class="game-video" loop muted>
+        <source src="videos/previews/give-me-your-hands.mp4" type="video/mp4">
+      </video>
+      <img src="images/logos/give-me-your-hands.png" alt="GIVE ME YOUR HANDS" class="game-logo">
     </a>
 
     <!-- Game 2 -->
@@ -379,13 +515,13 @@
     </a>
 
     <!-- Game 3 -->
-    <a href="https://unsame.fun/solara" class="game-item">
+    <!-- <a href="https://unsame.fun/solara" class="game-item">
       <img src="images/banner/solaraBG.png" alt="Solara" class="game-background">
       <video class="game-video" loop muted>
         <source src="/api/placeholder/400/320" type="video/mp4">
       </video>
       <img src="images/logos/solara.png" alt="Solara" class="game-logo">
-    </a>
+    </a> -->
 
     <!-- Game 4 -->
     <a href="https://unsame.itch.io/runway" class="game-item">
@@ -407,15 +543,16 @@
   </div>
 
   <!-- About Section -->
-  <h2 class="section-title">About</h2>
+  <h2 class="section-title" id="about">About</h2>
   <div class="container">
     <div class="about-content">
-      <p>unSAME is Fun! We love to experiment with different themes and create unique, original, weird, and "unSAME" games. Since 2019, we have been creating various indie games and participating in different game jams and events. Thanks for check out our games and Have fun!</p>
+      <p>unSAME is Fun!</p>
+      <p>We love to experiment with different themes and create unique, original, weird, and "unSAME" games.Since 2019, we have been creating various indie games and participating in different game jams and events. Thanks for check out our games and Have fun!</p>
     </div>
   </div>
   
   <!-- Follow Us Section -->
-  <h2 class="section-title">Follow Us</h2>
+  <h2 class="section-title" id="contact">Follow Us</h2>
   <div class="container">
     <div class="social-container">
       <!-- Twitter -->
@@ -477,6 +614,57 @@
         // Remove the video element if there's no valid source
         video.remove();
       }
+    });
+
+    // Navigation functionality
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const navbar = document.getElementById('navbar');
+
+    // Mobile menu toggle
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+      });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('.nav-link').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+          const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar height
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Hide/show navbar on scroll
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Scrolling down
+        navbar.classList.add('hidden');
+      } else {
+        // Scrolling up
+        navbar.classList.remove('hidden');
+      }
+      lastScrollTop = scrollTop;
     });
   </script>
 </body>
