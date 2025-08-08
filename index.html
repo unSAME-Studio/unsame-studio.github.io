@@ -321,6 +321,32 @@
       padding-top: 70px;
     }
 
+    /* Danmaku Effect Styles */
+    .danmaku-text {
+      position: absolute;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); */
+      white-space: nowrap;
+      z-index: 10;
+      animation: danmaku-flow 8s linear infinite;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.6;
+    }
+
+    @keyframes danmaku-flow {
+      0% {
+        transform: translateX(100vw);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateX(-100vw);
+        opacity: 0;
+      }
+    }
+
     footer {
       text-align: center;
       padding: 40px 0;
@@ -636,6 +662,124 @@
   </footer>
 
   <script>
+    // Danmaku text messages
+    const danmakuMessages = [
+      "wow unSAME!",
+      "who are they?",
+      "this is so weird",
+      "this is so silly",
+      "amazing games!",
+      "so creative!",
+      "indie vibes",
+      "what is this?",
+      "love the art style",
+      "quirky and fun",
+      "unique experience",
+      "mind blown",
+      "so random lol",
+      "artistic genius",
+      "absolutely unSAME",
+      "experimental",
+      "fresh ideas",
+      "game jam energy",
+      "pixel perfect",
+      "retro feels",
+      "totally bizarre",
+      "what even is this",
+      "need more of this",
+      "oddly satisfying",
+      "pure chaos",
+      "i love this",
+      "10/10 would play",
+      "very unsame indeed",
+      "innovative design",
+      "brilliant madness",
+      "weirdly addictive",
+      "art meets gaming",
+      "unexpected delight",
+      "refreshingly strange",
+      "beautifully chaotic",
+      "surprisingly deep",
+      "charmingly weird",
+      "delightfully odd",
+      "wonderfully bizarre",
+      "creatively insane",
+      "fascinatingly weird",
+      "perfectly imperfect",
+      "strangely compelling",
+      "uniquely beautiful",
+      "mysteriously fun",
+      "wildly creative",
+      "totally original",
+      "absolutely mental",
+      "genuinely unique",
+      "seriously cool",
+      "incredibly fresh",
+      "ridiculously fun",
+      "amazingly weird",
+      "surprisingly good",
+      "beautifully mad",
+      "perfectly crazy",
+      "wonderfully wild",
+      "deliciously strange",
+      "fantastically odd",
+      "marvelously weird",
+      "splendidly bizarre",
+      "magnificently mad"
+    ];
+
+    // Function to create danmaku text
+    function createDanmakuText() {
+      const heroSection = document.querySelector('.hero');
+      const textElement = document.createElement('div');
+      textElement.className = 'danmaku-text';
+      
+      // Random message selection
+      const randomMessage = danmakuMessages[Math.floor(Math.random() * danmakuMessages.length)];
+      textElement.textContent = randomMessage;
+      
+      // Random vertical position (avoiding the logo area in the center)
+      const heroHeight = heroSection.offsetHeight;
+      const centerStart = heroHeight * 0.3;
+      const centerEnd = heroHeight * 0.7;
+      let randomTop;
+      
+      // Position either in top 30% or bottom 30% to avoid the logo
+      if (Math.random() < 0.5) {
+        randomTop = Math.random() * centerStart;
+      } else {
+        randomTop = centerEnd + Math.random() * (heroHeight - centerEnd);
+      }
+      
+      textElement.style.top = randomTop + 'px';
+      
+      // Add to hero section
+      heroSection.appendChild(textElement);
+      
+      // Remove element after animation completes
+      setTimeout(() => {
+        if (textElement.parentNode) {
+          textElement.parentNode.removeChild(textElement);
+        }
+      }, 8000);
+    }
+
+    // Start danmaku effect
+    function startDanmaku() {
+      // Create initial text immediately
+      createDanmakuText();
+      
+      // Then create new text every 1.5-3 seconds
+      setInterval(() => {
+        createDanmakuText();
+      }, Math.random() * 1500 + 1500);
+    }
+
+    // Start danmaku when page loads
+    window.addEventListener('load', () => {
+      setTimeout(startDanmaku, 1000); // Start after 1 second delay
+    });
+
     // JavaScript to play videos when items are hovered
     document.querySelectorAll('.game-item').forEach(item => {
       const video = item.querySelector('.game-video');
