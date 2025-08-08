@@ -154,6 +154,10 @@
       line-height: 1.8;
       font-size: 1.1rem;
       color: #e0e0e0;
+      background: linear-gradient(45deg, #2b2b2b, #1a1a1a);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     /* Social Media Section Styles */
@@ -344,6 +348,35 @@
     .soundtrack-button:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* More Games Button Styles */
+    .more-games-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(45deg, #2b2b2b, #1a1a1a);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .more-games-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .more-games-button svg {
+      transition: transform 0.3s ease;
+    }
+
+    .more-games-button:hover svg {
+      transform: rotate(45deg);
     }
 
     .soundtrack-icon {
@@ -537,14 +570,24 @@
         <img src="images/banner/sauceBG.png" alt="Sauce" class="game-background">
         <video class="game-video" loop muted>
           <source src="videos/previews/sauce.mp4" type="video/mp4">
-          </video>
-          <img src="images/logos/sauce.png" alt="Sauce" class="game-logo">
+        </video>
+        <img src="images/logos/sauce.png" alt="Sauce" class="game-logo">
+    </a>
+  </div>
+
+  <!-- More Games Button -->
+  <div style="text-align: center; margin: 60px 0;">
+    <a href="https://unsame.itch.io/" class="more-games-button">
+      <span>More Games</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+      </svg>
     </a>
   </div>
 
   <!-- About Section -->
   <h2 class="section-title" id="about">About</h2>
-  <div class="container">
+  <div class="container" style="padding: 0 20px;">
     <div class="about-content">
       <p>unSAME is Fun!</p>
       <p>We love to experiment with different themes and create unique, original, weird, and "unSAME" games.Since 2019, we have been creating various indie games and participating in different game jams and events. Thanks for check out our games and Have fun!</p>
