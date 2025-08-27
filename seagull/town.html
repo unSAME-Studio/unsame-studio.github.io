@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- add font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <!-- Twitter Card Info -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="https://unsame.fun/blueskyseagull">
+    <meta name="twitter:site" content="https://unsame.fun/seagull/town">
     <meta name="twitter:title" content="Seagull Town">
     <meta name="twitter:description" content="Seagull Town is a 3D tactical seagull town game where you play as a seagull. It's time to cause a gull-tastrophe...">
     <meta name="twitter:image" content="https://unsame.fun/images/seagull/seagulltown.png">
@@ -12,11 +16,17 @@
     <meta property="og:title" content="Seagull Town">
     <meta property="og:description" content="Seagull Town is a 3D tactical seagull town game where you play as a seagull. It's time to cause a gull-tastrophe...">
     <meta property="og:image" content="https://unsame.fun/images/seagull/seagulltown.png">
-    <meta property="og:url" content="https://unsame.fun/blueskyseagull">
+    <meta property="og:url" content="https://unsame.fun/seagull/town">
 
     <title>Seagull Town</title>
     <style>
-        body { margin: 0; }
+        body {
+            margin: 0;
+            font-family: "Outfit", sans-serif;
+            font-weight: 400;
+            font-optical-sizing: auto;
+            font-style: normal;
+        }
         canvas { display: block; }
         #info {
             position: absolute;
@@ -24,12 +34,16 @@
             width: 100%;
             text-align: center;
             color: white;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            font-family: "Outfit", sans-serif;
+            font-weight: 400;
+            font-optical-sizing: auto;
+            font-style: normal;
         }
     </style>
 </head>
 <body>
-    <div id="info">Click to enter Seagull Town...</div>
+    <div id="info">Click anywhere to enter Seagull Town...</div>
     <script type="importmap">
         {
             "imports": {
@@ -65,7 +79,7 @@
         const sound = new THREE.Audio(listener);
 
         const audioLoader = new THREE.AudioLoader();
-        audioLoader.load('audios/funkytown.ogg', function(buffer) {
+        audioLoader.load('../audios/funkytown.ogg', function(buffer) {
             sound.setBuffer(buffer);
             sound.setLoop(true);
             sound.setVolume(0.5);
@@ -74,6 +88,15 @@
         document.addEventListener('click', function() {
             if (!sound.isPlaying) {
                 sound.play();
+
+                // Setup analyser for music volume
+                if (!analyser) {
+                    const context = listener.context;
+                    analyser = context.createAnalyser();
+                    analyser.fftSize = 64;
+                    dataArray = new Uint8Array(analyser.frequencyBinCount);
+                    sound.source.connect(analyser);
+                }
             }
         });
 
@@ -82,10 +105,16 @@
 
         // Seagull object
         let seagull;
+        let seagullTargetPos = null;
+        let seagullMoving = false;
+        let seagullOriginalScale = 0.5;
+        let seagullTargetScale = seagullOriginalScale;
+        let seagullCurrentScale = seagullOriginalScale;
+        let analyser, dataArray;
         const loader = new GLTFLoader();
-        loader.load('images/Seagull.glb', (gltf) => {
+        loader.load('../images/Seagull.glb', (gltf) => {
             seagull = gltf.scene;
-            seagull.scale.set(0.5, 0.5, 0.5);
+            seagull.scale.set(seagullOriginalScale, seagullOriginalScale, seagullOriginalScale);
             scene.add(seagull);
         }, undefined, (error) => {
             console.error('Error loading model:', error);
@@ -108,13 +137,14 @@
             const pos = camera.position.clone().add(dir.multiplyScalar(distance));
 
             if (seagull) {
-                seagull.position.copy(pos);
-                
+                seagullTargetPos = pos.clone();
+                seagullMoving = true;
+
                 // Add silly effects
                 // Random rotation
                 seagull.rotation.x = Math.random() * Math.PI * 2;
                 seagull.rotation.z = Math.random() * Math.PI * 2;
-                
+
                 // Random color
                 seagull.traverse((child) => {
                     if (child.isMesh) {
@@ -126,11 +156,10 @@
                     }
                 });
 
-                // Bouncy scale animation
-                const originalScale = 0.5;
-                seagull.scale.set(originalScale * 2, originalScale * 2, originalScale * 2);
+                // Bouncy scale animation (handled by scale interpolation)
+                seagullTargetScale = seagullOriginalScale * 2;
                 setTimeout(() => {
-                    seagull.scale.set(originalScale, originalScale, originalScale);
+                    seagullTargetScale = seagullOriginalScale;
                 }, 200);
             }
         }
@@ -157,6 +186,33 @@
                 // Reset position when too high
                 if (seagull.position.y > maxHeight) {
                     seagull.position.y = resetHeight;
+                }
+
+                // Interpolate position if moving
+                if (seagullMoving && seagullTargetPos) {
+                    const lerpAlpha = 0.08; // Lower = slower
+                    seagull.position.lerp(seagullTargetPos, lerpAlpha);
+                    if (seagull.position.distanceTo(seagullTargetPos) < 0.05) {
+                        seagull.position.copy(seagullTargetPos);
+                        seagullMoving = false;
+                    }
+                }
+
+                // Interpolate scale for bouncy effect
+                seagullCurrentScale += (seagullTargetScale - seagullCurrentScale) * 0.2;
+
+                // If analyser exists, scale based on music volume
+                if (analyser && dataArray) {
+                    analyser.getByteFrequencyData(dataArray);
+                    // Get average volume
+                    let sum = 0;
+                    for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+                    const avg = sum / dataArray.length;
+                    // Map avg (0-255) to scale multiplier (1-2)
+                    const musicScale = 1 + (avg / 255);
+                    seagull.scale.set(seagullCurrentScale * musicScale, seagullCurrentScale * musicScale, seagullCurrentScale * musicScale);
+                } else {
+                    seagull.scale.set(seagullCurrentScale, seagullCurrentScale, seagullCurrentScale);
                 }
             }
 
