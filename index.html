@@ -83,9 +83,19 @@
 
     .games-container {
       width: 100%;
-      /* max-width: 1200px; */
+      max-width: 1400px;
       margin: 0 auto;
       padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    @media (min-width: 769px) {
+      .games-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .game-item {
@@ -93,16 +103,25 @@
       position: relative;
       width: 100%;
       height: 180px;
-      margin-bottom: 20px;
       border-radius: 10px;
       overflow: hidden;
-      transition: height 0.5s ease;
+      transition: height 0.5s ease, transform 0.2s ease;
       cursor: pointer;
       text-decoration: none; /* Remove underline from links */
     }
 
-    .game-item:hover {
-      height: 320px;
+    /* Hover effect only on desktop */
+    @media (min-width: 769px) {
+      .game-item:hover {
+        height: 320px;
+      }
+    }
+
+    /* Bounce effect on mobile */
+    @media (max-width: 768px) {
+      .game-item:active {
+        transform: scale(0.98);
+      }
     }
 
     .game-background {
@@ -128,7 +147,7 @@
     }
 
     .game-item.has-video:hover .game-video {
-      opacity: 0.6;
+      opacity: 1;
     }
 
     .game-logo {
@@ -139,11 +158,18 @@
       width: 200px;
       height: auto;
       filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
-      transition: transform 0.3s ease;
+      transition: all 0.5s ease;
     }
 
-    .game-item:hover .game-logo {
-      transform: translate(-50%, -50%) scale(1.4);
+    /* Move logo to bottom left and make smaller on hover (desktop only) */
+    @media (min-width: 769px) {
+      .game-item.has-video:hover .game-logo {
+        top: auto;
+        bottom: 15px;
+        left: 15px;
+        transform: translate(0, 0);
+        width: 100px;
+      }
     }
 
     /* About Section Styles */
@@ -186,23 +212,23 @@
     }
 
     .social-button.twitter {
-      background-color: #1DA1F2;
+      background-color: #2b2b2b;
     }
 
     .social-button.instagram {
-      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      background-color: #2b2b2b;
     }
 
     .social-button.facebook {
-      background-color: #4267B2;
+      background-color: #2b2b2b;
     }
 
     .social-button.discord {
-      background-color: #5865F2;
+      background-color: #2b2b2b;
     }
 
     .social-button.youtube {
-      background-color: #FF0000;
+      background-color: #2b2b2b;
     }
 
     .social-icon {
@@ -254,12 +280,63 @@
       color: white;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s ease;
+      transition: color 0.3s ease, filter 0.3s ease;
       cursor: pointer;
+      display: flex;
+      align-items: center;
     }
 
     .nav-link:hover {
       color: #4CAF50;
+    }
+
+    /* Rainbow hover effects for social icons */
+    .nav-menu li:nth-child(1) .nav-link:hover {
+      color: #6e97e6; /* Red - Twitter */
+    }
+
+    .nav-menu li:nth-child(2) .nav-link:hover {
+      color: #866ee6; /* Orange - TikTok */
+    }
+
+    .nav-menu li:nth-child(3) .nav-link:hover {
+      color: #e66e6e; /* Yellow - YouTube */
+    }
+
+    .nav-menu li:nth-child(4) .nav-link:hover {
+      color: #e66e6e; /* Green - RedNote */
+    }
+
+    .nav-menu li:nth-child(5) .nav-link:hover {
+      color: #6eb4e6; /* Cyan - Bilibili */
+    }
+
+    .nav-menu li:nth-child(6) .nav-link:hover {
+      color: #e66e6e; /* Blue - itch.io */
+    }
+
+    .nav-menu li:nth-child(7) .nav-link:hover {
+      color: #f29f52; /* Magenta - Email */
+    }
+
+    /* Color filter for PNG images on hover */
+    /* RedNote - Match #e66e6e (red) */
+    .nav-menu li:nth-child(4) .nav-link:hover img {
+      filter: brightness(0) saturate(100%) invert(60%) sepia(50%) saturate(500%) hue-rotate(320deg) brightness(1.1);
+    }
+
+    /* itch.io - Match #e66e6e (red) */
+    .nav-menu li:nth-child(6) .nav-link:hover img {
+      filter: brightness(0) saturate(100%) invert(60%) sepia(50%) saturate(500%) hue-rotate(320deg) brightness(1.1);
+    }
+
+    /* Email - Match #f29f52 (orange) */
+    .nav-menu li:nth-child(7) .nav-link:hover img {
+      filter: brightness(0) saturate(100%) invert(65%) sepia(80%) saturate(600%) hue-rotate(340deg) brightness(1.1);
+    }
+
+    .nav-link img {
+      transition: filter 0.3s ease;
     }
 
     .nav-toggle {
@@ -309,6 +386,31 @@
 
       .nav-menu li {
         padding: 15px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        justify-content: center;
+        padding: 10px 20px;
+        width: auto;
+      }
+
+      .nav-link svg,
+      .nav-link img {
+        width: 28px !important;
+        height: 28px !important;
+      }
+
+      /* Show text labels on mobile */
+      .nav-link::after {
+        content: attr(data-label);
+        font-size: 1rem;
+        font-weight: 500;
       }
 
       .nav-toggle {
@@ -523,10 +625,36 @@
     <div class="nav-container">
       <img src="images/unSAMEBot.png" alt="unSAME Logo" class="nav-logo">
       <ul class="nav-menu" id="nav-menu">
-        <li><a href="#home" class="nav-link">Home</a></li>
-        <li><a href="#games" class="nav-link">Games</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <!-- Social Media Links -->
+        <li><a href="https://x.com/unsamestudio" class="nav-link" target="_blank" title="Twitter" data-label="Twitter">
+          <svg style="width: 40px; height: 40px; fill: currentColor;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+          </svg>
+        </a></li>
+        <li><a href="https://www.tiktok.com/@unsame_games" class="nav-link" target="_blank" title="TikTok" data-label="TikTok">
+          <svg style="width: 40px; height: 40px; fill: currentColor;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+          </svg>
+        </a></li>
+        <li><a href="https://www.youtube.com/@unsamestudio" class="nav-link" target="_blank" title="YouTube" data-label="YouTube">
+          <svg style="width: 40px; height: 40px; fill: currentColor;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a></li>
+        <li><a href="https://xhslink.com/m/6rZNAnusdye" class="nav-link" target="_blank" title="RedNote" data-label="RedNote">
+          <img style="width: 40px; height: 40px;" src="images/platforms/rednote.png" alt="RedNote">
+        </a></li>
+        <li><a href="https://space.bilibili.com/12186485/upload/video" class="nav-link" target="_blank" title="Bilibili" data-label="Bilibili">
+          <svg style="width: 40px; height: 40px; fill: currentColor;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z"/>
+          </svg>
+        </a></li>
+        <!-- <li><a href="https://unsame.itch.io/" class="nav-link" target="_blank" title="itch.io" data-label="itch.io">
+          <img style="width: 40px; height: 40px;" src="images/platforms/itchio.png" alt="itch.io">
+        </a></li> -->
+        <li><a href="mailto:unsamestudio@gmail.com" class="nav-link" title="Email" data-label="Email">
+          <img style="width: 40px; height: 40px;" src="images/platforms/icons8-email-48.png" alt="Email">
+        </a></li>
       </ul>
       <div class="nav-toggle" id="nav-toggle">
         <span></span>
@@ -545,7 +673,7 @@
   </section>
 
   <!-- Games Section -->
-  <h2 class="section-title" id="games">Games</h2>
+  <h2 class="section-title" id="games"></h2>
   <div class="games-container">
     <!-- Game 1 -->
     <a href="https://unsame.fun/seagull" class="game-item">
@@ -574,13 +702,13 @@
     </a>
 
     <!-- Game 3 -->
-    <!-- <a href="https://unsame.fun/solara" class="game-item">
+    <a href="https://unsame.fun/solara" class="game-item">
       <img src="images/banner/solaraBG.png" alt="Solara" class="game-background">
       <video class="game-video" loop muted>
-        <source src="/api/placeholder/400/320" type="video/mp4">
+        <source src="videos/previews/solara.mp4" type="video/mp4">
       </video>
       <img src="images/logos/solara.png" alt="Solara" class="game-logo">
-    </a> -->
+    </a>
 
     <!-- Game 4 -->
     <a href="https://unsame.itch.io/runway" class="game-item">
@@ -604,6 +732,7 @@
   <!-- More Games Button -->
   <div style="text-align: center; margin: 60px 0;">
     <a href="https://unsame.itch.io/" class="more-games-button">
+      <img src="images/platforms/itchio.png" alt="itch.io" style="width: 24px; height: 24px;">
       <span>More Games</span>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M7 17L17 7M17 7H7M17 7V17"/>
@@ -611,40 +740,56 @@
     </a>
   </div>
 
-  <!-- About Section -->
-  <h2 class="section-title" id="about">About</h2>
-  <div class="container" style="padding: 0 20px;">
-    <div class="about-content">
-      <p>unSAME is Fun!</p>
-      <p>We love to experiment with different themes and create unique, original, weird, and "unSAME" games. Since 2019, we have been creating various indie games and participating in different game jams and events. Thanks for checking out our games, and have fun!</p>
-    </div>
-  </div>
-  
   <!-- Follow Us Section -->
-  <h2 class="section-title" id="contact">Follow Us</h2>
+  
+  <h2 class="section-title" id="contact"></h2>
   <div class="container">
+    <!-- Social media buttons moved to navigation bar -->
     <div class="social-container">
-      <!-- Twitter -->
       <a href="https://x.com/unsamestudio" class="social-button twitter">
         <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
         </svg>
       </a>
       
-      <!-- Bluesky -->
-      <a href="https://bsky.app/profile/unsame.fun" class="social-button facebook">
-        <img class="social-icon" src="images/platforms/icons8-bluesky-48.png" alt="Discord">
+      <a href="https://www.tiktok.com/@unsame_games" class="social-button">
+        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="white" d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+        </svg>
       </a>
       
-      <!-- Email -->
-      <a href="mailto:unsamestudio@gmail.com" class="social-button discord">
-        <img class="social-icon" src="images/platforms/icons8-email-48.png" alt="Discord">
+      <a href="https://www.youtube.com/@unsamestudio" class="social-button youtube">
+        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="white" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
       </a>
       
-      <!-- itch -->
-      <a href="https://unsame.itch.io/" class="social-button instagram">
+      <a href="https://xhslink.com/m/6rZNAnusdye" class="social-button">
+        <img class="social-icon" src="images/platforms/rednote.png" alt="Rednote">
+      </a>
+      
+      <a href="https://space.bilibili.com/12186485/upload/video" class="social-button">
+        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="white" d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z"/>
+        </svg>
+      </a>
+      
+      <!-- <a href="https://unsame.itch.io/" class="social-button">
         <img class="social-icon" src="images/platforms/itchio.png" alt="itch.io">
+      </a> -->
+      
+      <a href="mailto:unsamestudio@gmail.com" class="social-button discord">
+        <img class="social-icon" src="images/platforms/icons8-email-48.png" alt="Email">
       </a>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <h2 class="section-title" id="about"></h2>
+  <div class="container" style="padding: 0 20px;">
+    <div class="about-content">
+      <p>unSAME is Fun!</p>
+      <p>We love to experiment with different themes and create unique, original, weird, and "unSAME" games. Since 2019, we have been creating various indie games and participating in different game jams and events. Thanks for checking out our games, and have fun!</p>
     </div>
   </div>
   
@@ -780,7 +925,7 @@
       setTimeout(startDanmaku, 1000); // Start after 1 second delay
     });
 
-    // JavaScript to play videos when items are hovered
+    // JavaScript to play videos when items are hovered (desktop only)
     document.querySelectorAll('.game-item').forEach(item => {
       const video = item.querySelector('.game-video');
       const source = video.querySelector('source');
@@ -789,14 +934,17 @@
       if (source && !source.src.includes('placeholder')) {
         item.classList.add('has-video');
         
-        item.addEventListener('mouseenter', () => {
-          video.play();
-        });
-        
-        item.addEventListener('mouseleave', () => {
-          video.pause();
-          video.currentTime = 0;
-        });
+        // Only enable video on hover for desktop
+        if (window.innerWidth > 768) {
+          item.addEventListener('mouseenter', () => {
+            video.play();
+          });
+          
+          item.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0;
+          });
+        }
       } else {
         // Remove the video element if there's no valid source
         video.remove();
