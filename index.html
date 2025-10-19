@@ -62,14 +62,22 @@
       height: auto;
       filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
       transition: transform 0.3s ease;
+      cursor: pointer;
+      user-select: none;
     }
 
     .logo:hover {
       transform: scale(1.05) rotate(5deg);
     }
 
-    .logo:press {
-      transform: scale(0.95);
+    .logo:active {
+      transform: scale(0.9);
+      transition: transform 0.1s ease;
+    }
+
+    .logo.pressed {
+      transform: scale(0.9);
+      transition: transform 0.1s ease;
     }
 
     .section-title {
@@ -155,8 +163,11 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 200px;
+      max-width: calc(50% - 40px);
+      max-height: calc(100% - 40px);
+      width: auto;
       height: auto;
+      object-fit: contain;
       filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
       transition: all 0.5s ease;
     }
@@ -165,10 +176,11 @@
     @media (min-width: 769px) {
       .game-item.has-video:hover .game-logo {
         top: auto;
-        bottom: 15px;
-        left: 15px;
+        bottom: 20px;
+        left: 20px;
         transform: translate(0, 0);
-        width: 100px;
+        max-width: 100px;
+        max-height: 100px;
       }
     }
 
@@ -545,11 +557,6 @@
       .game-item:hover {
         height: 240px;
       }
-      
-      .game-logo {
-        width: 200px;
-        height: auto;
-      }
 
       .social-button {
         width: 50px;
@@ -577,11 +584,6 @@
       
       .game-item:hover {
         height: 200px;
-      }
-      
-      .game-logo {
-        width: 200px;
-        height: auto;
       }
 
       .social-container {
@@ -874,13 +876,13 @@
     ];
 
     // Function to create danmaku text
-    function createDanmakuText() {
+    function createDanmakuText(customMessage) {
       const heroSection = document.querySelector('.hero');
       const textElement = document.createElement('div');
       textElement.className = 'danmaku-text';
       
-      // Random message selection
-      const randomMessage = danmakuMessages[Math.floor(Math.random() * danmakuMessages.length)];
+      // Use custom message or random message selection
+      const randomMessage = customMessage || danmakuMessages[Math.floor(Math.random() * danmakuMessages.length)];
       textElement.textContent = randomMessage;
       
       // Random vertical position (avoiding the logo area in the center)
@@ -923,6 +925,49 @@
     // Start danmaku when page loads
     window.addEventListener('load', () => {
       setTimeout(startDanmaku, 1000); // Start after 1 second delay
+    });
+
+    // Logo press effect for mobile and desktop
+    const logo = document.querySelector('.logo');
+    
+    // Support messages for logo press
+    const supportMessages = [
+      "+1",
+      "I support you!",
+      "Keep going!",
+      "You got this!",
+      "Amazing work!",
+      "Love it!",
+      "+1 support",
+      "We believe in you!",
+      "So cool!",
+      "Keep creating!",
+      "You're awesome!",
+      "Great job!",
+      "This is great!"
+    ];
+    
+    // Function to create danmaku on logo press
+    function createSupportDanmaku() {
+      createDanmakuText(supportMessages[Math.floor(Math.random() * supportMessages.length)]);
+    }
+    
+    logo.addEventListener('touchstart', (e) => {
+      logo.classList.add('pressed');
+    });
+    
+    logo.addEventListener('touchend', (e) => {
+      logo.classList.remove('pressed');
+      createSupportDanmaku();
+    });
+    
+    logo.addEventListener('touchcancel', (e) => {
+      logo.classList.remove('pressed');
+    });
+    
+    // Desktop click effect
+    logo.addEventListener('mousedown', (e) => {
+      createSupportDanmaku();
     });
 
     // JavaScript to play videos when items are hovered (desktop only)
