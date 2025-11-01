@@ -20,22 +20,166 @@
     <!-- add font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- <link rel="icon" type="image/x-icon" href="images/seagull/SeagullSquareIcon.ico"> -->
 
     <title>Solara</title>
     <style>
+        @font-face {
+            font-family: 'LanaPixel';
+            src: url('assets/LanaPixel.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             margin: 0;
             padding: 0;
             background-color: black;
             color: white;
-            font-family: "Pixelify Sans", serif;
+            font-family: "LanaPixel", "Pixelify Sans", serif;
             font-weight: 400;
             font-optical-sizing: auto;
             font-style: normal;
             text-align: center;
+        }
+
+        /* Language Selector Styles */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 8px 16px;
+            cursor: pointer;
+            /* border-radius: 20px; */
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 80px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        .dropdown-btn.active {
+            background: white;
+            color: black;
+        }
+
+        .dropdown-arrow {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            /* border-radius: 10px; */
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            margin-top: 5px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .dropdown-content.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-item {
+            color: black !important;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 10px 10px 0 0;
+        }
+
+        .dropdown-item:last-child {
+            border-radius: 0 0 10px 10px;
+        }
+
+        .dropdown-item:only-child {
+            border-radius: 10px;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: black !important;
+        }
+
+        .dropdown-item.selected {
+            background: rgba(0, 0, 0, 0.2);
+            color: black !important;
+        }
+
+        .flag-icon {
+            width: 16px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 480px) {
+            .language-selector {
+                top: 15px;
+                left: 15px;
+            }
+            
+            .dropdown-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+                min-width: 70px;
+            }
+            
+            .dropdown-content {
+                min-width: 100px;
+            }
+            
+            .dropdown-item {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
         }
 
         .container {
@@ -212,6 +356,35 @@
             letter-spacing: 4px;
         }
 
+        /* Wishlist Button Styles */
+        .wishlist-button-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .wishlist-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white !important;
+            color: black !important;
+            padding: 20px 40px;
+            /* border-radius: 10px; */
+            text-decoration: none !important;
+            font-weight: bold;
+            font-size: 1.5em;
+            transition: transform 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .wishlist-button:hover {
+            transform: scale(1.05);
+            text-decoration: none !important;
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.3);
+        }
+
         .platforms {
             display: flex;
             justify-content: center;
@@ -317,6 +490,96 @@
             }
         }
 
+        /* Trailer Widget Responsive Container */
+        .trailer-widget-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            padding: 0 20px;
+        }
+
+        .trailer-widget-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            overflow: hidden;
+            /* border-radius: 10px; */
+            border: 5px solid white;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+        }
+
+        .trailer-widget-wrapper iframe {
+            width: 800px;
+            height: 450px;
+            border: none;
+            transform-origin: top left;
+        }
+
+        @media (max-width: 800px) {
+            .trailer-widget-wrapper {
+                height: calc(450px * var(--scale-factor));
+            }
+            
+            .trailer-widget-wrapper iframe {
+                transform: scale(var(--scale-factor));
+            }
+        }
+
+        @media (max-width: 750px) {
+            .trailer-widget-wrapper {
+                --scale-factor: 0.94;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .trailer-widget-wrapper {
+                --scale-factor: 0.88;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .trailer-widget-wrapper {
+                --scale-factor: 0.81;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .trailer-widget-wrapper {
+                --scale-factor: 0.75;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .trailer-widget-wrapper {
+                --scale-factor: 0.69;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .trailer-widget-wrapper {
+                --scale-factor: 0.63;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .trailer-widget-wrapper {
+                --scale-factor: 0.56;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .trailer-widget-wrapper {
+                --scale-factor: 0.50;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .trailer-widget-wrapper {
+                --scale-factor: 0.44;
+            }
+        }
+
         /* Lightbox overlay */
         .lightbox-overlay {
             display: none;
@@ -371,6 +634,29 @@
     </style>
 </head>
 <body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <div class="language-dropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown()" id="dropdown-button">
+                <span id="current-lang">
+                    <span class="flag-icon">🇺🇸</span>
+                    EN
+                </span>
+                <span class="dropdown-arrow">▼</span>
+            </button>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="#" class="dropdown-item selected" onclick="selectLanguage('en', '🇺🇸', 'EN')" data-lang="en">
+                    <span class="flag-icon">🇺🇸</span>
+                    English
+                </a>
+                <a href="#" class="dropdown-item" onclick="selectLanguage('zh', '🇨🇳', '中文')" data-lang="zh">
+                    <span class="flag-icon">🇨🇳</span>
+                    中文
+                </a>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <!-- Banner Logo -->
         <div class="logo-container">
@@ -389,8 +675,14 @@
 
         <!-- <div class="parallax"></div> -->
         <!-- <iframe class="trailer" src="https://www.youtube.com/embed/ila6mWyYMIg?si=SYIZumMw3XnePK9_" title="trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
-
-        <!-- Screenshots -->
+        
+        <!-- Bilibili Trailer with Responsive Container -->
+        <div class="trailer-widget-container">
+            <div class="trailer-widget-wrapper">
+                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115471303054741&bvid=BV14C1VB8Ex9&cid=33577700481&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+            </div>
+        </div>
+                <!-- Screenshots -->
         <div class="screenshots-container">
             <div class="screenshots">
                 <a href="#" class="screenshot-link" onclick="openLightbox(event, 'images/solara/screenshots/screenshots (1).png')">
@@ -423,13 +715,17 @@
 
         <!-- Description -->
         <div class="description">
-            <p style="font-style: italic; font-size: 1.6em; margin-bottom: 30px; color: hsl(189, 100%, 69%);">"Even if this world turns black and white, I'll be the color of your story."</p>
-            <p style="margin-bottom: 20px;">Follows the journey of Sora and Ray, as they delve deeper into the ruins to uncover the truth about Solara...</p>
-            <p>Solara is a short puzzle adventure game that features puzzles that center around colors, a beautiful story of friendship and companionship, and atmospheric music scores.</p>
+            <p style="font-style: italic; font-size: 1.6em; margin-bottom: 30px; color: hsl(189, 100%, 69%);" data-translate="quote">"Even if this world turns black and white, I'll be the color of your story."</p>
+            <p style="margin-bottom: 20px;" data-translate="description1">Follows the journey of Sora and Ray, as they delve deeper into the ruins to uncover the truth about Solara...</p>
+            <p data-translate="description2">Solara is a short puzzle adventure game that features puzzles that center around colors, a beautiful story of friendship and companionship, and atmospheric music scores.</p>
         </div>
 
-        <!-- Coming Soon -->
-        <div class="coming-soon" style="color: hsl(189, 100%, 69%);">Wishlist Now</div>
+        <!-- Wishlist Button -->
+        <div class="wishlist-button-container">
+            <a href="https://store.steampowered.com/app/4011910/Solara/" target="_blank" class="wishlist-button">
+                <span data-translate="wishlistButton">Wishlist Now</span>
+            </a>
+        </div>
 
         <!-- Platform Logos -->
         <div class="platforms">
@@ -516,6 +812,122 @@
                 });
             }
         }
+
+        // Translation data
+        const translations = {
+            en: {
+                quote: '"Even if this world turns black and white, I\'ll be the color of your story."',
+                description1: 'Follows the journey of Sora and Ray, as they delve deeper into the ruins to uncover the truth about Solara...',
+                description2: 'Solara is a short puzzle adventure game that features puzzles that center around colors, a beautiful story of friendship and companionship, and atmospheric music scores.',
+                wishlistButton: 'Wishlist Now',
+                font: '"LanaPixel", "Pixelify Sans", serif'
+            },
+            zh: {
+                quote: '"即使这个世界变成黑白，我也会成为你故事中的色彩。"',
+                description1: '跟随索拉和雷伊的旅程，深入遗迹探寻关于SOLARA的真相...',
+                description2: 'Solara是一款短篇解谜冒险游戏，以色彩为中心的谜题、美丽的友谊与陪伴的故事，以及氛围感十足的音乐。',
+                wishlistButton: '立即加入愿望单',
+                font: '"LanaPixel", "Noto Sans SC", serif'
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update all translated elements
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update font family
+            document.body.style.fontFamily = translations[lang].font;
+
+            // Update active language button
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('selected');
+
+            // Save language preference
+            localStorage.setItem('preferredLanguage', lang);
+
+            // Update URL without reload
+            const url = new URL(window.location);
+            url.searchParams.set('lang', lang);
+            window.history.replaceState({}, '', url);
+        }
+
+        // Dropdown functionality
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdown-content');
+            dropdown.classList.toggle('show');
+            
+            const arrow = document.querySelector('.dropdown-arrow');
+            if (dropdown.classList.contains('show')) {
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function selectLanguage(langCode, flag, displayName) {
+            // Update the dropdown button display
+            const currentLang = document.getElementById('current-lang');
+            currentLang.innerHTML = `<span class="flag-icon">${flag}</span> ${displayName}`;
+            
+            // Change language
+            changeLanguage(langCode);
+            
+            // Close dropdown
+            const dropdown = document.getElementById('dropdown-content');
+            dropdown.classList.remove('show');
+            document.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-btn') && !event.target.matches('.dropdown-btn *')) {
+                const dropdown = document.getElementById('dropdown-content');
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                    document.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for language in URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const langFromUrl = urlParams.get('lang');
+            
+            // Check for saved language preference
+            const savedLang = localStorage.getItem('preferredLanguage');
+            
+            // Use URL language, then saved preference, then default to English
+            const initialLang = langFromUrl || savedLang || 'en';
+            
+            if (translations[initialLang]) {
+                // Set the dropdown display based on initial language
+                const langData = {
+                    'en': { flag: '🇺🇸', display: 'EN' },
+                    'zh': { flag: '🇨🇳', display: '中文' }
+                };
+                
+                if (langData[initialLang]) {
+                    const currentLang = document.getElementById('current-lang');
+                    currentLang.innerHTML = `<span class="flag-icon">${langData[initialLang].flag}</span> ${langData[initialLang].display}`;
+                }
+                
+                changeLanguage(initialLang);
+            }
+        });
     </script>
 </body>
 </html>
