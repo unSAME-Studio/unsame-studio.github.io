@@ -1,0 +1,29 @@
+/* ==========================================================================
+   unSAME Studio - Animations
+   All animations and keyframe definitions
+   ========================================================================== */
+
+/* Danmaku Animation */
+.danmaku-text {
+  position: absolute;
+  color: var(--color-text-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: var(--z-danmaku);
+  animation: danmaku-flow 8s linear infinite;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.6;
+}
+
+@keyframes danmaku-flow {
+  0% {
+    transform: translateX(100vw);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+}

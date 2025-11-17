@@ -1,0 +1,153 @@
+/* ==========================================================================
+   unSAME Studio - Main Styles
+   Global styles, fonts, resets, and CSS variables
+   ========================================================================== */
+
+/* Brand Font - Pill Gothic */
+@font-face {
+  font-family: 'Pill Gothic';
+  src: url('../assets/PillGothic-Bold.woff2') format('woff2'),
+       url('../assets/PillGothic-Bold.woff') format('woff'),
+       url('../assets/PillGothic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pill Gothic';
+  src: url('../assets/PillGothic-Regular.woff2') format('woff2'),
+       url('../assets/PillGothic-Regular.woff') format('woff'),
+       url('../assets/PillGothic-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pill Gothic';
+  src: url('../assets/PillGothic-Light.woff2') format('woff2'),
+       url('../assets/PillGothic-Light.woff') format('woff'),
+       url('../assets/PillGothic-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CSS Variables */
+:root {
+  /* Colors */
+  --color-bg-primary: #121212;
+  --color-bg-secondary: #1a1a1a;
+  --color-bg-tertiary: #2b2b2b;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e0e0e0;
+  --color-text-muted: #888888;
+  --color-accent: #4CAF50;
+
+  /* Social Media Colors */
+  --color-twitter: #6e97e6;
+  --color-tiktok: #866ee6;
+  --color-youtube: #e66e6e;
+  --color-rednote: #e66e6e;
+  --color-bilibili: #6eb4e6;
+  --color-itchio: #e66e6e;
+  --color-email: #f29f52;
+
+  /* Spacing */
+  --spacing-xs: 10px;
+  --spacing-sm: 15px;
+  --spacing-md: 20px;
+  --spacing-lg: 30px;
+  --spacing-xl: 40px;
+  --spacing-xxl: 60px;
+
+  /* Border Radius */
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 25px;
+  --radius-full: 50%;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.3);
+
+  /* Transitions */
+  --transition-fast: 0.1s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Z-index layers */
+  --z-navbar: 1000;
+  --z-danmaku: 10;
+  --z-hero-overlay: -1;
+
+  /* Typography */
+  --font-primary: 'Pill Gothic', sans-serif;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.1rem;
+  --font-size-xl: 1.2rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+  --line-height-base: 1.8;
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-primary);
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  padding-top: 70px;
+}
+
+/* Typography */
+.section-title {
+  text-align: center;
+  font-size: var(--font-size-3xl);
+  font-weight: 500;
+  letter-spacing: 4px;
+  margin: 50px;
+  text-transform: uppercase;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+  margin-top: var(--spacing-xxl);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: var(--font-size-2xl);
+    margin: var(--spacing-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.8rem;
+  }
+}

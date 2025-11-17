@@ -1,0 +1,123 @@
+/* ==========================================================================
+   unSAME Studio - Page Templates
+   Styles for different page types (about, games list, press, etc.)
+   ========================================================================== */
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  padding: var(--spacing-xxl) var(--spacing-md);
+  background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
+}
+
+.page-header h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-md);
+}
+
+.page-header p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: var(--line-height-base);
+}
+
+/* Games List Page */
+.games-list {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+/* Press/Contact Page */
+.press-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.press-kit-download {
+  text-align: center;
+  margin: var(--spacing-xxl) 0;
+}
+
+.contact-info {
+  background: linear-gradient(45deg, var(--color-bg-tertiary), var(--color-bg-secondary));
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-xl);
+}
+
+.contact-info h3 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.contact-info a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-normal);
+}
+
+.contact-info a:hover {
+  color: var(--color-text-primary);
+}
+
+/* Team Section */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.team-member {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background: linear-gradient(45deg, var(--color-bg-tertiary), var(--color-bg-secondary));
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-normal);
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.team-member img {
+  width: 150px;
+  height: 150px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  margin-bottom: var(--spacing-md);
+}
+
+.team-member h3 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-xs);
+}
+
+.team-member p {
+  color: var(--color-text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+}

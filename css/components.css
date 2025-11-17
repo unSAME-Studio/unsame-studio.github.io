@@ -1,0 +1,436 @@
+/* ==========================================================================
+   unSAME Studio - Components
+   Reusable UI components
+   ========================================================================== */
+
+/* Navigation Bar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: var(--z-navbar);
+  padding: var(--spacing-sm) 0;
+  transition: transform var(--transition-normal);
+}
+
+.navbar.hidden {
+  transform: translateY(-100%);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--spacing-md);
+}
+
+.nav-logo {
+  height: 40px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-lg);
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-normal), filter var(--transition-normal);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover {
+  color: var(--color-accent);
+}
+
+/* Navigation Divider */
+.nav-divider {
+  width: 1px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 var(--spacing-xs);
+}
+
+/* Page links styling */
+.nav-link:not(.nav-external) {
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Social icon sizing */
+.nav-link.nav-external svg,
+.nav-link.nav-external img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Rainbow hover effects for social icons - adjusted for new positions */
+.nav-link.nav-external:hover { color: inherit; }
+
+.nav-link img {
+  transition: filter var(--transition-normal);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.nav-toggle span {
+  width: 25px;
+  height: 3px;
+  background: var(--color-text-primary);
+  transition: var(--transition-normal);
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 70px;
+    flex-direction: column;
+    background-color: rgba(18, 18, 18, 0.98);
+    width: 100%;
+    text-align: center;
+    transition: var(--transition-normal);
+    gap: 0;
+    padding: var(--spacing-md) 0;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .nav-menu li {
+    padding: var(--spacing-sm) 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Mobile divider - horizontal instead of vertical */
+  .nav-divider {
+    width: 80%;
+    height: 1px;
+    margin: var(--spacing-sm) 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    padding: var(--spacing-xs) var(--spacing-md);
+    width: auto;
+  }
+
+  /* Only show icons for social links on mobile */
+  .nav-link.nav-external svg,
+  .nav-link.nav-external img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  /* Show labels only for external links on mobile */
+  .nav-link.nav-external::after {
+    content: attr(data-label);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+}
+
+/* Buttons */
+.btn,
+.more-games-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: linear-gradient(45deg, var(--color-bg-tertiary), var(--color-bg-secondary));
+  color: var(--color-text-primary);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  border: none;
+}
+
+.btn:hover,
+.more-games-button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn svg,
+.more-games-button svg {
+  transition: transform var(--transition-normal);
+}
+
+.btn:hover svg,
+.more-games-button:hover svg {
+  transform: rotate(45deg);
+}
+
+/* Social Media Buttons */
+.social-container {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-tertiary);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.social-button:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.social-icon {
+  width: 30px;
+  height: 30px;
+  fill: var(--color-text-primary);
+}
+
+/* Soundtrack Button */
+.soundtrack-button {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(45deg, var(--color-bg-tertiary), var(--color-bg-secondary));
+  padding: var(--spacing-sm) 25px;
+  border-radius: var(--radius-md);
+  margin: var(--spacing-xl) auto;
+  max-width: 600px;
+  width: 90%;
+  cursor: pointer;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+
+.soundtrack-button:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.soundtrack-icon {
+  width: 48px;
+  height: 48px;
+  margin-right: var(--spacing-md);
+}
+
+.soundtrack-text {
+  text-align: left;
+}
+
+.soundtrack-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.soundtrack-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* Game Cards */
+.game-item {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 180px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: height var(--transition-slow), transform 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@media (min-width: 769px) {
+  .game-item:hover {
+    height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-item:active {
+    transform: scale(0.98);
+  }
+}
+
+.game-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity var(--transition-slow);
+  filter: brightness(50%);
+}
+
+.game-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+}
+
+.game-item.has-video:hover .game-background {
+  opacity: 0;
+}
+
+.game-item.has-video:hover .game-video {
+  opacity: 1;
+}
+
+.game-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: calc(50% - 40px);
+  max-height: calc(100% - 40px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
+  transition: all var(--transition-slow);
+}
+
+@media (min-width: 769px) {
+  .game-item.has-video:hover .game-logo {
+    top: auto;
+    bottom: var(--spacing-md);
+    left: var(--spacing-md);
+    transform: translate(0, 0);
+    max-width: 100px;
+    max-height: 100px;
+  }
+}
+
+/* About Content Box */
+.about-content {
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  line-height: var(--line-height-base);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  background: linear-gradient(45deg, var(--color-bg-tertiary), var(--color-bg-secondary));
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Responsive Components */
+@media (max-width: 768px) {
+  .game-item {
+    height: 140px;
+  }
+
+  .game-item:hover {
+    height: 240px;
+  }
+
+  .social-button {
+    width: 50px;
+    height: 50px;
+  }
+
+  .social-icon {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-item {
+    height: 120px;
+  }
+
+  .game-item:hover {
+    height: 200px;
+  }
+
+  .social-container {
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+
+  .social-button {
+    width: 45px;
+    height: 45px;
+  }
+
+  .social-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .soundtrack-button {
+    margin: var(--spacing-lg) var(--spacing-md);
+    padding: 12px var(--spacing-md);
+  }
+
+  .soundtrack-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .soundtrack-title {
+    font-size: var(--font-size-base);
+  }
+
+  .soundtrack-subtitle {
+    font-size: 0.8rem;
+  }
+}

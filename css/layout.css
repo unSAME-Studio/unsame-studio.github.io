@@ -1,0 +1,91 @@
+/* ==========================================================================
+   unSAME Studio - Layout
+   Page layout and structure styles
+   ========================================================================== */
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero video {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: var(--z-hero-overlay);
+  object-fit: cover;
+  filter: brightness(50%) blur(2px);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-hero-overlay);
+}
+
+.logo {
+  width: 220px;
+  height: auto;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+  transition: transform var(--transition-normal);
+  cursor: pointer;
+  user-select: none;
+}
+
+.logo:hover {
+  transform: scale(1.05) rotate(5deg);
+}
+
+.logo:active {
+  transform: scale(0.9);
+  transition: transform var(--transition-fast);
+}
+
+.logo.pressed {
+  transform: scale(0.9);
+  transition: transform var(--transition-fast);
+}
+
+/* Games Grid */
+.games-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+@media (min-width: 769px) {
+  .games-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .logo {
+    width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 150px;
+  }
+}

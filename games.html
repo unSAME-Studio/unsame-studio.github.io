@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games - unSAME studio</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <!-- unSAME Studio CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/page-templates.css">
+  <link rel="stylesheet" href="css/mixtape.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/">
+        <img src="images/unSAMEBot.png" alt="unSAME Logo" class="nav-logo">
+      </a>
+      <ul class="nav-menu" id="nav-menu">
+        <!-- Page Links -->
+        <li><a href="/" class="nav-link" data-label="Home">Home</a></li>
+        <li><a href="/games.html" class="nav-link" data-label="Games">Games</a></li>
+        <li><a href="/about.html" class="nav-link" data-label="About">About</a></li>
+        <li><a href="/press.html" class="nav-link" data-label="Press">Press</a></li>
+
+        <!-- Divider -->
+        <li class="nav-divider"></li>
+
+        <!-- Social Media Links -->
+        <li><a href="https://x.com/unsamestudio" class="nav-link nav-external" target="_blank" title="Twitter" data-label="Twitter">
+          <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+          </svg>
+        </a></li>
+        <li><a href="https://www.tiktok.com/@unsame_studio" class="nav-link nav-external" target="_blank" title="TikTok" data-label="TikTok">
+          <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+          </svg>
+        </a></li>
+        <li><a href="https://www.youtube.com/@unsamestudio" class="nav-link nav-external" target="_blank" title="YouTube" data-label="YouTube">
+          <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a></li>
+        <li><a href="https://www.xiaohongshu.com/user/profile/6772d1d6000000001801638e" class="nav-link nav-external" target="_blank" title="RedNote" data-label="RedNote">
+          <img src="images/platforms/rednote.png" alt="RedNote">
+        </a></li>
+        <li><a href="https://space.bilibili.com/12186485/upload/video" class="nav-link nav-external" target="_blank" title="Bilibili" data-label="Bilibili">
+          <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z"/>
+          </svg>
+        </a></li>
+      </ul>
+      <div class="nav-toggle" id="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mixtape Hero Section -->
+  <section class="mixtape-hero">
+    <!-- Scrolling Game Covers Background -->
+    <div class="scrolling-covers">
+      <!-- Row 1 - Scrolls Left (populated by JS) -->
+      <div class="scroll-row"></div>
+      <!-- Row 2 - Scrolls Right (populated by JS) -->
+      <div class="scroll-row"></div>
+    </div>
+
+    <!-- Mixtape Logo Center -->
+    <div class="mixtape-logo-container">
+      <img src="images/mixtape/unSAME Mixtape Logo.png" alt="unSAME Mixtape">
+      <!-- <h1>The Mixtape</h1> -->
+      <p>Curated collection of unique game experiences across multiple genres</p>
+    </div>
+  </section>
+
+  <!-- Action Games Category -->
+  <section class="category-section">
+    <div class="category-header">
+      <span class="category-badge action">Action</span>
+      <h2>Crazy Dramatic Fun</h2>
+      <p>Our signature action games that give you crazy fun every time a button is pressed</p>
+    </div>
+    <div class="category-games">
+      <a href="https://unsame.fun/seagull" class="category-game-card">
+        <img src="images/covers/gulltastrophe.png" alt="Gulltastrophe">
+        <div class="category-game-info">
+          <h3>Gulltastrophe</h3>
+          <p>Chaotic platformer causing mayhem on the beach</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/runway" class="category-game-card">
+        <img src="images/covers/runway.png" alt="Runway">
+        <div class="category-game-info">
+          <h3>Runway™</h3>
+          <p>Fashion-themed action with model-kicking mechanics</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/portarumaku" class="category-game-card">
+        <img src="images/covers/potarumaku.png" alt="Portarumaku">
+        <div class="category-game-info">
+          <h3>Portarumaku</h3>
+          <p>Bullet hell shooter with multiverse survival theme</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/connecting-to-system-8" class="category-game-card">
+        <img src="images/covers/system8.png" alt="Connecting to SYSTEM 8">
+        <div class="category-game-info">
+          <h3>Connecting to SYSTEM 8</h3>
+          <p>Adventure combining exploration and combat</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/hop-hop-donut" class="category-game-card">
+        <img src="images/covers/hophopdonut.png" alt="Hop Hop! Donut">
+        <div class="category-game-info">
+          <h3>Hop Hop! Donut</h3>
+          <p>2D platformer inspired by Balloon Fight</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/little-cleaner" class="category-game-card">
+        <img src="images/covers/littlecleaner.png" alt="Little Cleaner">
+        <div class="category-game-info">
+          <h3>Little Cleaner</h3>
+          <p>Protective platformer featuring a rat character</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/the-amoeba-effect" class="category-game-card">
+        <img src="images/covers/amoeba.png" alt="The Amoeba Effect">
+        <div class="category-game-info">
+          <h3>The Amoeba Effect</h3>
+          <p>Survive. Evolve. Adventure</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Story-Driven Games Category -->
+  <section class="category-section">
+    <div class="category-header">
+      <span class="category-badge story">Story</span>
+      <h2>Playable Work of Art</h2>
+      <p>Games that take you on an emotional journey</p>
+    </div>
+    <div class="category-games">
+      <a href="https://unsame.fun/solara" class="category-game-card">
+        <img src="images/covers/solara.png" alt="Solara">
+        <div class="category-game-info">
+          <h3>Solara</h3>
+          <p>A heartfelt puzzle adventure about connection</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/tlr" class="category-game-card">
+        <img src="images/covers/tlr.png" alt="The Little Robot">
+        <div class="category-game-info">
+          <h3>The Little Robot</h3>
+          <p>A journey through loneliness</p>
+        </div>
+      </a>
+      <a href="https://cytea.itch.io/seaside-picnic" class="category-game-card">
+        <img src="images/covers/seasidepicnic.png" alt="Seaside Picnic">
+        <div class="category-game-info">
+          <h3>Seaside Picnic</h3>
+          <p>Interactive fiction with atmospheric tension</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/emotionless" class="category-game-card">
+        <img src="images/covers/emotionless.png" alt="emotionless">
+        <div class="category-game-info">
+          <h3>emotionless</h3>
+          <p>Would you trade your life to be normal?</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/laugh-with-me" class="category-game-card">
+        <img src="images/covers/laughwithme.png" alt="Laugh with Me">
+        <div class="category-game-info">
+          <h3>Laugh with Me</h3>
+          <p>Action game with emotional undertones</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Casual & Accessible Games Category -->
+  <section class="category-section">
+    <div class="category-header">
+      <span class="category-badge casual">Casual</span>
+      <h2>Easy to Pick Up & Play in Arcade Style</h2>
+      <p>Games that are accessible and that anyone can enjoy</p>
+    </div>
+    <div class="category-games">
+      <a href="https://unsame.itch.io/plug-it-in" class="category-game-card">
+        <img src="images/covers/plugitin.png" alt="PLUG IT IN">
+        <div class="category-game-info">
+          <h3>PLUG IT IN</h3>
+          <p>A juicy puzzle game about plugs and outlets</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/sauce" class="category-game-card">
+        <img src="images/covers/sauce.png" alt="Sauce">
+        <div class="category-game-info">
+          <h3>Sauce</h3>
+          <p>Food service simulation</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/stock-up" class="category-game-card">
+        <img src="images/covers/stockup.png" alt="Stock Up!">
+        <div class="category-game-info">
+          <h3>Stock Up!</h3>
+          <p>Toilet paper stocking simulation</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/boba-o-matic" class="category-game-card">
+        <img src="images/covers/bobaomatic.png" alt="Boba-O-Matic">
+        <div class="category-game-info">
+          <h3>Boba-O-Matic</h3>
+          <p>Drink preparation service simulation</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/sushiunroll" class="category-game-card">
+        <img src="images/covers/sushiunroll.png" alt="SUSHI unROLL">
+        <div class="category-game-info">
+          <h3>SUSHI unROLL</h3>
+          <p>Unroll the Sushi and make money</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Experimental Games Category -->
+  <section class="category-section">
+    <div class="category-header">
+      <span class="category-badge experimental">Experimental</span>
+      <h2>Weirdly Wonderful and Wonderfully Weird</h2>
+      <p>Unconventional games that push boundaries and explore new ideas</p>
+    </div>
+    <div class="category-games">
+      <a href="https://unsame.itch.io/give-me-your-hands" class="category-game-card">
+        <img src="images/covers/gmyh.png" alt="Give Me Your Hands">
+        <div class="category-game-info">
+          <h3>Give Me Your Hands</h3>
+          <p>Give a hand and connect the World!</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/love-stickin" class="category-game-card">
+        <img src="images/covers/lovestickin.png" alt="Love Stickin'">
+        <div class="category-game-info">
+          <h3>Love Stickin'</h3>
+          <p>Rolling action meets dating sim</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/canorous" class="category-game-card">
+        <img src="images/covers/canorous.png" alt="CANOROUS">
+        <div class="category-game-info">
+          <h3>CANOROUS</h3>
+          <p>Voice-singing experimental game</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/trash-beats" class="category-game-card">
+        <img src="images/covers/trashbeat.png" alt="Trash Beats">
+        <div class="category-game-info">
+          <h3>Trash Beats</h3>
+          <p>DJ trash panda rhythm platformer</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/suffocate" class="category-game-card">
+        <img src="images/covers/suffocate.png" alt="suffocate">
+        <div class="category-game-info">
+          <h3>suffocate</h3>
+          <p>Keep breathing</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/split-clash" class="category-game-card">
+        <img src="images/covers/splitclash.png" alt="Split Clash">
+        <div class="category-game-info">
+          <h3>Split Clash</h3>
+          <p>Chaotic one-button party game</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/root" class="category-game-card">
+        <img src="images/covers/root.png" alt="Root Simulator">
+        <div class="category-game-info">
+          <h3>Root of Reality</h3>
+          <p>Immersive first-person root simulator</p>
+        </div>
+      </a>
+      <a href="https://unsame.itch.io/tmdtneptot" class="category-game-card">
+        <img src="images/covers/tmdtneptot.png" alt="Train of Thought">
+        <div class="category-game-info">
+          <h3>Train of Thought</h3>
+          <p>Destroy the never-ending problematic train</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- More Games Section -->
+  <section class="category-section" style="text-align: center; padding-bottom: 40px;">
+    <a href="https://unsame.itch.io/" class="more-games-button">
+      <img src="images/platforms/itchio.png" alt="itch.io" style="width: 24px; height: 24px;">
+      <span>Explore All 50+ Games on itch.io</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+      </svg>
+    </a>
+
+    <!-- Mixtape Badge -->
+    <div style="margin-top: 60px; padding-bottom: 40px;">
+      <img src="images/mixtape/unSAME Mixtape Badge.png" alt="unSAME Mixtape" class="mixtape-badge-footer">
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2019-2025 unSAME studio. All rights reserved.
+  </footer>
+
+  <script src="js/navigation.js"></script>
+  <script src="js/mixtape-scroll.js"></script>
+</body>
+</html>
