@@ -70,6 +70,24 @@
   font-size: 0.95rem;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+/* Individual hover colors for each nav button from unSAME logo */
+.nav-link[href="/"]:hover {
+  color: #ff839b;
+}
+
+.nav-link[href="/games.html"]:hover {
+  color: #ffe500;
+}
+
+.nav-link[href="/about.html"]:hover {
+  color: #55c59d;
+}
+
+.nav-link[href="/press.html"]:hover {
+  color: #00a2cc;
 }
 
 /* Social icon sizing */
@@ -79,8 +97,32 @@
   height: 24px;
 }
 
-/* Rainbow hover effects for social icons - adjusted for new positions */
-.nav-link.nav-external:hover { color: inherit; }
+/* Social media icon colors */
+/* Twitter/X */
+.nav-link.nav-external[href*="x.com"]:hover svg,
+.nav-link.nav-external[href*="twitter.com"]:hover svg {
+  color: #1DA1F2;
+}
+
+/* TikTok */
+.nav-link.nav-external[href*="tiktok.com"]:hover svg {
+  color: #fe2c55;
+}
+
+/* YouTube */
+.nav-link.nav-external[href*="youtube.com"]:hover svg {
+  color: #FF0000;
+}
+
+/* RedNote */
+.nav-link.nav-external[href*="xiaohongshu.com"]:hover img {
+  filter: brightness(1.2);
+}
+
+/* Bilibili */
+.nav-link.nav-external[href*="bilibili.com"]:hover svg {
+  color: #00A1D6;
+}
 
 .nav-link img {
   transition: filter var(--transition-normal);
