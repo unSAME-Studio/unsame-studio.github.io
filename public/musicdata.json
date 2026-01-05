@@ -4,7 +4,7 @@
         "id": "gulltastrophe", 
         "title": "Gulltastrophe", 
         "url": "https://unsame.fun/seagull",
-        "coverArt": "https://unsame.fun/images/gulltastrophe.png",
+        "coverArt": "https://unsame.fun/images/covers/gulltastrophe.png",
         "hasVideo": true,
         "videoUrl": "https://unsame.fun/videos/previews/seagull.mp4"
       },
@@ -12,7 +12,7 @@
         "id": "plug-it-in", 
         "title": "PLUG IT IN", 
         "url": "https://unsame.itch.io/plug-it-in",
-        "coverArt": "https://unsame.fun/images/plug.png",
+        "coverArt": "https://unsame.fun/images/covers/plugitin.png",
         "hasVideo": true,
         "videoUrl": "https://unsame.fun/videos/previews/plugitin.mp4"
       },
@@ -20,7 +20,7 @@
         "id": "runway", 
         "title": "Runway", 
         "url": "https://unsame.itch.io/runway",
-        "coverArt": "https://unsame.fun/images/Runway.png",
+        "coverArt": "https://unsame.fun/images/covers/runway.png",
         "hasVideo": true,
         "videoUrl": "https://unsame.fun/videos/previews/runway.mp4"
       },
@@ -28,21 +28,21 @@
         "id": "love-stickin", 
         "title": "Love Stickin'", 
         "url": "https://samfeng.itch.io/love-stickin",
-        "coverArt": "https://unsame.fun/images/ItchCoverLove.png",
+        "coverArt": "https://unsame.fun/images/covers/lovestickin.png",
         "hasVideo": false
       },
       { 
         "id": "portarumaku", 
         "title": "Portarumaku", 
         "url": "https://weisa.itch.io/portarumaku",
-        "coverArt": "https://unsame.fun/images/portarumaku.png",
+        "coverArt": "https://unsame.fun/images/covers/portarumaku.png",
         "hasVideo": false
       },
       { 
         "id": "sushi-unroll", 
         "title": "SUSHI unROLL", 
         "url": "https://unsame.itch.io/sushi-unroll",
-        "coverArt": "https://unsame.fun/images/SUSHI unROLL.png",
+        "coverArt": "https://unsame.fun/images/covers/sushiunroll.png",
         "hasVideo": false
       }
     ],
