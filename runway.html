@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://unsame.fun/runway">
+    <meta name="twitter:title" content="Runway™">
+    <meta name="twitter:description" content="Dress up, kick the models off the runway, strike a pose, and be fabulous~! A dress-up & kick 'em out mini arcade action game.">
+    <meta name="twitter:image" content="https://img.itch.zone/aW1nLzI0Mzc1MjgucG5n/original/7qmmc%2F.png">
+
+    <meta property="og:title" content="Runway™">
+    <meta property="og:description" content="Dress up, kick the models off the runway, strike a pose, and be fabulous~! A dress-up & kick 'em out mini arcade action game.">
+    <meta property="og:image" content="https://img.itch.zone/aW1nLzI0Mzc1MjgucG5n/original/7qmmc%2F.png">
+    <meta property="og:url" content="https://unsame.fun/runway">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <title data-translate="title">Runway™ - Be Fabulous</title>
+    <style>
+        :root {
+            --color-cream: #dfe0e0;
+            --color-blush: #f7f7f7;
+            --color-gold: #e8c000;
+            --color-gold-light: #f5e066;
+            --color-black: #222222;
+            --color-charcoal: #444444;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Cormorant Garamond', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-cream);
+            color: var(--color-black);
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 1000;
+        }
+
+        .language-dropdown {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--color-gold);
+            color: var(--color-cream);
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-display);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 100px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn:hover {
+            background: var(--color-black);
+            border-color: var(--color-gold-light);
+        }
+
+        .dropdown-arrow {
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(26, 26, 26, 0.95);
+            min-width: 140px;
+            border: 1px solid var(--color-gold);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            margin-top: 5px;
+            backdrop-filter: blur(10px);
+        }
+
+        .dropdown-content.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-item {
+            color: var(--color-cream) !important;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-display);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(201, 169, 98, 0.2);
+        }
+
+        .dropdown-item.selected {
+            background: rgba(201, 169, 98, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-blush) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(232, 192, 0, 0.05) 100px,
+                    rgba(232, 192, 0, 0.05) 101px
+                );
+            pointer-events: none;
+        }
+
+        .magazine-header {
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .issue-label {
+            font-family: var(--font-display);
+            font-size: 11px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 15px;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 0.85;
+            color: var(--color-black);
+            margin-bottom: 20px;
+        }
+
+        .hero-title .trademark {
+            font-size: 0.3em;
+            vertical-align: super;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 400;
+            color: var(--color-charcoal);
+            letter-spacing: 0.1em;
+        }
+
+        .hero-cover {
+            position: relative;
+            margin: 40px 0;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .hero-cover img {
+            max-width: 90vw;
+            max-height: 50vh;
+            object-fit: contain;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+        }
+
+        .decorative-line {
+            width: 1px;
+            height: 80px;
+            background: var(--color-gold);
+            margin: 40px auto;
+            opacity: 0;
+            animation: lineGrow 1s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        @keyframes lineGrow {
+            from { 
+                opacity: 0; 
+                height: 0; 
+            }
+            to { 
+                opacity: 1; 
+                height: 80px; 
+            }
+        }
+
+        .scroll-indicator {
+            font-family: var(--font-display);
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 1s;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            color: var(--color-black);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-number {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            color: var(--color-gold);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            color: var(--color-black);
+            margin-bottom: 20px;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--color-gold);
+            margin: 30px auto;
+        }
+
+        /* Editorial Quote */
+        .editorial-quote {
+            background: var(--color-black);
+            color: var(--color-cream);
+            padding: 120px 40px;
+            text-align: center;
+        }
+
+        .quote-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-style: italic;
+            font-weight: 400;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            line-height: 1.5;
+        }
+
+        .quote-attribution {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--color-gold);
+        }
+
+        /* Screenshots Gallery */
+        .gallery-section {
+            background: white;
+            padding: 120px 40px;
+        }
+
+        .screenshots-wrapper {
+            position: relative;
+            margin: 0 -40px;
+            padding: 0 60px;
+        }
+
+        .screenshots {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 40px 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-gold) transparent;
+        }
+
+        .screenshots::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .screenshots::-webkit-scrollbar-track {
+            background: rgba(232, 192, 0, 0.1);
+        }
+
+        .screenshots::-webkit-scrollbar-thumb {
+            background: var(--color-gold);
+        }
+
+        .screenshot-frame {
+            flex: 0 0 auto;
+            width: 350px;
+            background: var(--color-cream);
+            padding: 15px;
+            border: 1px solid rgba(232, 192, 0, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .screenshot-frame:hover {
+            transform: scale(1.02) rotate(1deg);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        }
+
+        .screenshot-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .screenshot-caption {
+            margin-top: 15px;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--color-charcoal);
+            text-align: center;
+        }
+
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--color-black);
+            border: 1px solid var(--color-gold);
+            color: var(--color-cream);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .scroll-btn:hover {
+            background: var(--color-gold);
+            color: var(--color-black);
+        }
+
+        .scroll-btn.left {
+            left: 20px;
+        }
+
+        .scroll-btn.right {
+            right: 20px;
+        }
+
+        /* Trailer Section */
+        .trailer-section {
+            padding: 120px 40px;
+            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-blush) 100%);
+        }
+
+        .trailer-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .trailer-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: var(--color-black);
+            border: 1px solid var(--color-gold);
+        }
+
+        .trailer-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--color-black);
+            padding: 120px 40px;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            color: var(--color-cream);
+            margin-bottom: 30px;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: rgba(245, 240, 232, 0.7);
+            margin-bottom: 50px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 45px;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .cta-btn.primary {
+            background: var(--color-gold);
+            color: var(--color-black);
+            border: 1px solid var(--color-gold);
+        }
+
+        .cta-btn.primary:hover {
+            background: transparent;
+            color: var(--color-gold);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: var(--color-cream);
+            border: 1px solid var(--color-cream);
+        }
+
+        .cta-btn.secondary:hover {
+            background: var(--color-cream);
+            color: var(--color-black);
+        }
+
+        .cta-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Social Links */
+        .social-section {
+            padding: 80px 40px;
+            background: var(--color-blush);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-black);
+            color: var(--color-cream);
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--color-gold);
+            color: var(--color-black);
+            transform: translateY(-5px);
+        }
+
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-black);
+            color: var(--color-cream);
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(245, 240, 232, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-gold);
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: rgba(245, 240, 232, 0.5);
+        }
+
+        .copyright a {
+            color: var(--color-gold);
+            text-decoration: none;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: var(--color-cream);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-gold);
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: var(--color-gold);
+            color: var(--color-black);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .locations-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .language-selector {
+                top: 20px;
+                left: 20px;
+            }
+            
+            .content-section {
+                padding: 80px 25px;
+            }
+            
+            .parallax-bg {
+                background-attachment: scroll;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .locations-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <div class="language-dropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown()">
+                <span id="current-lang">🇺🇸 EN</span>
+                <span class="dropdown-arrow">▼</span>
+            </button>
+            <div class="dropdown-content" id="dropdown-content">
+                <div class="dropdown-item selected" data-lang="en" onclick="selectLanguage('en', '🇺🇸', 'EN')">
+                    🇺🇸 English
+                </div>
+                <div class="dropdown-item" data-lang="zh" onclick="selectLanguage('zh', '🇨🇳', '中文')">
+                    🇨🇳 中文
+                </div>
+                <div class="dropdown-item" data-lang="ja" onclick="selectLanguage('ja', '🇯🇵', '日本語')">
+                    🇯🇵 日本語
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="magazine-header">
+            <div class="issue-label" data-translate="issueLabel">unSAME studio PRESENT</div>
+            <h1 class="hero-title">Runway<span class="trademark">™</span></h1>
+            <p class="hero-subtitle" data-translate="heroSubtitle">Be Fabulous</p>
+        </div>
+        
+        <div class="hero-cover">
+            <img src="https://img.itch.zone/aW1nLzI0Mzc1MjgucG5n/original/7qmmc%2F.png" alt="Runway™ Cover">
+        </div>
+        
+        <div class="decorative-line"></div>
+        
+        <div class="scroll-indicator" onclick="document.querySelector('.trailer-section').scrollIntoView({behavior: 'smooth'})" data-translate="scrollIndicator">
+            Scroll to Explore
+        </div>
+    </section>
+
+    <!-- Trailer Section -->
+    <section class="trailer-section">
+        <div class="section-header">
+            <div class="section-number" data-translate="trailerNumber">Chapter One</div>
+            <h2 class="section-title" data-translate="trailerTitle">The Premiere</h2>
+            <div class="section-divider"></div>
+        </div>
+        
+        <div class="trailer-container">
+            <div class="trailer-wrapper" id="youtube-trailer">
+                <iframe src="https://www.youtube.com/embed/lflWvzShIks?si=kAXu7rWt9UZHk7oS" title="Runway Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="trailer-wrapper" id="bilibili-trailer" style="display: none;">
+                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115227530107646&bvid=BV1KNWuz5EJa&cid=32474792731&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Editorial Quote -->
+    <section class="editorial-quote">
+        <p class="quote-text" data-translate="quoteText">
+            "Dress up, kick the models off the runway, strike a pose, and be fabulous~!"
+        </p>
+        <p class="quote-attribution" data-translate="quoteAttribution">— The Runway™ Manifesto</p>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="section-header">
+            <div class="section-number" data-translate="galleryNumber">Chapter Two</div>
+            <h2 class="section-title" data-translate="galleryTitle">The Lookbook</h2>
+            <div class="section-divider"></div>
+        </div>
+        
+        <div class="screenshots-wrapper">
+            <button class="scroll-btn left" onclick="scrollScreenshots('left')">‹</button>
+            <div class="screenshots">
+                <div class="screenshot-frame" onclick="openLightbox(event, 'https://img.itch.zone/aW1hZ2UvNDc0ODQyLzI0Mzc0OTkucG5n/original/bM1vVJ.png')">
+                    <img src="https://img.itch.zone/aW1hZ2UvNDc0ODQyLzI0Mzc0OTkucG5n/original/bM1vVJ.png" alt="Runway Screenshot 6">
+                    <div class="screenshot-caption" data-translate="caption6">Dress up</div>
+                </div>
+                <div class="screenshot-frame" onclick="openLightbox(event, 'https://img.itch.zone/aW1hZ2UvNDc0ODQyLzU4Nzk5ODgucG5n/original/sRtDuF.png')">
+                    <img src="https://img.itch.zone/aW1hZ2UvNDc0ODQyLzU4Nzk5ODgucG5n/original/sRtDuF.png" alt="Runway Screenshot 1">
+                    <div class="screenshot-caption" data-translate="caption1">Strike your pose</div>
+                </div>
+                <div class="screenshot-frame" onclick="openLightbox(event, 'https://img.itch.zone/aW1hZ2UvNDc0ODQyLzI0Mzc1MDAucG5n/original/xbDX6j.png')">
+                    <img src="https://img.itch.zone/aW1hZ2UvNDc0ODQyLzI0Mzc1MDAucG5n/original/xbDX6j.png" alt="Runway Screenshot 2">
+                    <div class="screenshot-caption" data-translate="caption2">Kick with style</div>
+                </div>
+                <div class="screenshot-frame" onclick="openLightbox(event, 'https://img.itch.zone/aW1hZ2UvNDc0ODQyLzU4Nzk5ODkucG5n/original/9PlFIm.png')">
+                    <img src="https://img.itch.zone/aW1hZ2UvNDc0ODQyLzU4Nzk5ODkucG5n/original/9PlFIm.png" alt="Runway Screenshot 3">
+                    <div class="screenshot-caption" data-translate="caption3">World runways</div>
+                </div>
+                <div class="screenshot-frame" onclick="openLightbox(event, 'https://img.itch.zone/aW1hZ2UvNDc0ODQyLzU4Nzk5OTEucG5n/original/ID4cfJ.png')">
+                    <img src="https://img.itch.zone/aW1hZ2UvNDc0ODQyLzU4Nzk5OTEucG5n/original/ID4cfJ.png" alt="Runway Screenshot 4">
+                    <div class="screenshot-caption" data-translate="caption4">Fashion combat</div>
+                </div>
+                <div class="screenshot-frame" onclick="openLightbox(event, 'https://img.itch.zone/aW1hZ2UvNDc0ODQyLzU4Nzk5OTAucG5n/original/ZOb8lc.png')">
+                    <img src="https://img.itch.zone/aW1hZ2UvNDc0ODQyLzU4Nzk5OTAucG5n/original/ZOb8lc.png" alt="Runway Screenshot 5">
+                    <div class="screenshot-caption" data-translate="caption5">Be fabulous</div>
+                </div>
+            </div>
+            <button class="scroll-btn right" onclick="scrollScreenshots('right')">›</button>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title" data-translate="ctaTitle">Join the Runway</h2>
+            <p class="cta-subtitle" data-translate="ctaSubtitle">Available now on Steam and itch.io</p>
+            
+            <div class="cta-buttons">
+                <a href="https://store.steampowered.com/app/3879500/Runway/" target="_blank" class="cta-btn primary" data-translate="wishlistBtn">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor"/></svg>
+                    Wishlist on Steam
+                </a>
+                <a href="https://unsame.itch.io/runway" target="_blank" class="cta-btn secondary" data-translate="playBtn">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                    Play on itch.io
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="social-section">
+        <div class="section-header">
+            <h2 class="section-title" data-translate="followTitle">Follow the Collection</h2>
+            <div class="section-divider"></div>
+        </div>
+        
+        <div class="social-links">
+            <a href="https://x.com/unsamestudio" target="_blank" class="social-icon">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@unsame_studio" target="_blank" class="social-icon">
+                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@unsamestudio" target="_blank" class="social-icon">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://www.xiaohongshu.com/user/profile/6772d1d6000000001801638e" target="_blank" class="social-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </a>
+            <a href="https://space.bilibili.com/12186485" target="_blank" class="social-icon">
+                <svg viewBox="0 0 24 24"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo"><span data-translate="areYouReady">Are you ready?</span></div>
+        <div class="footer-links">
+            <a href="mailto:unsamestudio@gmail.com" data-translate="emailUs">Contact</a>
+            <a href="https://unsame.fun" data-translate="studio">Studio</a>
+        </div>
+        <p class="copyright">
+            <span data-translate="copyright">© 2019-2025</span> <a href="https://unsame.fun">unSAME Studio</a>
+        </p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-close">×</div>
+        <img id="lightbox-img" src="" alt="Screenshot">
+    </div>
+
+    <script>
+        // Translation data
+        const translations = {
+            en: {
+                title: 'Runway™ - Be Fabulous',
+                issueLabel: 'unSAME studio PRESENT',
+                heroSubtitle: 'Be Fabulous',
+                scrollIndicator: 'Scroll to Explore',
+                trailerNumber: 'Chapter One',
+                trailerTitle: 'The Premiere',
+                quoteText: '"Dress up, kick the models off the runway, strike a pose, and be fabulous~!"',
+                quoteAttribution: '— The Runway™ Manifesto',
+                galleryNumber: 'Chapter Two',
+                galleryTitle: 'The Lookbook',
+                caption1: 'Strike your pose',
+                caption2: 'Kick with style',
+                caption3: 'World runways',
+                caption4: 'Fashion combat',
+                caption5: 'Be fabulous',
+                caption6: 'Dress up',
+                ctaTitle: 'Join the Runway',
+                ctaSubtitle: 'Available now on Steam and itch.io',
+                wishlistBtn: 'Wishlist on Steam',
+                playBtn: 'Play on itch.io',
+                followTitle: 'Follow the Collection',
+                areYouReady: 'Are you ready?',
+                emailUs: 'Contact',
+                studio: 'Studio',
+                copyright: '© 2019-2025',
+                font: "'Playfair Display', 'Cormorant Garamond', serif"
+            },
+            zh: {
+                title: 'Runway™ - 闪耀登场',
+                issueLabel: 'unSAME studio PRESENT',
+                heroSubtitle: '闪耀登场',
+                scrollIndicator: '向下探索',
+                trailerNumber: '第一章',
+                trailerTitle: '首映',
+                quoteText: '"穿上时装，踢飞其他模特，摆好姿势，尽情闪耀~！"',
+                quoteAttribution: '— Runway™ 宣言',
+                galleryNumber: '第二章',
+                galleryTitle: '造型集',
+                caption1: '摆好姿势',
+                caption2: '时尚踢击',
+                caption3: '世界T台',
+                caption4: '时尚战斗',
+                caption5: '尽情闪耀',
+                caption6: '换装打扮',
+                ctaTitle: '加入T台',
+                ctaSubtitle: '现已在Steam和itch.io上线',
+                wishlistBtn: 'Steam愿望单',
+                playBtn: 'itch.io游玩',
+                followTitle: '关注我们',
+                areYouReady: '准备好了吗？',
+                emailUs: '联系我们',
+                studio: '工作室',
+                copyright: '© 2019-2025',
+                font: "'Noto Serif SC', 'Playfair Display', serif"
+            },
+            ja: {
+                title: 'Runway™ - ファビュラスに',
+                issueLabel: 'unSAME studio PRESENT',
+                heroSubtitle: 'ファビュラスに',
+                scrollIndicator: 'スクロールして探索',
+                trailerNumber: '第一章',
+                trailerTitle: 'プレミア',
+                quoteText: '"着飾って、モデルを蹴り落として、ポーズを決めて、ファビュラスに~！"',
+                quoteAttribution: '— Runway™ マニフェスト',
+                galleryNumber: '第二章',
+                galleryTitle: 'ルックブック',
+                caption1: 'ポーズを決める',
+                caption2: 'スタイリッシュにキック',
+                caption3: '世界のランウェイ',
+                caption4: 'ファッションバトル',
+                caption5: 'ファビュラスに',
+                caption6: '着替え',
+                ctaTitle: 'ランウェイに参加',
+                ctaSubtitle: 'Steamとitch.ioで配信中',
+                wishlistBtn: 'Steamでウィッシュリスト',
+                playBtn: 'itch.ioでプレイ',
+                followTitle: 'フォローする',
+                areYouReady: '準備はいい？',
+                emailUs: 'お問い合わせ',
+                studio: 'スタジオ',
+                copyright: '© 2019-2025',
+                font: "'Noto Serif JP', 'Playfair Display', serif"
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            document.title = translations[lang].title;
+            document.body.style.fontFamily = translations[lang].font;
+
+            // Switch trailers for Chinese
+            const youtubeTrailer = document.getElementById('youtube-trailer');
+            const bilibiliTrailer = document.getElementById('bilibili-trailer');
+            
+            if (lang === 'zh') {
+                youtubeTrailer.style.display = 'none';
+                bilibiliTrailer.style.display = 'block';
+            } else {
+                youtubeTrailer.style.display = 'block';
+                bilibiliTrailer.style.display = 'none';
+            }
+
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('selected');
+
+            localStorage.setItem('preferredLanguage', lang);
+
+            const url = new URL(window.location);
+            url.searchParams.set('lang', lang);
+            window.history.replaceState({}, '', url);
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdown-content');
+            dropdown.classList.toggle('show');
+            
+            const arrow = document.querySelector('.dropdown-arrow');
+            if (dropdown.classList.contains('show')) {
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function selectLanguage(langCode, flag, displayName) {
+            const currentLang = document.getElementById('current-lang');
+            currentLang.innerHTML = `${flag} ${displayName}`;
+            
+            changeLanguage(langCode);
+            
+            const dropdown = document.getElementById('dropdown-content');
+            dropdown.classList.remove('show');
+            document.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-btn') && !event.target.matches('.dropdown-btn *')) {
+                const dropdown = document.getElementById('dropdown-content');
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                    document.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const langFromUrl = urlParams.get('lang');
+            const savedLang = localStorage.getItem('preferredLanguage');
+            const initialLang = langFromUrl || savedLang || 'en';
+            
+            if (translations[initialLang]) {
+                const langData = {
+                    'en': { flag: '🇺🇸', display: 'EN' },
+                    'zh': { flag: '🇨🇳', display: '中文' },
+                    'ja': { flag: '🇯🇵', display: '日本語' }
+                };
+                
+                if (langData[initialLang]) {
+                    const currentLang = document.getElementById('current-lang');
+                    currentLang.innerHTML = `${langData[initialLang].flag} ${langData[initialLang].display}`;
+                }
+                
+                changeLanguage(initialLang);
+            }
+        });
+
+        function scrollScreenshots(direction) {
+            const container = document.querySelector('.screenshots');
+            const scrollAmount = 380;
+            container.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        function openLightbox(event, imageSrc) {
+            event.stopPropagation();
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imageSrc;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
