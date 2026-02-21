@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - unSAME studio</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <!-- unSAME Studio CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <style>
+    /* Business card page layout */
+    .biz-page {
+      min-height: calc(100vh - 70px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    .biz-logo {
+      width: 140px;
+      height: auto;
+      margin-bottom: 12px;
+    }
+
+    .biz-tagline {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
+
+    /* Contact link buttons */
+    .biz-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .biz-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--color-bg-tertiary);
+      color: var(--color-text-primary);
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: var(--radius-lg);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .biz-link:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Icon: default muted, colored on hover */
+    .biz-link svg:first-child,
+    .biz-link img {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      opacity: 0.5;
+      transition: opacity var(--transition-normal), color var(--transition-normal), filter var(--transition-normal);
+    }
+
+    .biz-link span {
+      flex: 1;
+    }
+
+    .biz-link .biz-arrow {
+      width: 14px;
+      height: 14px;
+      opacity: 0.25;
+      flex-shrink: 0;
+      transition: opacity var(--transition-normal), transform var(--transition-normal);
+    }
+
+    .biz-link:hover .biz-arrow {
+      opacity: 0.7;
+      transform: translateX(3px);
+    }
+
+    /* Platform icon colors on hover */
+    .biz-link.email:hover   svg:first-child { opacity: 1; color: #f29f52; }
+    .biz-link.linkedin:hover svg:first-child { opacity: 1; color: #0A66C2; }
+    .biz-link.whatsapp:hover svg:first-child { opacity: 1; color: #25D366; }
+    .biz-link.wechat:hover  svg:first-child  { opacity: 1; color: #07C160; }
+    .biz-link.twitter:hover svg:first-child  { opacity: 1; color: #1DA1F2; }
+
+    /* Section label */
+    .biz-section-label {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin: 28px 0 8px;
+      align-self: flex-start;
+      padding-left: 4px;
+    }
+
+    /* Divider */
+    .biz-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 6px 0;
+    }
+
+    @media (max-width: 480px) {
+      .biz-logo {
+        width: 110px;
+      }
+
+      .biz-link {
+        padding: 14px 18px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/">
+        <img src="images/unSAMEBot.png" alt="unSAME Logo" class="nav-logo">
+      </a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/" class="nav-link" data-label="Home">Home</a></li>
+        <li><a href="/games.html" class="nav-link" data-label="Games">Games</a></li>
+        <li><a href="/about.html" class="nav-link" data-label="About">About</a></li>
+        <li><a href="/press.html" class="nav-link" data-label="Press">Press</a></li>
+
+        <li class="nav-divider"></li>
+
+        <li><a href="https://x.com/unsamestudio" class="nav-link nav-external" target="_blank" title="Twitter" data-label="Twitter">
+          <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+          </svg>
+        </a></li>
+        <li><a href="https://www.tiktok.com/@unsame_studio" class="nav-link nav-external" target="_blank" title="TikTok" data-label="TikTok">
+          <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+          </svg>
+        </a></li>
+        <li><a href="https://www.youtube.com/@unsamestudio" class="nav-link nav-external" target="_blank" title="YouTube" data-label="YouTube">
+          <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a></li>
+        <li><a href="https://www.xiaohongshu.com/user/profile/6772d1d6000000001801638e" class="nav-link nav-external" target="_blank" title="RedNote" data-label="RedNote">
+          <img src="images/platforms/rednote.png" alt="RedNote">
+        </a></li>
+        <li><a href="https://space.bilibili.com/12186485/upload/video" class="nav-link nav-external" target="_blank" title="Bilibili" data-label="Bilibili">
+          <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z"/>
+          </svg>
+        </a></li>
+      </ul>
+      <div class="nav-toggle" id="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Business Card Page -->
+  <main class="biz-page">
+
+    <!-- Logo -->
+    <img src="images/Logo White (Small).png" alt="unSAME studio" class="biz-logo">
+    <p class="biz-tagline">unSAME is Fun!</p>
+
+    <!-- Contact Links -->
+    <div class="biz-links">
+
+      <!-- Business / Direct Contact -->
+      <p class="biz-section-label">Business Inquiries</p>
+
+      <a href="mailto:unsamestudio@gmail.com" class="biz-link email">
+        <!-- Email icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <polyline points="2,4 12,13 22,4"/>
+        </svg>
+        <span>Email us</span>
+        <svg class="biz-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </a>
+
+      <a href="http://linkedin.com/in/lyiyang" target="_blank" class="biz-link linkedin">
+        <!-- LinkedIn icon -->
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+        <span>LinkedIn</span>
+        <svg class="biz-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </a>
+
+      <a href="https://wa.me/qr/MNPLT2HDWBCME1" target="_blank" class="biz-link whatsapp">
+        <!-- WhatsApp icon -->
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span>WhatsApp</span>
+        <svg class="biz-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </a>
+
+      <a href="weixin://dl/TunckyMC" class="biz-link wechat">
+        <!-- WeChat icon -->
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.328.328 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.986-1.838-.968-3.552-4.335-6.348-8.73-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.49.49 0 0 1 .176-.554C22.922 18.78 24 17.142 24 15.2c0-3.226-2.972-5.342-7.062-5.342zm-3.74 2.629c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm7.42 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
+        </svg>
+        <span>WeChat</span>
+        <svg class="biz-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </a>
+
+      <!-- Divider -->
+      <div class="biz-divider"></div>
+      <p class="biz-section-label">Follow us</p>
+
+      <a href="https://x.com/unsamestudio" target="_blank" class="biz-link twitter">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+        </svg>
+        <span>Twitter / X</span>
+        <svg class="biz-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2019-2025 unSAME studio. All rights reserved.
+  </footer>
+
+  <script src="js/navigation.js"></script>
+</body>
+</html>

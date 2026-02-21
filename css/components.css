@@ -180,11 +180,9 @@
     align-items: center;
   }
 
-  /* Mobile divider - horizontal instead of vertical */
+  /* Hide divider on mobile */
   .nav-divider {
-    width: 80%;
-    height: 1px;
-    margin: var(--spacing-sm) 0;
+    display: none;
   }
 
   .nav-link {
