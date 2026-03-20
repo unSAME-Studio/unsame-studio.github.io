@@ -52,6 +52,17 @@
             font-size: 18px;
             line-height: 1.7;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Scattered character images */
+        .scatter-char {
+            position: absolute;
+            pointer-events: none;
+            will-change: transform;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.14));
+            z-index: 1;
+            user-select: none;
         }
 
         /* Language Selector */
@@ -67,12 +78,12 @@
         }
 
         .dropdown-btn {
-            background: rgba(34, 34, 34, 0.07);
-            border: 1px solid rgba(34, 34, 34, 0.2);
+            background: rgba(245, 242, 235, 0.88);
+            border: 1px solid rgba(34, 34, 34, 0.25);
             color: var(--color-black);
-            padding: 8px 12px;
+            padding: 8px 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: border-radius 0.2s ease, background 0.2s ease;
             font-family: var(--font-display);
             font-size: 11px;
             letter-spacing: 2px;
@@ -80,21 +91,33 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            border-radius: 50px;
+            width: 100%;
         }
 
         .dropdown-btn:hover {
-            background: rgba(34, 34, 34, 0.15);
+            background: rgba(235, 230, 220, 0.96);
+        }
+
+        /* When open: button becomes flat-bottom, merges into dropdown */
+        .language-dropdown.open .dropdown-btn {
+            border-radius: 12px 12px 0 0;
+            border-bottom-color: transparent;
+            background: var(--color-blush);
         }
 
         .dropdown-content {
             display: none;
             position: absolute;
             background: var(--color-blush);
-            border: 1px solid rgba(34, 34, 34, 0.15);
+            border: 1px solid rgba(34, 34, 34, 0.2);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
             z-index: 1;
             top: 100%;
             left: 0;
-            margin-top: 4px;
+            right: 0;
+            min-width: 100%;
         }
 
         .dropdown-content.show {
@@ -124,6 +147,36 @@
 
         .dropdown-item.selected {
             color: var(--color-gold) !important;
+        }
+
+        /* Studio home button */
+        .studio-home-btn {
+            position: fixed;
+            top: 24px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(245, 242, 235, 0.88);
+            border: 1px solid rgba(34, 34, 34, 0.25);
+            transition: background 0.2s ease, transform 0.2s ease;
+            text-decoration: none;
+        }
+
+        .studio-home-btn:hover {
+            background: rgba(235, 230, 220, 0.96);
+            transform: scale(1.08);
+        }
+
+        .studio-home-btn img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            filter: invert(1);
         }
 
         /* Section label */
@@ -167,9 +220,6 @@
             z-index: 2;
             padding: 0 6% 0 8%;
             max-width: 560px;
-            opacity: 0;
-            animation: fadeUp 0.9s ease forwards;
-            animation-delay: 0.2s;
         }
 
         .hero-studio {
@@ -770,6 +820,79 @@
             line-height: 1.7;
         }
 
+        /* ===== Intro Overlay ===== */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            overflow: hidden;
+            pointer-events: all;
+        }
+
+        #curtain-left, #curtain-right {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            background: var(--color-blush);
+            transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+            will-change: transform;
+        }
+
+        #curtain-left  { left: 0; }
+        #curtain-right { right: 0; }
+
+        #intro-overlay.opening #curtain-left  { transform: translateX(-100%); }
+        #intro-overlay.opening #curtain-right { transform: translateX(100%); }
+
+        #loading-wrap {
+            position: absolute;
+            bottom: 44px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: rgba(34,34,34,0.12);
+            z-index: 10;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        #loading-bar {
+            height: 100%;
+            width: 0;
+            background: var(--color-gold);
+            border-radius: 2px;
+            transition: width 0.35s ease;
+        }
+
+        /* ===== Hero Entrance ===== */
+        .hero-studio, .hero-title, .hero-subtitle, .hero-cta {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .hero-char-img {
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInChar {
+            from { opacity: 0; transform: translateY(80px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-studio.revealed   { animation: slideInLeft 0.55s ease 0s      forwards; }
+        .hero-title.revealed    { animation: slideInLeft 0.60s ease 0.12s    forwards; }
+        .hero-subtitle.revealed { animation: slideInLeft 0.55s ease 0.25s    forwards; }
+        .hero-cta.revealed      { animation: slideInLeft 0.55s ease 0.40s    forwards; }
+        .hero-char-img.revealed { animation: slideInChar 0.85s cubic-bezier(0.34, 1.26, 0.64, 1) 0.1s forwards; }
+
         /* Text shadows */
         .hero-studio,
         .hero-title,
@@ -785,6 +908,20 @@
     </style>
 </head>
 <body>
+    <!-- Intro Overlay -->
+    <div id="intro-overlay">
+        <div id="curtain-left"></div>
+        <div id="curtain-right"></div>
+        <div id="loading-wrap">
+            <div id="loading-bar"></div>
+        </div>
+    </div>
+
+    <!-- Studio Home Link -->
+    <a href="https://unsame.fun" class="studio-home-btn" title="unSAME Studio">
+        <img src="/images/unSAMEBot.png" alt="unSAME Studio">
+    </a>
+
     <!-- Language Selector -->
     <div class="language-selector">
         <div class="language-dropdown">
@@ -809,9 +946,9 @@
             <h1 class="hero-title">Runway<span class="trademark">™</span></h1>
             <p class="hero-subtitle" data-translate="heroSubtitle">Be Fabulous</p>
             <div class="hero-cta">
-                <a href="https://store.steampowered.com/app/3879500/Runway/" target="_blank" class="cta-btn primary" data-translate="wishlistBtn">
+                <a href="https://store.steampowered.com/app/3879500/Runway/" target="_blank" class="cta-btn primary">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.523 4.524-4.523 2.494 0 4.524 2.029 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.252 0-2.265-1.014-2.265-2.265z"/></svg>
-                    Wishlist on Steam
+                    <span data-translate="wishlistBtn">Wishlist on Steam</span>
                 </a>
                 <!-- <a href="https://unsame.itch.io/runway" target="_blank" class="cta-btn secondary" data-translate="playBtn">
                     <svg width="18" height="18" viewBox="0 0 245.37 220.71" fill="currentColor"><path d="M31.99 3.47C20.64 10.04.2 34.58 0 41.55v9.28c0 11.73 10.99 22.07 20.95 22.07 11.98 0 21.95-9.93 21.95-21.72 0 11.79 9.63 21.72 21.61 21.72 11.97 0 21.28-9.93 21.28-21.72 0 11.79 9.94 21.72 21.92 21.72h.22c11.97 0 21.92-9.93 21.92-21.72 0 11.79 9.31 21.72 21.28 21.72 11.98 0 21.61-9.93 21.61-21.72 0 11.79 9.97 21.72 21.95 21.72 9.96 0 20.95-10.34 20.95-22.07v-9.28c-.2-6.97-20.64-31.51-31.99-38.08C176.93 0 12.72-.16 31.99 3.47zM76.57 85.61c-6.36 0-12.36.59-18.02 1.53v119.04h99.27V87.14c-5.66-.94-11.66-1.53-18.02-1.53zm-4.5 40.54h27.04v45.04H72.07zm69.24 0v45.04h-27.04v-45.04z"/></svg>
@@ -829,7 +966,7 @@
     <!-- Trailer Section -->
     <section class="trailer-section">
         <div class="section-header">
-            <div class="section-label">Trailer</div>
+            <div class="section-label" data-translate="labelTrailer">Trailer</div>
             <div class="section-divider"></div>
         </div>
         
@@ -846,16 +983,16 @@
     <!-- Premier Section -->
     <section class="premier-section">
         <div class="section-header">
-            <div class="section-label">Premier</div>
+            <div class="section-label" data-translate="labelPremier">Premier</div>
             <div class="section-divider"></div>
         </div>
-        <p class="premier-text">Dress up, kick the models off the runway, strike a pose, and be fabulous~!<br>A dress-up &amp; kick 'em out mini arcade action game.</p>
+        <p class="premier-text" data-translate="premierText">Dress up, kick the models off the runway, strike a pose, and be fabulous~!<br>A dress-up &amp; kick 'em out mini arcade action game.</p>
     </section>
 
     <!-- Gallery Section -->
     <section class="gallery-section">
         <div class="section-header">
-            <div class="section-label">Screenshots</div>
+            <div class="section-label" data-translate="labelScreenshots">Screenshots</div>
             <div class="section-divider"></div>
         </div>
         
@@ -897,13 +1034,13 @@
             <h2 class="cta-title" data-translate="ctaTitle">Are you ready?</h2>
 
             <div class="cta-buttons">
-                <a href="https://store.steampowered.com/app/3879500/Runway/" target="_blank" class="cta-btn primary" data-translate="wishlistBtn">
+                <a href="https://store.steampowered.com/app/3879500/Runway/" target="_blank" class="cta-btn primary">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.523 4.524-4.523 2.494 0 4.524 2.029 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.252 0-2.265-1.014-2.265-2.265z"/></svg>
-                    Wishlist on Steam
+                    <span data-translate="wishlistBtn">Wishlist on Steam</span>
                 </a>
-                <a href="https://unsame.itch.io/runway" target="_blank" class="cta-btn secondary" data-translate="playBtn">
+                <a href="https://unsame.itch.io/runway" target="_blank" class="cta-btn secondary">
                     <svg width="18" height="18" viewBox="0 0 245.37 220.71" fill="currentColor"><path d="M31.99 3.47C20.64 10.04.2 34.58 0 41.55v9.28c0 11.73 10.99 22.07 20.95 22.07 11.98 0 21.95-9.93 21.95-21.72 0 11.79 9.63 21.72 21.61 21.72 11.97 0 21.28-9.93 21.28-21.72 0 11.79 9.94 21.72 21.92 21.72h.22c11.97 0 21.92-9.93 21.92-21.72 0 11.79 9.31 21.72 21.28 21.72 11.98 0 21.61-9.93 21.61-21.72 0 11.79 9.97 21.72 21.95 21.72 9.96 0 20.95-10.34 20.95-22.07v-9.28c-.2-6.97-20.64-31.51-31.99-38.08C176.93 0 12.72-.16 31.99 3.47zM76.57 85.61c-6.36 0-12.36.59-18.02 1.53v119.04h99.27V87.14c-5.66-.94-11.66-1.53-18.02-1.53zm-4.5 40.54h27.04v45.04H72.07zm69.24 0v45.04h-27.04v-45.04z"/></svg>
-                    Play on itch.io
+                    <span data-translate="playBtn">Play on itch.io</span>
                 </a>
             </div>
         </div>
@@ -912,7 +1049,7 @@
     <!-- Social Section -->
     <section class="social-section">
         <div class="section-header">
-            <div class="section-label">Socials</div>
+            <div class="section-label" data-translate="labelSocials">Socials</div>
             <div class="section-divider"></div>
         </div>
         
@@ -965,6 +1102,11 @@
                 caption4: 'Fashion combat',
                 caption5: 'Be fabulous',
                 caption6: 'Dress up',
+                labelTrailer: 'Trailer',
+                labelPremier: 'Premier',
+                labelScreenshots: 'Screenshots',
+                labelSocials: 'Socials',
+                premierText: 'Dress up, kick the models off the runway, strike a pose, and be fabulous~!\nA dress-up &amp; kick \'em out mini arcade action game.',
                 ctaTitle: 'Are you ready?',
                 wishlistBtn: 'Wishlist on Steam',
                 playBtn: 'Play on itch.io',
@@ -992,6 +1134,11 @@
                 caption4: '时尚战斗',
                 caption5: '尽情闪耀',
                 caption6: '换装打扮',
+                labelTrailer: '预告片',
+                labelPremier: '简介',
+                labelScreenshots: '截图',
+                labelSocials: '社交媒体',
+                premierText: '换上时装，踢飞其他模特，摆好姿势，尽情闪耀~！\n一款换装 & 踢人小街机动作游戏。',
                 ctaTitle: '准备好了吗？',
                 ctaSubtitle: '现已在Steam和itch.io上线',
                 wishlistBtn: 'Steam愿望单',
@@ -1020,6 +1167,11 @@
                 caption4: 'ファッションバトル',
                 caption5: 'ファビュラスに',
                 caption6: '着替え',
+                labelTrailer: 'トレーラー',
+                labelPremier: 'プレミア',
+                labelScreenshots: 'スクリーンショット',
+                labelSocials: 'ソーシャル',
+                premierText: '着飾って、モデルを蹴り落として、ポーズを決めて、ファビュラスに~！\n着替え＆蹴り出しミニアーケードアクションゲーム。',
                 ctaTitle: '準備はいい？',
                 ctaSubtitle: 'Steamとitch.ioで配信中',
                 wishlistBtn: 'Steamでウィッシュリスト',
@@ -1037,12 +1189,17 @@
 
         function changeLanguage(lang) {
             currentLanguage = lang;
-            
+
             const elements = document.querySelectorAll('[data-translate]');
             elements.forEach(element => {
                 const key = element.getAttribute('data-translate');
                 if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
+                    const val = translations[lang][key];
+                    if (key === 'premierText') {
+                        element.innerHTML = val.replace(/\n/g, '<br>');
+                    } else {
+                        element.textContent = val;
+                    }
                 }
             });
 
@@ -1074,7 +1231,10 @@
         }
 
         function toggleDropdown() {
-            document.getElementById('dropdown-content').classList.toggle('show');
+            const dropdown = document.getElementById('dropdown-content');
+            const wrapper = dropdown.closest('.language-dropdown');
+            dropdown.classList.toggle('show');
+            wrapper.classList.toggle('open');
         }
 
         function selectLanguage(langCode, displayName) {
@@ -1085,7 +1245,7 @@
             
             const dropdown = document.getElementById('dropdown-content');
             dropdown.classList.remove('show');
-            document.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
+            dropdown.closest('.language-dropdown').classList.remove('open');
         }
 
         window.onclick = function(event) {
@@ -1093,6 +1253,7 @@
                 const dropdown = document.getElementById('dropdown-content');
                 if (dropdown.classList.contains('show')) {
                     dropdown.classList.remove('show');
+                    dropdown.closest('.language-dropdown').classList.remove('open');
                 }
             }
         }
@@ -1140,6 +1301,45 @@
             lightbox.classList.remove('active');
         }
 
+        // ===== Intro Animation =====
+        (function() {
+            var overlay   = document.getElementById('intro-overlay');
+            var loadBar   = document.getElementById('loading-bar');
+            var heroEls   = [
+                document.querySelector('.hero-studio'),
+                document.querySelector('.hero-title'),
+                document.querySelector('.hero-subtitle'),
+                document.querySelector('.hero-cta'),
+            ];
+            var charImg = document.querySelector('.hero-char-img');
+
+            // Fake-progress the bar while page loads
+            var progress = 0;
+            var ticker = setInterval(function() {
+                progress = Math.min(progress + Math.random() * 18 + 4, 80);
+                loadBar.style.width = progress + '%';
+                if (progress >= 80) clearInterval(ticker);
+            }, 160);
+
+            window.addEventListener('load', function() {
+                clearInterval(ticker);
+                loadBar.style.width = '100%';
+
+                setTimeout(function() {
+                    overlay.classList.add('opening');
+
+                    setTimeout(function() {
+                        overlay.style.pointerEvents = 'none';
+                        // Reveal hero elements
+                        heroEls.forEach(function(el) { if (el) el.classList.add('revealed'); });
+                        if (charImg) charImg.classList.add('revealed');
+
+                        setTimeout(function() { overlay.remove(); }, 500);
+                    }, 900);
+                }, 350);
+            });
+        })();
+
         // Parallax
         (function() {
             var charWrap = document.querySelector('.hero-character-wrap');
@@ -1150,6 +1350,51 @@
                 charWrap.style.transform = 'translateY(' + (s * 0.45) + 'px)';
                 if (heroLeft) heroLeft.style.transform = 'translateY(' + (s * 0.15) + 'px)';
             }, { passive: true });
+        })();
+
+        // 🎀 SECRET LISA MODE — activate with runway.html%LISA
+        (function() {
+            if (window.location.href.indexOf('%LISA') === -1) return;
+
+            var pool = [
+                'images/runway/Lisas/Lisa04.webp',
+                'images/runway/Lisas/Lisa08.webp',
+                'images/runway/Lisas/Lisa13.webp',
+                'images/runway/Lisas/Lisa23.webp',
+                'images/runway/Lisas/Lisa26.webp',
+                'images/runway/Lisas/Lisa32.webp',
+                'images/runway/Lisas/Lisa40.webp',
+            ];
+
+            var els = [];
+
+            window.addEventListener('load', function() {
+                var docH = document.body.scrollHeight;
+                for (var i = 0; i < 24; i++) {
+                    var el = document.createElement('img');
+                    el.src = pool[Math.floor(Math.random() * pool.length)];
+                    el.className = 'scatter-char';
+                    el.style.left    = (Math.random() * 120 - 10) + '%';
+                    el.style.top     = (Math.random() * docH) + 'px';
+                    el.style.height  = (15 + Math.random() * 75) + 'vh';
+                    el.style.width   = 'auto';
+                    el.style.zIndex  = Math.floor(Math.random() * 50);
+                    var rot   = (Math.random() - 0.5) * 60;
+                    var speed = (Math.random() - 0.3) * 1.2; // can go negative = scroll down
+                    el.style.transform = 'rotate(' + rot + 'deg)';
+                    el._rot   = rot;
+                    el._speed = speed;
+                    document.body.appendChild(el);
+                    els.push(el);
+                }
+
+                window.addEventListener('scroll', function() {
+                    var s = window.pageYOffset;
+                    els.forEach(function(el) {
+                        el.style.transform = 'rotate(' + el._rot + 'deg) translateY(' + (s * el._speed) + 'px)';
+                    });
+                }, { passive: true });
+            });
         })();
     </script>
 </body>
