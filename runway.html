@@ -29,7 +29,7 @@
             --color-gold: #e8c000;
             --color-gold-light: #f5e066;
             --color-black: #222222;
-            --color-charcoal: #444444;
+            --color-charcoal: #555555;
             --font-display: 'Playfair Display', serif;
             --font-body: 'Cormorant Garamond', serif;
         }
@@ -67,144 +67,128 @@
         }
 
         .dropdown-btn {
-            background: rgba(26, 26, 26, 0.9);
-            border: 1px solid var(--color-gold);
-            color: var(--color-cream);
-            padding: 10px 20px;
+            background: rgba(34, 34, 34, 0.07);
+            border: 1px solid rgba(34, 34, 34, 0.2);
+            color: var(--color-black);
+            padding: 8px 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: var(--font-display);
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 10px;
-            min-width: 100px;
-            justify-content: space-between;
+            gap: 6px;
         }
 
         .dropdown-btn:hover {
-            background: var(--color-black);
-            border-color: var(--color-gold-light);
-        }
-
-        .dropdown-arrow {
-            font-size: 10px;
-            transition: transform 0.3s ease;
+            background: rgba(34, 34, 34, 0.15);
         }
 
         .dropdown-content {
             display: none;
             position: absolute;
-            background: rgba(26, 26, 26, 0.95);
-            min-width: 140px;
-            border: 1px solid var(--color-gold);
+            background: var(--color-blush);
+            border: 1px solid rgba(34, 34, 34, 0.15);
             z-index: 1;
             top: 100%;
             left: 0;
-            margin-top: 5px;
-            backdrop-filter: blur(10px);
+            margin-top: 4px;
         }
 
         .dropdown-content.show {
             display: block;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.2s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(-6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .dropdown-item {
-            color: var(--color-cream) !important;
-            padding: 12px 20px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: var(--color-black) !important;
+            padding: 10px 16px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: background 0.2s ease;
             font-family: var(--font-display);
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .dropdown-item:hover {
-            background: rgba(201, 169, 98, 0.2);
+            background: rgba(232, 192, 0, 0.15);
         }
 
         .dropdown-item.selected {
-            background: rgba(201, 169, 98, 0.3);
+            color: var(--color-gold) !important;
+        }
+
+        /* Section label */
+        .section-label {
+            font-family: var(--font-display);
+            font-size: 16px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: flex-start;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-blush) 100%);
+            background: var(--color-cream);
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 100px,
-                    rgba(232, 192, 0, 0.05) 100px,
-                    rgba(232, 192, 0, 0.05) 101px
-                );
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, transparent 30%, rgba(0,0,0,0.06) 100%);
             pointer-events: none;
-        }
-
-        .magazine-header {
-            text-align: center;
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeUp 1s ease forwards;
-            animation-delay: 0.2s;
+            z-index: 1;
         }
 
         @keyframes fadeUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        .issue-label {
+        .hero-left {
+            position: relative;
+            z-index: 2;
+            padding: 0 6% 0 8%;
+            max-width: 560px;
+            opacity: 0;
+            animation: fadeUp 0.9s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .hero-studio {
             font-family: var(--font-display);
             font-size: 11px;
             letter-spacing: 6px;
             text-transform: uppercase;
             color: var(--color-gold);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .hero-title {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 15vw, 12rem);
+            font-size: clamp(4rem, 12vw, 10rem);
             font-weight: 400;
             letter-spacing: -0.02em;
             line-height: 0.85;
             color: var(--color-black);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .hero-title .trademark {
@@ -215,63 +199,60 @@
         .hero-subtitle {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
             font-weight: 400;
             color: var(--color-charcoal);
             letter-spacing: 0.1em;
+            margin-bottom: 40px;
         }
 
-        .hero-cover {
-            position: relative;
-            margin: 40px 0;
-            opacity: 0;
-            animation: fadeUp 1s ease forwards;
-            animation-delay: 0.5s;
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
-        .hero-cover img {
-            max-width: 90vw;
-            max-height: 50vh;
+        /* Character */
+        .hero-character-wrap {
+            position: absolute;
+            left: 48%;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 0;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .hero-char-img {
+            height: 95vh;
+            width: auto;
             object-fit: contain;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+            filter: drop-shadow(-20px 0 40px rgba(0,0,0,0.2));
         }
 
-        .decorative-line {
-            width: 1px;
-            height: 80px;
-            background: var(--color-gold);
-            margin: 40px auto;
-            opacity: 0;
-            animation: lineGrow 1s ease forwards;
-            animation-delay: 0.8s;
-        }
-
-        @keyframes lineGrow {
-            from { 
-                opacity: 0; 
-                height: 0; 
-            }
-            to { 
-                opacity: 1; 
-                height: 80px; 
-            }
-        }
-
+        /* Scroll hint */
         .scroll-indicator {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
             font-family: var(--font-display);
             font-size: 11px;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--color-gold);
-            opacity: 0;
-            animation: fadeUp 1s ease forwards;
-            animation-delay: 1s;
+            color: rgba(34, 34, 34, 0.35);
             cursor: pointer;
-            transition: color 0.3s ease;
+            animation: scrollBounce 2.2s ease-in-out infinite;
         }
 
-        .scroll-indicator:hover {
-            color: var(--color-black);
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
         }
 
         /* Section Headers */
@@ -331,8 +312,8 @@
 
         /* Screenshots Gallery */
         .gallery-section {
-            background: white;
-            padding: 120px 40px;
+            background: var(--color-blush);
+            padding: 100px 40px;
         }
 
         .screenshots-wrapper {
@@ -426,12 +407,12 @@
 
         /* Trailer Section */
         .trailer-section {
-            padding: 120px 40px;
-            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-blush) 100%);
+            padding: 100px 40px;
+            background: var(--color-cream);
         }
 
         .trailer-container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -455,7 +436,7 @@
         /* CTA Section */
         .cta-section {
             background: var(--color-black);
-            padding: 120px 40px;
+            padding: 100px 40px;
             text-align: center;
         }
 
@@ -489,35 +470,81 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 20px 45px;
+            padding: 18px 42px;
+            border-radius: 50px;
             font-family: var(--font-display);
             font-size: 0.9rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             text-decoration: none;
-            transition: all 0.4s ease;
+            border: none;
+            transition: all 0.25s ease;
         }
 
         .cta-btn.primary {
-            background: var(--color-gold);
-            color: var(--color-black);
-            border: 1px solid var(--color-gold);
+            background:
+                linear-gradient(180deg,
+                    rgba(255,255,255,0.82) 0%,
+                    rgba(255,255,255,0.10) 50%,
+                    transparent 50%),
+                linear-gradient(180deg,
+                    #ffe040 0%,
+                    #e8c000 48%,
+                    #c09800 100%);
+            color: #2e2600;
+            box-shadow:
+                0 5px 0 #8a6f00,
+                0 8px 22px rgba(0,0,0,0.38),
+                inset 0 1px 0 rgba(255,255,255,0.95),
+                inset 0 -1px 0 rgba(0,0,0,0.12);
         }
 
         .cta-btn.primary:hover {
-            background: transparent;
-            color: var(--color-gold);
+            transform: translateY(-3px);
+            box-shadow:
+                0 8px 0 #8a6f00,
+                0 12px 30px rgba(0,0,0,0.42),
+                inset 0 1px 0 rgba(255,255,255,0.95),
+                inset 0 -1px 0 rgba(0,0,0,0.12);
+        }
+
+        .cta-btn.primary:active {
+            transform: translateY(2px);
+            box-shadow:
+                0 2px 0 #8a6f00,
+                0 4px 10px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.95),
+                inset 0 -1px 0 rgba(0,0,0,0.12);
         }
 
         .cta-btn.secondary {
-            background: transparent;
-            color: var(--color-cream);
-            border: 1px solid var(--color-cream);
+            background:
+                linear-gradient(180deg,
+                    rgba(255,255,255,0.28) 0%,
+                    rgba(255,255,255,0.04) 50%,
+                    transparent 50%),
+                linear-gradient(180deg,
+                    rgba(255,255,255,0.14) 0%,
+                    rgba(255,255,255,0.04) 100%);
+            color: #ffffff;
+            box-shadow:
+                0 5px 0 rgba(0,0,0,0.38),
+                0 8px 22px rgba(0,0,0,0.38),
+                inset 0 0 0 1px rgba(255,255,255,0.35),
+                inset 0 1px 0 rgba(255,255,255,0.65);
         }
 
         .cta-btn.secondary:hover {
-            background: var(--color-cream);
-            color: var(--color-black);
+            transform: translateY(-3px);
+            box-shadow:
+                0 8px 0 rgba(0,0,0,0.38),
+                0 12px 30px rgba(0,0,0,0.42),
+                inset 0 0 0 1px rgba(255,255,255,0.35),
+                inset 0 1px 0 rgba(255,255,255,0.65);
+        }
+
+        .cta-btn.secondary:active {
+            transform: translateY(2px);
         }
 
         .cta-btn svg {
@@ -528,7 +555,7 @@
         /* Social Links */
         .social-section {
             padding: 80px 40px;
-            background: var(--color-blush);
+            background: var(--color-black);
         }
 
         .social-links {
@@ -539,27 +566,43 @@
         }
 
         .social-icon {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--color-black);
-            color: var(--color-cream);
-            border-radius: 0;
-            transition: all 0.3s ease;
+            border-radius: 50%;
+            background:
+                linear-gradient(180deg,
+                    rgba(255,255,255,0.82) 0%,
+                    rgba(255,255,255,0.10) 50%,
+                    transparent 50%),
+                linear-gradient(180deg,
+                    #ffe040 0%,
+                    #e8c000 48%,
+                    #c09800 100%);
+            color: #2e2600;
+            box-shadow:
+                0 5px 0 #8a6f00,
+                0 8px 22px rgba(0,0,0,0.38),
+                inset 0 1px 0 rgba(255,255,255,0.95),
+                inset 0 -1px 0 rgba(0,0,0,0.12);
+            transition: all 0.25s ease;
         }
 
         .social-icon:hover {
-            background: var(--color-gold);
-            color: var(--color-black);
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.08);
+            box-shadow:
+                0 8px 0 #8a6f00,
+                0 12px 28px rgba(0,0,0,0.42),
+                inset 0 1px 0 rgba(255,255,255,0.95),
+                inset 0 -1px 0 rgba(0,0,0,0.12);
         }
 
         .social-icon svg {
             width: 24px;
             height: 24px;
-            fill: currentColor;
+            fill: #2e2600;
         }
 
         /* Footer */
@@ -655,6 +698,28 @@
             .locations-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
+
+            /* Screenshots — vertical stack on mobile */
+            .screenshots {
+                flex-direction: column;
+                overflow-x: visible;
+                padding: 0;
+                gap: 20px;
+            }
+
+            .screenshot-frame {
+                width: 100%;
+            }
+
+            .scroll-btn {
+                display: none;
+            }
+
+            .screenshots-wrapper {
+                padding: 0;
+                margin: 0;
+            }
+
             
             .language-selector {
                 top: 20px;
@@ -686,6 +751,37 @@
                 justify-content: center;
             }
         }
+
+        /* Premier Section */
+        .premier-section {
+            padding: 100px 40px;
+            background: var(--color-blush);
+            text-align: center;
+        }
+
+        .premier-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--color-black);
+            max-width: 760px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Text shadows */
+        .hero-studio,
+        .hero-title,
+        .hero-subtitle,
+        .section-label,
+        .section-title,
+        .premier-text,
+        .cta-title,
+        .cta-subtitle,
+        .footer-logo {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+        }
     </style>
 </head>
 <body>
@@ -693,47 +789,47 @@
     <div class="language-selector">
         <div class="language-dropdown">
             <button class="dropdown-btn" onclick="toggleDropdown()">
-                <span id="current-lang">🇺🇸 EN</span>
-                <span class="dropdown-arrow">▼</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+                <span id="current-lang">EN</span>
             </button>
             <div class="dropdown-content" id="dropdown-content">
-                <div class="dropdown-item selected" data-lang="en" onclick="selectLanguage('en', '🇺🇸', 'EN')">
-                    🇺🇸 English
-                </div>
-                <div class="dropdown-item" data-lang="zh" onclick="selectLanguage('zh', '🇨🇳', '中文')">
-                    🇨🇳 中文
-                </div>
-                <div class="dropdown-item" data-lang="ja" onclick="selectLanguage('ja', '🇯🇵', '日本語')">
-                    🇯🇵 日本語
-                </div>
+                <div class="dropdown-item selected" data-lang="en" onclick="selectLanguage('en', 'EN')">English</div>
+                <div class="dropdown-item" data-lang="zh" onclick="selectLanguage('zh', '中文')">中文</div>
+                <div class="dropdown-item" data-lang="ja" onclick="selectLanguage('ja', '日本語')">日本語</div>
             </div>
         </div>
     </div>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="magazine-header">
-            <div class="issue-label" data-translate="issueLabel">unSAME studio PRESENT</div>
+        <div class="hero-left">
+            <div class="hero-studio" data-translate="issueLabel">unSAME studio</div>
             <h1 class="hero-title">Runway<span class="trademark">™</span></h1>
             <p class="hero-subtitle" data-translate="heroSubtitle">Be Fabulous</p>
+            <div class="hero-cta">
+                <a href="https://store.steampowered.com/app/3879500/Runway/" target="_blank" class="cta-btn primary" data-translate="wishlistBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.523 4.524-4.523 2.494 0 4.524 2.029 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.252 0-2.265-1.014-2.265-2.265z"/></svg>
+                    Wishlist on Steam
+                </a>
+                <a href="https://unsame.itch.io/runway" target="_blank" class="cta-btn secondary" data-translate="playBtn">
+                    <svg width="18" height="18" viewBox="0 0 245.37 220.71" fill="currentColor"><path d="M31.99 3.47C20.64 10.04.2 34.58 0 41.55v9.28c0 11.73 10.99 22.07 20.95 22.07 11.98 0 21.95-9.93 21.95-21.72 0 11.79 9.63 21.72 21.61 21.72 11.97 0 21.28-9.93 21.28-21.72 0 11.79 9.94 21.72 21.92 21.72h.22c11.97 0 21.92-9.93 21.92-21.72 0 11.79 9.31 21.72 21.28 21.72 11.98 0 21.61-9.93 21.61-21.72 0 11.79 9.97 21.72 21.95 21.72 9.96 0 20.95-10.34 20.95-22.07v-9.28c-.2-6.97-20.64-31.51-31.99-38.08C176.93 0 12.72-.16 31.99 3.47zM76.57 85.61c-6.36 0-12.36.59-18.02 1.53v119.04h99.27V87.14c-5.66-.94-11.66-1.53-18.02-1.53zm-4.5 40.54h27.04v45.04H72.07zm69.24 0v45.04h-27.04v-45.04z"/></svg>
+                    Play on itch.io
+                </a>
+            </div>
         </div>
-        
-        <div class="hero-cover">
-            <img src="https://img.itch.zone/aW1nLzI0Mzc1MjgucG5n/original/7qmmc%2F.png" alt="Runway™ Cover">
+
+        <div class="hero-character-wrap">
+            <img src="images/runway/LisaCutout.png" alt="Runway Character" class="hero-char-img">
         </div>
-        
-        <div class="decorative-line"></div>
-        
-        <div class="scroll-indicator" onclick="document.querySelector('.trailer-section').scrollIntoView({behavior: 'smooth'})" data-translate="scrollIndicator">
-            Scroll to Explore
-        </div>
+
     </section>
 
     <!-- Trailer Section -->
     <section class="trailer-section">
         <div class="section-header">
-            <div class="section-number" data-translate="trailerNumber">Chapter One</div>
-            <h2 class="section-title" data-translate="trailerTitle">The Premiere</h2>
+            <div class="section-label">Trailer</div>
             <div class="section-divider"></div>
         </div>
         
@@ -747,19 +843,19 @@
         </div>
     </section>
 
-    <!-- Editorial Quote -->
-    <section class="editorial-quote">
-        <p class="quote-text" data-translate="quoteText">
-            "Dress up, kick the models off the runway, strike a pose, and be fabulous~!"
-        </p>
-        <p class="quote-attribution" data-translate="quoteAttribution">— The Runway™ Manifesto</p>
+    <!-- Premier Section -->
+    <section class="premier-section">
+        <div class="section-header">
+            <div class="section-label">Premier</div>
+            <div class="section-divider"></div>
+        </div>
+        <p class="premier-text">Dress up, kick the models off the runway, strike a pose, and be fabulous~!<br>A dress-up &amp; kick 'em out mini arcade action game.</p>
     </section>
 
     <!-- Gallery Section -->
     <section class="gallery-section">
         <div class="section-header">
-            <div class="section-number" data-translate="galleryNumber">Chapter Two</div>
-            <h2 class="section-title" data-translate="galleryTitle">The Lookbook</h2>
+            <div class="section-label">Screenshots</div>
             <div class="section-divider"></div>
         </div>
         
@@ -798,16 +894,15 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-content">
-            <h2 class="cta-title" data-translate="ctaTitle">Join the Runway</h2>
-            <p class="cta-subtitle" data-translate="ctaSubtitle">Available now on Steam and itch.io</p>
-            
+            <h2 class="cta-title" data-translate="ctaTitle">Are you ready?</h2>
+
             <div class="cta-buttons">
                 <a href="https://store.steampowered.com/app/3879500/Runway/" target="_blank" class="cta-btn primary" data-translate="wishlistBtn">
-                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.523 4.524-4.523 2.494 0 4.524 2.029 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.252 0-2.265-1.014-2.265-2.265z"/></svg>
                     Wishlist on Steam
                 </a>
                 <a href="https://unsame.itch.io/runway" target="_blank" class="cta-btn secondary" data-translate="playBtn">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 245.37 220.71" fill="currentColor"><path d="M31.99 3.47C20.64 10.04.2 34.58 0 41.55v9.28c0 11.73 10.99 22.07 20.95 22.07 11.98 0 21.95-9.93 21.95-21.72 0 11.79 9.63 21.72 21.61 21.72 11.97 0 21.28-9.93 21.28-21.72 0 11.79 9.94 21.72 21.92 21.72h.22c11.97 0 21.92-9.93 21.92-21.72 0 11.79 9.31 21.72 21.28 21.72 11.98 0 21.61-9.93 21.61-21.72 0 11.79 9.97 21.72 21.95 21.72 9.96 0 20.95-10.34 20.95-22.07v-9.28c-.2-6.97-20.64-31.51-31.99-38.08C176.93 0 12.72-.16 31.99 3.47zM76.57 85.61c-6.36 0-12.36.59-18.02 1.53v119.04h99.27V87.14c-5.66-.94-11.66-1.53-18.02-1.53zm-4.5 40.54h27.04v45.04H72.07zm69.24 0v45.04h-27.04v-45.04z"/></svg>
                     Play on itch.io
                 </a>
             </div>
@@ -817,7 +912,7 @@
     <!-- Social Section -->
     <section class="social-section">
         <div class="section-header">
-            <h2 class="section-title" data-translate="followTitle">Follow the Collection</h2>
+            <div class="section-label">Socials</div>
             <div class="section-divider"></div>
         </div>
         
@@ -832,7 +927,7 @@
                 <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </a>
             <a href="https://www.xiaohongshu.com/user/profile/6772d1d6000000001801638e" target="_blank" class="social-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                <img src="/images/platforms/rednote.png" alt="RedNote" style="width:24px;height:24px;filter:brightness(0) saturate(100%);" >
             </a>
             <a href="https://space.bilibili.com/12186485" target="_blank" class="social-icon">
                 <svg viewBox="0 0 24 24"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z"/></svg>
@@ -842,7 +937,6 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-logo"><span data-translate="areYouReady">Are you ready?</span></div>
         <div class="footer-links">
             <a href="mailto:unsamestudio@gmail.com" data-translate="emailUs">Contact</a>
             <a href="https://unsame.fun" data-translate="studio">Studio</a>
@@ -865,21 +959,13 @@
                 title: 'Runway™ - Be Fabulous',
                 issueLabel: 'unSAME studio PRESENT',
                 heroSubtitle: 'Be Fabulous',
-                scrollIndicator: 'Scroll to Explore',
-                trailerNumber: 'Chapter One',
-                trailerTitle: 'The Premiere',
-                quoteText: '"Dress up, kick the models off the runway, strike a pose, and be fabulous~!"',
-                quoteAttribution: '— The Runway™ Manifesto',
-                galleryNumber: 'Chapter Two',
-                galleryTitle: 'The Lookbook',
                 caption1: 'Strike your pose',
                 caption2: 'Kick with style',
                 caption3: 'World runways',
                 caption4: 'Fashion combat',
                 caption5: 'Be fabulous',
                 caption6: 'Dress up',
-                ctaTitle: 'Join the Runway',
-                ctaSubtitle: 'Available now on Steam and itch.io',
+                ctaTitle: 'Are you ready?',
                 wishlistBtn: 'Wishlist on Steam',
                 playBtn: 'Play on itch.io',
                 followTitle: 'Follow the Collection',
@@ -906,7 +992,7 @@
                 caption4: '时尚战斗',
                 caption5: '尽情闪耀',
                 caption6: '换装打扮',
-                ctaTitle: '加入T台',
+                ctaTitle: '准备好了吗？',
                 ctaSubtitle: '现已在Steam和itch.io上线',
                 wishlistBtn: 'Steam愿望单',
                 playBtn: 'itch.io游玩',
@@ -934,7 +1020,7 @@
                 caption4: 'ファッションバトル',
                 caption5: 'ファビュラスに',
                 caption6: '着替え',
-                ctaTitle: 'ランウェイに参加',
+                ctaTitle: '準備はいい？',
                 ctaSubtitle: 'Steamとitch.ioで配信中',
                 wishlistBtn: 'Steamでウィッシュリスト',
                 playBtn: 'itch.ioでプレイ',
@@ -988,20 +1074,12 @@
         }
 
         function toggleDropdown() {
-            const dropdown = document.getElementById('dropdown-content');
-            dropdown.classList.toggle('show');
-            
-            const arrow = document.querySelector('.dropdown-arrow');
-            if (dropdown.classList.contains('show')) {
-                arrow.style.transform = 'rotate(180deg)';
-            } else {
-                arrow.style.transform = 'rotate(0deg)';
-            }
+            document.getElementById('dropdown-content').classList.toggle('show');
         }
 
-        function selectLanguage(langCode, flag, displayName) {
+        function selectLanguage(langCode, displayName) {
             const currentLang = document.getElementById('current-lang');
-            currentLang.innerHTML = `${flag} ${displayName}`;
+            currentLang.textContent = displayName;
             
             changeLanguage(langCode);
             
@@ -1015,7 +1093,6 @@
                 const dropdown = document.getElementById('dropdown-content');
                 if (dropdown.classList.contains('show')) {
                     dropdown.classList.remove('show');
-                    document.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
                 }
             }
         }
@@ -1028,16 +1105,15 @@
             
             if (translations[initialLang]) {
                 const langData = {
-                    'en': { flag: '🇺🇸', display: 'EN' },
-                    'zh': { flag: '🇨🇳', display: '中文' },
-                    'ja': { flag: '🇯🇵', display: '日本語' }
+                    'en': 'EN',
+                    'zh': '中文',
+                    'ja': '日本語'
                 };
-                
+
                 if (langData[initialLang]) {
-                    const currentLang = document.getElementById('current-lang');
-                    currentLang.innerHTML = `${langData[initialLang].flag} ${langData[initialLang].display}`;
+                    document.getElementById('current-lang').textContent = langData[initialLang];
                 }
-                
+
                 changeLanguage(initialLang);
             }
         });
@@ -1063,6 +1139,18 @@
             const lightbox = document.getElementById('lightbox');
             lightbox.classList.remove('active');
         }
+
+        // Parallax
+        (function() {
+            var charWrap = document.querySelector('.hero-character-wrap');
+            var heroLeft = document.querySelector('.hero-left');
+            if (!charWrap) return;
+            window.addEventListener('scroll', function() {
+                var s = window.pageYOffset;
+                charWrap.style.transform = 'translateY(' + (s * 0.45) + 'px)';
+                if (heroLeft) heroLeft.style.transform = 'translateY(' + (s * 0.15) + 'px)';
+            }, { passive: true });
+        })();
     </script>
 </body>
 </html>
