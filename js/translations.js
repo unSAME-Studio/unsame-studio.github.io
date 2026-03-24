@@ -40,5 +40,19 @@ const translations = {
         copyright: "© 2025",
         logoImage: "images/seagull/TitleLogo.png", // You can change this to TitleLogo_JP.png if you have a Japanese version
         font: "'Noto Sans JP', sans-serif"
+    },
+    'zh-hk': {
+        title: "鷗買嘎！- 即將推出",
+        description1: "是時候製造海鷗大災難了...",
+        description2: "你係一隻海鷗，而討厭嘅人類想將你鍾意嘅小島改造成度假勝地。",
+        description3: "喺呢個喜劇海鷗動作遊戲入面，用你有力嘅翅膀同強健嘅消化系統製造大混亂喇！鷗買嘎，海鷗嚟喇！",
+        wishlistButton: "喺Steam上加入願望清單！",
+        comingSoon: "立即喺",
+        credits: "製作人員",
+        emailUs: "聯絡我哋",
+        seagullTown: "海鷗鎮",
+        copyright: "© 2025",
+        logoImage: "images/seagull/TitleLogoChinese.png",
+        font: "'Noto Sans HK', sans-serif"
     }
 };

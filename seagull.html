@@ -20,7 +20,7 @@
     <!-- add font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+HK:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/x-icon" href="images/seagull/SeagullSquareIcon.ico">
 
@@ -752,6 +752,10 @@
                     <span class="flag-icon">🇨🇳</span>
                     中文
                 </a>
+                <a href="#" class="dropdown-item" onclick="selectLanguage('zh-hk', '🇭🇰', '繁體')" data-lang="zh-hk">
+                    <span class="flag-icon">🇭🇰</span>
+                    繁體中文
+                </a>
                 <a href="#" class="dropdown-item" onclick="selectLanguage('ja', '🇯🇵', '日本語')" data-lang="ja">
                     <span class="flag-icon">🇯🇵</span>
                     日本語
@@ -1014,6 +1018,7 @@
                 const langData = {
                     'en': { flag: '🇺🇸', display: 'EN' },
                     'zh': { flag: '🇨🇳', display: '中文' },
+                    'zh-hk': { flag: '🇭🇰', display: '繁體' },
                     'ja': { flag: '🇯🇵', display: '日本語' }
                 };
                 
