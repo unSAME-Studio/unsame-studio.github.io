@@ -14,8 +14,11 @@
   <link rel="stylesheet" href="css/mixtape.css">
 </head>
 <body>
+  <!-- Intro Animation Overlay -->
+  <div class="intro-overlay" id="intro-overlay"></div>
+
   <!-- Navigation Bar -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar intro-hidden" id="navbar">
     <div class="nav-container">
       <a href="/">
         <img src="images/unSAMEBot.png" alt="unSAME Logo" class="nav-logo">
@@ -70,7 +73,7 @@
   </nav>
 
   <!-- Hero Section with Video Background -->
-  <section class="hero" id="home">
+  <section class="hero intro-hidden" id="home">
     <video autoplay muted loop>
       <source src="videos/Collagev1.mp4" type="video/mp4">
     </video>
@@ -78,8 +81,8 @@
   </section>
 
   <!-- Games Section -->
-  <h2 class="section-title" id="games"></h2>
-  <div class="games-container">
+  <h2 class="section-title intro-hidden" id="games"></h2>
+  <div class="games-container intro-hidden">
     <!-- Game 1 -->
     <a href="https://unsame.fun/seagull" class="game-item">
       <img src="images/banner/gullBG.png" alt="Gulltastrophe" class="game-background">
@@ -135,7 +138,7 @@
   </div>
 
   <!-- Scrolling Game Covers Section - Clickable -->
-  <a href="/games.html" style="display: block; text-decoration: none; cursor: pointer; margin: 60px 0;">
+  <a href="/games.html" class="intro-hidden" style="display: block; text-decoration: none; cursor: pointer; margin: 60px 0;">
   <!-- Mixtape Hero Section -->
     <section class="mixtape-hero">
       <!-- Scrolling Game Covers Background -->
@@ -155,7 +158,7 @@
   </a>
 
   <!-- More Games Button -->
-  <div style="text-align: center; margin: 60px 0;">
+  <div class="intro-hidden" style="text-align: center; margin: 60px 0;">
     <a href="https://unsame.fun/games" class="more-games-button">
       <img src="images/unSAMEBot.png" alt="itch.io" style="width: 24px; height: 24px;">
       <span>More Games</span>
@@ -166,9 +169,9 @@
   </div>
 
   <!-- Follow Us Section -->
-  
-  <h2 class="section-title" id="contact"></h2>
-  <div class="container">
+
+  <h2 class="section-title intro-hidden" id="contact"></h2>
+  <div class="container intro-hidden">
     <!-- Social media buttons moved to navigation bar -->
     <div class="social-container">
       <a href="https://x.com/unsamestudio" class="social-button twitter">
@@ -210,8 +213,8 @@
   </div>
 
   <!-- About Section -->
-  <h2 class="section-title" id="about"></h2>
-  <div class="container" style="padding: 0 20px;">
+  <h2 class="section-title intro-hidden" id="about"></h2>
+  <div class="container intro-hidden" style="padding: 0 20px;">
     <div class="about-content">
       <p>unSAME is Fun!</p><br>
       <p>We has been creating games that feel different.</p><br>
@@ -221,7 +224,7 @@
   </div>
   
   <!-- Soundtrack Player Button -->
-  <a href="https://unsame.fun/music" class="soundtrack-button">
+  <a href="https://unsame.fun/music" class="soundtrack-button intro-hidden">
     <img src="images/unSAMEMusic.png" alt="Soundtrack" class="soundtrack-icon">
     <div class="soundtrack-text">
       <div class="soundtrack-title">unSAME Soundtrack Player</div>
@@ -229,11 +232,12 @@
     </div>
   </a>
 
-  <footer>
+  <footer class="intro-hidden">
     &copy; 2019-2025 unSAME studio. All rights reserved.
   </footer>
 
   <!-- JavaScript -->
+  <script src="js/intro-bubbles.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/game-videos.js"></script>
   <script src="js/danmaku.js"></script>
