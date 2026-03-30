@@ -621,6 +621,58 @@
             flex-wrap: wrap;
         }
 
+        .press-kit-wrap {
+            margin-top: 42px;
+            text-align: center;
+        }
+
+        .press-kit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 34px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.78rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #2e2600;
+            background:
+                linear-gradient(180deg,
+                    rgba(255,255,255,0.82) 0%,
+                    rgba(255,255,255,0.10) 50%,
+                    transparent 50%),
+                linear-gradient(180deg,
+                    #ffe040 0%,
+                    #e8c000 48%,
+                    #c09800 100%);
+            box-shadow:
+                0 5px 0 #8a6f00,
+                0 8px 22px rgba(0,0,0,0.38),
+                inset 0 1px 0 rgba(255,255,255,0.95),
+                inset 0 -1px 0 rgba(0,0,0,0.12);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .press-kit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 8px 0 #8a6f00,
+                0 12px 30px rgba(0,0,0,0.42),
+                inset 0 1px 0 rgba(255,255,255,0.95),
+                inset 0 -1px 0 rgba(0,0,0,0.12);
+        }
+
+        .press-kit-btn:active {
+            transform: translateY(2px);
+            box-shadow:
+                0 2px 0 #8a6f00,
+                0 4px 10px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.95),
+                inset 0 -1px 0 rgba(0,0,0,0.12);
+        }
+
         .social-icon {
             width: 60px;
             height: 60px;
@@ -1048,7 +1100,7 @@
             <div class="section-label" data-translate="labelPremier">Premier</div>
             <div class="section-divider"></div>
         </div>
-        <p class="premier-text" data-translate="premierText">Runway™ is an action game where you can dress up and kick other models off the stage. Play as the fabulous robot Lisa, fight against uninspired models on runways around the world, and be the queen of fashion!</p>
+        <p class="premier-text" data-translate="premierText">Runway™ is an arcade action game where you can dress up and kick other models off the stage. Play as the fabulous robot Lisa, fight against uninspired models on runways around the world, and be the queen of fashion!</p>
     </section>
 
     <!-- Gallery Section -->
@@ -1132,6 +1184,10 @@
                 <svg viewBox="0 0 24 24"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z"/></svg>
             </a>
         </div>
+
+        <div class="press-kit-wrap">
+            <a href="https://drive.google.com/drive/folders/1UdmuylvNG1bBW12fvghgCmc3sdf6APq1?usp=sharing" target="_blank" rel="noopener noreferrer" class="press-kit-btn" data-translate="pressKitBtn">Press Kit</a>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -1168,11 +1224,12 @@
                 labelPremier: 'Premier',
                 labelScreenshots: 'Screenshots',
                 labelSocials: 'Socials',
-                premierText: 'Runway™ is an action game where you can dress up and kick other models off the stage. Play as the fabulous robot Lisa, fight against uninspired models on runways around the world, and be the queen of fashion!',
+                premierText: 'Runway™ is an arcade action game where you can dress up and kick other models off the stage. Play as the fabulous robot Lisa, fight against uninspired models on runways around the world, and be the queen of fashion!',
                 ctaTitle: 'Are you ready?',
                 wishlistBtn: 'Wishlist on Steam',
                 playBtn: 'Play on itch.io',
                 followTitle: 'Follow the Collection',
+                pressKitBtn: 'Press Kit',
                 areYouReady: 'Are you ready?',
                 emailUs: 'Contact',
                 studio: 'Studio',
@@ -1200,12 +1257,13 @@
                 labelPremier: '简介',
                 labelScreenshots: '截图',
                 labelSocials: '社交媒体',
-                premierText: '换上最绝的穿搭，把那些没灵感的模特统统踢下台！ 扮演时尚机器人Lisa，亮相全球T台，成为时尚界最闪耀的女王！',
+                premierText: 'Runway™是一款街机动作游戏：换上最绝的穿搭，把那些没灵感的模特统统踢下台！扮演时尚机器人Lisa，亮相全球T台，成为时尚界最闪耀的女王！',
                 ctaTitle: '准备好了吗？',
                 ctaSubtitle: '现已在Steam和itch.io上线',
                 wishlistBtn: 'Steam愿望单',
                 playBtn: 'itch.io游玩',
                 followTitle: '关注我们',
+                pressKitBtn: '媒体资料包',
                 areYouReady: '准备好了吗？',
                 emailUs: '联系我们',
                 studio: '工作室',
@@ -1233,12 +1291,13 @@
                 labelPremier: '簡介',
                 labelScreenshots: '截圖',
                 labelSocials: '社群媒體',
-                premierText: '換上最絕的穿搭，把那些沒靈感的模特統統踢下台! 扮演時髦機器人Lisa，亮相全球伸展台，成為時尚界最閃耀的女王！',
+                premierText: 'Runway™是一款街機動作遊戲：換上最絕的穿搭，把那些沒靈感的模特統統踢下台！扮演時髦機器人Lisa，亮相全球伸展台，成為時尚界最閃耀的女王！',
                 ctaTitle: '準備好了嗎？',
                 ctaSubtitle: '現已在Steam和itch.io上線',
                 wishlistBtn: 'Steam願望清單',
                 playBtn: 'itch.io遊玩',
                 followTitle: '追蹤我們',
+                pressKitBtn: '媒體資料包',
                 areYouReady: '準備好了嗎？',
                 emailUs: '聯絡我們',
                 studio: '工作室',
@@ -1266,12 +1325,13 @@
                 labelPremier: 'プレミア',
                 labelScreenshots: 'スクリーンショット',
                 labelSocials: 'ソーシャル',
-                premierText: '最旬コーデに着替えて、センスなしモデルたちをランウェイから蹴り落とせ！ ファビュラスなロボット・リサとなり、世界中のランウェイを制覇して女王の座を掴め',
+                premierText: 'Runway™は、着せ替えとキックが楽しめるアーケードアクションゲーム。ファビュラスなロボット・リサとなり、センスなしモデルたちをランウェイから蹴り落として、世界中のランウェイを制覇し女王の座をつかめ！',
                 ctaTitle: '準備はいい？',
                 ctaSubtitle: 'Steamとitch.ioで配信中',
                 wishlistBtn: 'Steamでウィッシュリスト',
                 playBtn: 'itch.ioでプレイ',
                 followTitle: 'フォローする',
+                pressKitBtn: 'プレスキット',
                 areYouReady: '準備はいい？',
                 emailUs: 'お問い合わせ',
                 studio: 'スタジオ',
