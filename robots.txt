@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /index_old.html
+Disallow: /elements.html
+
+Sitemap: https://unsame.fun/sitemap.xml
