@@ -665,17 +665,17 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const screenshotsContainer = document.getElementById('screenshots');
-        const screenshotFolder = 'images/seagull/screenshots/screenshots';
+        const screenshotFolder = 'images/seagull/screenshots';
         const screenshotCount = 8; // Number of screenshots
 
         for (let i = 1; i <= screenshotCount; i++) {
             const screenshotLink = document.createElement('a');
-            screenshotLink.href = `${screenshotFolder} (${i}).png`;
+            screenshotLink.href = `${screenshotFolder}/screenshots (${i}).webp`;
             screenshotLink.target = '_blank';
             screenshotLink.className = 'screenshot-link';
 
             const screenshotImg = document.createElement('img');
-            screenshotImg.src = `${screenshotFolder} (${i}).png`;
+            screenshotImg.src = `${screenshotFolder}/screenshots (${i}).webp`;
             screenshotImg.alt = `Screenshot ${i}`;
             screenshotImg.className = 'screenshot';
 
