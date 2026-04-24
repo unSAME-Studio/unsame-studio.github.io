@@ -10,7 +10,7 @@ const translations = {
         emailUs: "Email Us",
         seagullTown: "Seagull Town",
         copyright: "© 2025",
-        logoImage: "images/seagull/TitleLogo.png",
+        logoImage: "images/seagull/TitleLogo.webp",
         font: "'Outfit', sans-serif"
     },
     zh: {
@@ -38,7 +38,7 @@ const translations = {
         emailUs: "お問い合わせ",
         seagullTown: "カモメタウン",
         copyright: "© 2025",
-        logoImage: "images/seagull/TitleLogo.png", // You can change this to TitleLogo_JP.png if you have a Japanese version
+        logoImage: "images/seagull/TitleLogo.webp", // You can change this to TitleLogo_JP.png if you have a Japanese version
         font: "'Noto Sans JP', sans-serif"
     },
     'zh-hk': {
