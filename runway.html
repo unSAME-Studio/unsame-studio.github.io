@@ -474,8 +474,19 @@
         }
 
         .trailer-container {
-            max-width: 1200px;
+            max-width: 1440px;
             margin: 0 auto;
+        }
+
+        .trailer-carousel {
+            display: grid;
+            grid-template-columns: 56px minmax(0, 200px) minmax(0, 1fr) minmax(0, 200px) 56px;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .trailer-stage {
+            min-width: 0;
         }
 
         .trailer-wrapper {
@@ -484,6 +495,8 @@
             padding-bottom: 56.25%;
             background: var(--color-black);
             border: 1px solid var(--color-gold);
+            overflow: hidden;
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.18);
         }
 
         .trailer-wrapper iframe {
@@ -493,6 +506,94 @@
             width: 100%;
             height: 100%;
             border: none;
+        }
+
+        .trailer-nav,
+        .trailer-preview {
+            border: 1px solid var(--color-gold);
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, opacity 0.25s ease;
+        }
+
+        .trailer-nav {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(34, 34, 34, 0.92);
+            color: var(--color-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            line-height: 1;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+        }
+
+        .trailer-nav:hover,
+        .trailer-nav:focus-visible {
+            background: var(--color-gold);
+            color: var(--color-black);
+            transform: scale(1.04);
+        }
+
+        .trailer-nav:disabled {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .trailer-preview {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            min-height: 120px;
+            min-width: 0;
+            background: rgba(255, 255, 255, 0.52);
+            text-align: left;
+            color: var(--color-black);
+            box-shadow: 0 18px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .trailer-preview:hover,
+        .trailer-preview:focus-visible {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.72);
+            box-shadow: 0 24px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .trailer-preview.is-hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .trailer-preview-media {
+            flex: 0 0 96px;
+            width: 96px;
+            aspect-ratio: 16 / 9;
+            background-color: var(--color-black);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trailer-preview-media::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.45) 100%);
+        }
+
+        .trailer-preview-title {
+            min-width: 0;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            line-height: 1.35;
         }
 
         /* CTA Section */
@@ -813,6 +914,24 @@
                 grid-template-columns: repeat(3, 1fr);
             }
 
+            .trailer-section {
+                padding: 80px 25px;
+            }
+
+            .trailer-carousel {
+                grid-template-columns: 52px minmax(0, 1fr) 52px;
+                gap: 14px;
+            }
+
+            .trailer-preview {
+                display: none;
+            }
+
+            .trailer-nav {
+                width: 52px;
+                height: 52px;
+            }
+
             /* Screenshots — vertical stack on mobile */
             .screenshots {
                 flex-direction: column;
@@ -852,6 +971,17 @@
         @media (max-width: 480px) {
             .locations-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .trailer-carousel {
+                grid-template-columns: 44px minmax(0, 1fr) 44px;
+                gap: 10px;
+            }
+
+            .trailer-nav {
+                width: 44px;
+                height: 44px;
+                font-size: 1.6rem;
             }
             
             .cta-buttons {
@@ -1118,11 +1248,22 @@
         </div>
         
         <div class="trailer-container">
-            <div class="trailer-wrapper" id="youtube-trailer">
-                <iframe src="https://www.youtube.com/embed/lflWvzShIks?si=kAXu7rWt9UZHk7oS" title="Runway Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div class="trailer-wrapper" id="bilibili-trailer" style="display: none;">
-                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115227530107646&bvid=BV1KNWuz5EJa&cid=32474792731&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+            <div class="trailer-carousel">
+                <button class="trailer-nav" type="button" id="trailer-prev" onclick="changeTrailer(-1)" aria-label="Previous trailer">‹</button>
+                <button class="trailer-preview trailer-preview-left" type="button" id="trailer-preview-left" onclick="changeTrailer(-1)" aria-label="Play previous trailer">
+                    <span class="trailer-preview-media" id="trailer-preview-left-media"></span>
+                    <span class="trailer-preview-title" id="trailer-preview-left-title"></span>
+                </button>
+                <div class="trailer-stage">
+                    <div class="trailer-wrapper">
+                        <iframe id="active-trailer-frame" src="https://www.youtube.com/embed/TF0B7E-nT6c?si=78WTr4AIQS7mOtQq" title="Launch Day Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <button class="trailer-preview trailer-preview-right" type="button" id="trailer-preview-right" onclick="changeTrailer(1)" aria-label="Play next trailer">
+                    <span class="trailer-preview-title" id="trailer-preview-right-title"></span>
+                    <span class="trailer-preview-media" id="trailer-preview-right-media"></span>
+                </button>
+                <button class="trailer-nav" type="button" id="trailer-next" onclick="changeTrailer(1)" aria-label="Next trailer">›</button>
             </div>
         </div>
     </section>
@@ -1395,7 +1536,106 @@
             }
         };
 
+        const trailerLibraries = {
+            default: [
+                {
+                    platform: 'youtube',
+                    title: 'Launch Day Trailer',
+                    embed: 'https://www.youtube.com/embed/TF0B7E-nT6c?si=78WTr4AIQS7mOtQq',
+                    thumbnail: 'https://i.ytimg.com/vi/TF0B7E-nT6c/hqdefault.jpg'
+                },
+                {
+                    platform: 'youtube',
+                    title: 'Announcement Trailer',
+                    embed: 'https://www.youtube.com/embed/lflWvzShIks?si=kAXu7rWt9UZHk7oS',
+                    thumbnail: 'https://i.ytimg.com/vi/lflWvzShIks/hqdefault.jpg'
+                }
+            ],
+            zh: [
+                {
+                    platform: 'bilibili',
+                    title: '【发售PV】Runway™ |做了6年的换装游戏，但是格斗？？',
+                    embed: 'https://player.bilibili.com/player.html?isOutside=true&aid=116460538043655&bvid=BV1jAoEBpEsG&cid=37791337164&p=1',
+                    thumbnail: 'https://i1.hdslb.com/bfs/archive/730746dbb2f8997a12095b7c812079234cdfebc4.jpg'
+                },
+                {
+                    platform: 'bilibili',
+                    title: '我高中做的独立游戏被博物馆收录了？！【独立游戏】Runway™ || 踢台™',
+                    embed: 'https://player.bilibili.com/player.html?isOutside=true&aid=115227530107646&bvid=BV1KNWuz5EJa&cid=32474792731&p=1',
+                    thumbnail: 'https://i1.hdslb.com/bfs/archive/6aa07188a59dd3ebc4046a781e5f9588de4cdc17.jpg'
+                }
+            ]
+        };
+
         let currentLanguage = 'en';
+        let currentTrailerIndex = 0;
+
+        function getTrailerSet(lang) {
+            return typeof lang === 'string' && lang.startsWith('zh') ? trailerLibraries.zh : trailerLibraries.default;
+        }
+
+        function setTrailerPreview(side, trailer, hidden) {
+            const preview = document.getElementById(`trailer-preview-${side}`);
+            const media = document.getElementById(`trailer-preview-${side}-media`);
+            const title = document.getElementById(`trailer-preview-${side}-title`);
+
+            if (!preview || !media || !title) return;
+
+            preview.classList.toggle('is-hidden', hidden);
+            preview.disabled = hidden;
+            title.textContent = hidden ? '' : trailer.title;
+            media.style.backgroundImage = hidden ? '' : `url("${trailer.thumbnail}")`;
+        }
+
+        function updateTrailerCarousel(resetIndex) {
+            const trailers = getTrailerSet(currentLanguage);
+            const frame = document.getElementById('active-trailer-frame');
+            const navButtons = document.querySelectorAll('.trailer-nav');
+            const hasMultipleTrailers = trailers.length > 1;
+
+            if (!frame || !trailers.length) return;
+
+            if (resetIndex || currentTrailerIndex >= trailers.length) {
+                currentTrailerIndex = 0;
+            }
+
+            const activeTrailer = trailers[currentTrailerIndex];
+            const previousTrailer = trailers[(currentTrailerIndex - 1 + trailers.length) % trailers.length];
+            const nextTrailer = trailers[(currentTrailerIndex + 1) % trailers.length];
+
+            if (frame.src !== activeTrailer.embed) {
+                frame.src = activeTrailer.embed;
+            }
+            frame.title = activeTrailer.title;
+            frame.setAttribute('data-platform', activeTrailer.platform);
+            frame.setAttribute('allowfullscreen', 'true');
+
+            if (activeTrailer.platform === 'youtube') {
+                frame.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+                frame.removeAttribute('scrolling');
+            } else {
+                frame.setAttribute('allow', 'autoplay; fullscreen');
+                frame.removeAttribute('referrerpolicy');
+                frame.setAttribute('scrolling', 'no');
+            }
+
+            navButtons.forEach(button => {
+                button.disabled = !hasMultipleTrailers;
+            });
+
+            setTrailerPreview('left', previousTrailer, !hasMultipleTrailers);
+            setTrailerPreview('right', nextTrailer, !hasMultipleTrailers);
+        }
+
+        function changeTrailer(direction) {
+            const trailers = getTrailerSet(currentLanguage);
+
+            if (trailers.length < 2) return;
+
+            currentTrailerIndex = (currentTrailerIndex + direction + trailers.length) % trailers.length;
+            updateTrailerCarousel(false);
+        }
 
         function changeLanguage(lang) {
             currentLanguage = lang;
@@ -1415,18 +1655,7 @@
 
             document.title = translations[lang].title;
             document.body.style.fontFamily = translations[lang].font;
-
-            // Switch trailers for Chinese
-            const youtubeTrailer = document.getElementById('youtube-trailer');
-            const bilibiliTrailer = document.getElementById('bilibili-trailer');
-            
-            if (lang === 'zh') {
-                youtubeTrailer.style.display = 'none';
-                bilibiliTrailer.style.display = 'block';
-            } else {
-                youtubeTrailer.style.display = 'block';
-                bilibiliTrailer.style.display = 'none';
-            }
+            updateTrailerCarousel(false);
 
             document.querySelectorAll('.dropdown-item').forEach(item => {
                 item.classList.remove('selected');
@@ -1478,6 +1707,7 @@
                 const langData = {
                     'en': 'EN',
                     'zh': '中文',
+                    'zh-tw': '中文',
                     'ja': '日本語'
                 };
 
