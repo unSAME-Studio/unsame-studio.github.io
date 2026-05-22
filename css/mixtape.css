@@ -272,6 +272,99 @@
   transform: rotate(1deg) scale(1.05);
 }
 
+.coming-next-badge-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: var(--spacing-md);
+}
+
+.category-badge.coming-next {
+  background: linear-gradient(45deg, #ffd6a5, #ffe8cc);
+  transform: rotate(-2deg);
+  transition: transform var(--transition-normal);
+  margin-bottom: 0;
+}
+
+.category-badge.coming-next:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+/* Rising flames — "cooking in the oven" */
+.flame {
+  position: absolute;
+  bottom: 100%;
+  width: 14px;
+  height: 20px;
+  /* teardrop: rounded base, pointed tip */
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+  background: radial-gradient(
+    ellipse 60% 70% at 50% 75%,
+    #fff3b0 0%,
+    #ffd23f 30%,
+    #ff7b00 62%,
+    #ff3b00 100%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: bottom center;
+  animation: flame-rise 2.6s ease-in-out infinite;
+}
+
+.flame-a {
+  left: -8%;
+  animation-delay: 0s;
+}
+
+.flame-b {
+  left: 30%;
+  width: 17px;
+  height: 26px;
+  animation-delay: -0.9s;
+}
+
+.flame-c {
+  left: 108%;
+  width: 12px;
+  height: 17px;
+  animation-delay: -1.7s;
+}
+
+.flame-d {
+  left: 70%;
+  width: 15px;
+  height: 22px;
+  animation-delay: -2.3s;
+}
+
+@keyframes flame-rise {
+  0% {
+    opacity: 0;
+    filter: blur(0px);
+    transform: translate3d(-50%, 4px, 0) rotate(-2deg) scale(0.5);
+  }
+  22% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translate3d(-50%, -3px, 0) rotate(3deg) scaleX(0.92) scaleY(1.12);
+  }
+  60% {
+    opacity: 0.85;
+    filter: blur(1.5px);
+    transform: translate3d(calc(-50% + 5px), -14px, 0) rotate(-4deg) scaleX(0.8) scaleY(1.2);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translate3d(calc(-50% - 4px), -26px, 0) rotate(5deg) scaleX(0.6) scaleY(1.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flame {
+    animation: none;
+  }
+}
+
 .category-header h2 {
   font-size: var(--font-size-2xl);
   font-weight: 700;
@@ -304,7 +397,8 @@
   box-shadow: var(--shadow-md);
   text-decoration: none;
   color: inherit;
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 .category-game-card:hover {
@@ -322,6 +416,9 @@
 
 .category-game-info {
   padding: var(--spacing-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .category-game-info h3 {
@@ -340,7 +437,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: var(--spacing-sm);
+  margin-top: auto;
+  padding-top: var(--spacing-sm);
 }
 
 .category-game-card .platform-icons img {
@@ -351,6 +449,46 @@
   background: transparent;
   border-radius: 0;
   flex: 0 0 24px;
+}
+
+/* Card with individually-linked platform icons */
+.card-main-link {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+}
+
+.platform-icons-links {
+  padding: 0 var(--spacing-md) var(--spacing-md);
+}
+
+.platform-icons-links a {
+  display: inline-flex;
+  transition: transform var(--transition-normal);
+}
+
+.platform-icons-links a:hover {
+  transform: scale(1.15);
+}
+
+/* Release date row for Coming Next cards */
+.release-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.release-date svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
 }
 
 /* Mixtape Badge Footer */
