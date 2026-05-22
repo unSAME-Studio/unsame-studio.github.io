@@ -561,3 +561,147 @@
     padding: var(--spacing-xl) var(--spacing-sm);
   }
 }
+
+/* ==========================================================================
+   Category Quick-Nav — sticky pill bar that jumps between category sections
+   ========================================================================== */
+
+.category-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: calc(var(--z-navbar) - 1);
+  background: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  /* Hidden above the viewport until the hero scrolls away. */
+  transform: translateY(-130%);
+  opacity: 0;
+  transition: transform var(--transition-normal),
+              opacity var(--transition-normal),
+              top var(--transition-normal);
+}
+
+.category-nav.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Tuck below the main navbar while it's on screen; sit at the very
+   top once the navbar hides on scroll-down. */
+.category-nav.below-navbar {
+  top: var(--navbar-height, 64px);
+}
+
+.category-nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px var(--spacing-md);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.category-nav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.cat-pill {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 18px;
+  border-radius: 50px;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background: transparent;
+  border: 1.5px solid var(--pill-color);
+  color: var(--pill-color);
+  transition: transform var(--transition-normal),
+              background var(--transition-normal),
+              color var(--transition-normal),
+              box-shadow var(--transition-normal);
+}
+
+.cat-pill:hover {
+  transform: translateY(-2px);
+}
+
+/* Active category — fills with its badge gradient. */
+.cat-pill.active {
+  background: var(--pill-gradient);
+  border-color: transparent;
+  color: #1a1a1a;
+  box-shadow: 0 0 14px var(--pill-glow);
+}
+
+/* Per-category colors — mirror the .category-badge gradients above. */
+.cat-pill.cat-new {
+  --pill-color: #c6f6d5;
+  --pill-gradient: linear-gradient(45deg, #c6f6d5, #fef3c7);
+  --pill-glow: rgba(198, 246, 213, 0.5);
+}
+
+.cat-pill.cat-coming {
+  --pill-color: #ffd6a5;
+  --pill-gradient: linear-gradient(45deg, #ffd6a5, #ffe8cc);
+  --pill-glow: rgba(255, 214, 165, 0.5);
+}
+
+.cat-pill.cat-action {
+  --pill-color: #ffb3ba;
+  --pill-gradient: linear-gradient(45deg, #ffb3ba, #ffccd5);
+  --pill-glow: rgba(255, 179, 186, 0.5);
+}
+
+.cat-pill.cat-story {
+  --pill-color: #bae1ff;
+  --pill-gradient: linear-gradient(45deg, #bae1ff, #d4e9ff);
+  --pill-glow: rgba(186, 225, 255, 0.5);
+}
+
+.cat-pill.cat-casual {
+  --pill-color: #ffffba;
+  --pill-gradient: linear-gradient(45deg, #ffffba, #ffffcc);
+  --pill-glow: rgba(255, 255, 186, 0.5);
+}
+
+.cat-pill.cat-experimental {
+  --pill-color: #d4a5ff;
+  --pill-gradient: linear-gradient(45deg, #d4a5ff, #e6c7ff);
+  --pill-glow: rgba(212, 165, 255, 0.5);
+}
+
+/* Keep section headings clear of the fixed bars when jumped to. */
+.category-section {
+  scroll-margin-top: 130px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-nav {
+    transition: opacity var(--transition-normal);
+  }
+
+  .cat-pill:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-nav-inner {
+    padding: 8px var(--spacing-sm);
+    gap: 8px;
+  }
+
+  .cat-pill {
+    padding: 6px 14px;
+  }
+}

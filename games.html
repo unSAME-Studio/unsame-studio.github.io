@@ -80,6 +80,18 @@
     </div>
   </nav>
 
+  <!-- Category Quick-Nav -->
+  <nav class="category-nav" id="category-nav" aria-label="Jump to game category">
+    <div class="category-nav-inner">
+      <a href="#cat-new" class="cat-pill cat-new">New Release</a>
+      <a href="#cat-coming" class="cat-pill cat-coming">Coming Next</a>
+      <a href="#cat-action" class="cat-pill cat-action">Action</a>
+      <a href="#cat-story" class="cat-pill cat-story">Story</a>
+      <a href="#cat-casual" class="cat-pill cat-casual">Casual</a>
+      <a href="#cat-experimental" class="cat-pill cat-experimental">Experimental</a>
+    </div>
+  </nav>
+
   <!-- Mixtape Hero Section -->
   <section class="mixtape-hero">
     <!-- Scrolling Game Covers Background -->
@@ -99,7 +111,7 @@
   </section>
 
   <!-- New Release Category -->
-  <section class="category-section">
+  <section class="category-section" id="cat-new">
     <div class="category-header">
       <span class="new-release-badge-wrap" aria-hidden="true">
         <span class="category-badge new-release">New Release</span>
@@ -152,7 +164,7 @@
   </section>
 
   <!-- Coming Next Category -->
-  <section class="category-section">
+  <section class="category-section" id="cat-coming">
     <div class="category-header">
       <span class="coming-next-badge-wrap" aria-hidden="true">
         <span class="category-badge coming-next">Coming Next</span>
@@ -235,22 +247,36 @@
           </div>
         </div>
       </a>
+      <a href="https://unsame.fun/solara" class="category-game-card">
+        <img src="images/covers/solara.png" alt="Solara">
+        <div class="category-game-info">
+          <h3>Solara</h3>
+          <p>A heartfelt puzzle adventure about connection</p>
+          <div class="release-date">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+            <span>Coming soon</span>
+          </div>
+        </div>
+      </a>
     </div>
   </section>
 
   <!-- Action Games Category -->
-  <section class="category-section">
+  <section class="category-section" id="cat-action">
     <div class="category-header">
       <span class="category-badge action">Action</span>
       <h2>Crazy Dramatic Fun</h2>
       <p>Our signature action games that give you crazy fun every time a button is pressed</p>
     </div>
     <div class="category-games">
-      <a href="https://unsame.fun/seagull" class="category-game-card">
-        <img src="images/covers/gulltastrophe.png" alt="Gulltastrophe">
+      <a href="https://eizi.itch.io/love-spinning" class="category-game-card">
+        <img src="images/covers/love%20spinnin.png" alt="~Love Spinnin'~">
         <div class="category-game-info">
-          <h3>Gulltastrophe</h3>
-          <p>Chaotic platformer causing mayhem on the beach</p>
+          <h3>~Love Spinnin'~</h3>
+          <p>Let's unite the world in this love tornado!</p>
         </div>
       </a>
       <a href="https://weisa.itch.io/portarumaku" class="category-game-card">
@@ -285,18 +311,18 @@
   </section>
 
   <!-- Story-Driven Games Category -->
-  <section class="category-section">
+  <section class="category-section" id="cat-story">
     <div class="category-header">
       <span class="category-badge story">Story</span>
       <h2>Playable Work of Art</h2>
       <p>Games that take you on an emotional journey</p>
     </div>
     <div class="category-games">
-      <a href="https://unsame.fun/solara" class="category-game-card">
-        <img src="images/covers/solara.png" alt="Solara">
+      <a href="https://unsame.itch.io/aida-the-space-between" class="category-game-card">
+        <img src="images/covers/aida.png" alt="aida 間 ~the space between~">
         <div class="category-game-info">
-          <h3>Solara</h3>
-          <p>A heartfelt puzzle adventure about connection</p>
+          <h3>aida 間 ~the space between~</h3>
+          <p>Some conversations happen in the space between words</p>
         </div>
       </a>
       <a href="https://unsame.itch.io/emotionless" class="category-game-card">
@@ -317,7 +343,7 @@
   </section>
 
   <!-- Casual & Accessible Games Category -->
-  <section class="category-section">
+  <section class="category-section" id="cat-casual">
     <div class="category-header">
       <span class="category-badge casual">Casual</span>
       <h2>Easy to Pick Up & Play in Arcade Style</h2>
@@ -356,7 +382,7 @@
   </section>
 
   <!-- Experimental Games Category -->
-  <section class="category-section">
+  <section class="category-section" id="cat-experimental">
     <div class="category-header">
       <span class="category-badge experimental">Experimental</span>
       <h2>Weirdly Wonderful and Wonderfully Weird</h2>
@@ -437,5 +463,6 @@
 
   <script src="js/navigation.js"></script>
   <script src="js/mixtape-scroll.js"></script>
+  <script src="js/category-nav.js"></script>
 </body>
 </html>
