@@ -27,6 +27,148 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/page-templates.css">
+
+  <!-- Press page — minimal layout -->
+  <style>
+    .press-page {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md) var(--spacing-xxl);
+    }
+
+    /* Each topic block */
+    .press-block {
+      margin-bottom: var(--spacing-xxl);
+      text-align: center;
+    }
+
+    /* Pill-shape section title — mirrors the .category-badge look on games.html */
+    .press-pill {
+      display: inline-block;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      box-shadow: var(--shadow-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .press-pill.contact   { background: linear-gradient(45deg, #bae1ff, #d4e9ff); }
+    .press-pill.kits      { background: linear-gradient(45deg, #c6f6d5, #fef3c7); }
+    .press-pill.gallery   { background: linear-gradient(45deg, #ffd6a5, #ffe8cc); }
+    .press-pill.socials   { background: linear-gradient(45deg, #d4a5ff, #e6c7ff); }
+
+    /* Card surface holding grouped info */
+    .press-card {
+      background: linear-gradient(45deg, var(--color-bg-tertiary), var(--color-bg-secondary));
+      border-radius: var(--radius-md);
+      padding: var(--spacing-xl);
+    }
+
+    /* Contact — two side-by-side groups */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-lg);
+    }
+
+    .contact-item {
+      text-align: center;
+    }
+
+    .contact-item .label {
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .contact-item .value {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* Pill buttons — replace bare text links */
+    .press-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      padding: 12px 26px;
+      border-radius: 50px;
+      font-size: var(--font-size-base);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    }
+
+    .press-btn svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+    }
+
+    /* Filled accent button */
+    .press-btn.filled {
+      background: var(--color-accent);
+      color: #0d0d0d;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .press-btn.filled:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Outlined button */
+    .press-btn.outline {
+      background: transparent;
+      color: var(--color-text-primary);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .press-btn.outline:hover {
+      transform: translateY(-3px);
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* Button rows */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--spacing-md);
+    }
+
+    .press-note {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-base);
+      max-width: 520px;
+      margin: var(--spacing-lg) auto 0;
+      line-height: var(--line-height-base);
+    }
+
+    /* Press kit buttons share the outline look but keep one per game */
+    .kit-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--spacing-md);
+    }
+
+    @media (max-width: 600px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Navigation Bar -->
@@ -81,88 +223,110 @@
 
   <!-- Page Header -->
   <header class="page-header">
-    <h1>Press & Contact</h1>
-    <p>Get in touch with us!</p>
+    <h1>Press &amp; Contact</h1>
+    <p>Media resources and ways to reach unSAME Studio.</p>
   </header>
-  
-  <!-- Press Section -->
-  <section class="press-section">
-    <!-- Contact Info -->
-    <div class="contact-info">
-      <h3>Contact Information</h3>
-      <p><strong>Player Support</strong></p>
-      <p><strong>Email:</strong> <a href="mailto:play@unsame.fun">play@unsame.fun</a></p>
-      <br>
-      <p><strong>Business & Press</strong></p>
-      <p><strong>Email:</strong> <a href="mailto:unsamestudio@gmail.com">unsamestudio@gmail.com</a></p>
-      <p style="margin-top: 20px;">For press inquiries, collaboration opportunities, or general questions, feel free to reach out!</p>
-      <div style="margin-top: 18px; line-height: 1.8;">
-        <p><strong>Press Kits</strong></p>
-        <p><a href="https://drive.google.com/drive/folders/1UdmuylvNG1bBW12fvghgCmc3sdf6APq1?usp=sharing" target="_blank" rel="noopener noreferrer">Runway Press Kit</a></p>
-        <p><a href="https://drive.google.com/drive/folders/1_nrp297O69YjLQjUSkdXWRJmTegTdpO7?usp=sharing" target="_blank" rel="noopener noreferrer">Seagull Press Kit</a></p>
+
+  <!-- Press Content -->
+  <main class="press-page">
+
+    <!-- Contact -->
+    <section class="press-block">
+      <span class="press-pill contact">Contact</span>
+      <div class="press-card">
+        <div class="contact-grid">
+          <div class="contact-item">
+            <p class="label">Player Support</p>
+            <p class="value">For help with our games</p>
+            <a href="mailto:play@unsame.fun" class="press-btn filled">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+              play@unsame.fun
+            </a>
+          </div>
+          <div class="contact-item">
+            <p class="label">Business &amp; Press</p>
+            <p class="value">Coverage &amp; collaborations</p>
+            <a href="mailto:unsamestudio@gmail.com" class="press-btn filled">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+              unsamestudio@gmail.com
+            </a>
+          </div>
+        </div>
+        <p class="press-note">For press inquiries, collaboration opportunities, or general questions, feel free to reach out — we'd love to hear from you.</p>
       </div>
-    </div>
-    
-    <!-- Showcase Photos with Funny Shapes -->
-    <div class="showcase-photo-container">
-      <a href="images/photos/showcase.JPG" target="_blank" class="photo-wrapper photo-1">
-        <img src="images/photos/showcase.JPG" alt="Game Showcase" class="showcase-photo">
-      </a>
-      <a href="images/photos/runwaybooth.webp" target="_blank" class="photo-wrapper photo-2">
-        <img src="images/photos/runwaybooth.webp" alt="Game Showcase" class="showcase-photo">
-      </a>
-    </div>
+    </section>
 
-    <!-- Social Media -->
-    <h2 class="section-title" style="margin-top: 60px;">Follow Us</h2>
-    <div class="social-container">
-      <a href="https://x.com/unsamestudio" class="social-button twitter" title="X (Twitter)">
-        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
+    <!-- Press Kits -->
+    <section class="press-block">
+      <span class="press-pill kits">Press Kits</span>
+      <div class="press-card">
+        <p class="press-note" style="margin-top: 0; margin-bottom: var(--spacing-lg);">Logos, screenshots, key art, and fact sheets — everything you need to cover our games.</p>
+        <div class="kit-row">
+          <a href="https://drive.google.com/drive/folders/1UdmuylvNG1bBW12fvghgCmc3sdf6APq1?usp=sharing" target="_blank" rel="noopener noreferrer" class="press-btn outline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Runway™ Press Kit
+          </a>
+          <a href="https://drive.google.com/drive/folders/1_nrp297O69YjLQjUSkdXWRJmTegTdpO7?usp=sharing" target="_blank" rel="noopener noreferrer" class="press-btn outline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Gulltastrophe Press Kit
+          </a>
+        </div>
+      </div>
+    </section>
 
-      <a href="https://www.tiktok.com/@unsame_studio" class="social-button" title="TikTok">
-        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path fill="white" d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
-        </svg>
-      </a>
+    <!-- Gallery -->
+    <section class="press-block">
+      <span class="press-pill gallery">Gallery</span>
+      <div class="showcase-photo-container">
+        <a href="images/photos/showcase.JPG" target="_blank" class="photo-wrapper photo-1">
+          <img src="images/photos/showcase.JPG" alt="Game Showcase" class="showcase-photo">
+        </a>
+        <a href="images/photos/runwaybooth.webp" target="_blank" class="photo-wrapper photo-2">
+          <img src="images/photos/runwaybooth.webp" alt="Runway Booth" class="showcase-photo">
+        </a>
+      </div>
+    </section>
 
-      <a href="https://www.youtube.com/@unsamestudio" class="social-button youtube" title="YouTube">
-        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path fill="white" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-        </svg>
-      </a>
+    <!-- Socials -->
+    <section class="press-block">
+      <span class="press-pill socials">Follow Us</span>
+      <div class="social-container">
+        <a href="https://x.com/unsamestudio" class="social-button twitter" title="X (Twitter)">
+          <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
 
-      <a href="https://www.xiaohongshu.com/user/profile/6772d1d6000000001801638e" class="social-button" title="RedNote">
-        <img class="social-icon" src="images/platforms/rednote.png" alt="RedNote">
-      </a>
+        <a href="https://www.tiktok.com/@unsame_studio" class="social-button" title="TikTok">
+          <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="white" d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+          </svg>
+        </a>
 
-      <a href="https://space.bilibili.com/12186485/upload/video" class="social-button" title="Bilibili">
-        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path fill="white" d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z"/>
-        </svg>
-      </a>
+        <a href="https://www.youtube.com/@unsamestudio" class="social-button youtube" title="YouTube">
+          <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="white" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
 
-      <a href="mailto:unsamestudio@gmail.com" class="social-button discord" title="Email">
-        <img class="social-icon" src="images/platforms/icons8-email-48.png" alt="Email">
-      </a>
-    </div>
+        <a href="https://www.xiaohongshu.com/user/profile/6772d1d6000000001801638e" class="social-button" title="RedNote">
+          <img class="social-icon" src="images/platforms/rednote.png" alt="RedNote">
+        </a>
 
-    <!-- Press Kit (Optional) -->
-    <!-- <div class="press-kit-download">
-      <h2 class="section-title">Press Kit</h2>
-      <a href="/press-kit.zip" class="btn">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
-        Download Press Kit
-      </a>
-    </div> -->
-  </section>
+        <a href="https://space.bilibili.com/12186485/upload/video" class="social-button" title="Bilibili">
+          <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="white" d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z"/>
+          </svg>
+        </a>
+
+        <a href="mailto:unsamestudio@gmail.com" class="social-button discord" title="Email">
+          <img class="social-icon" src="images/platforms/icons8-email-48.png" alt="Email">
+        </a>
+      </div>
+    </section>
+
+  </main>
 
   <footer>
-    &copy; 2019-2025 unSAME studio. All rights reserved.
+    &copy; 2019-2026 unSAME Studio LLC. All rights reserved.
   </footer>
 
   <script src="js/navigation.js"></script>
