@@ -563,44 +563,75 @@
 }
 
 /* ==========================================================================
-   Category Quick-Nav — sticky pill bar that jumps between category sections
+   Category Quick-Nav — lives inside the navbar (.navbar) so the two share
+   one box and can never seam apart. On scroll-down the logo/menu row
+   collapses while the pill row stays pinned — so the pill bar reads as its
+   own bar, yet stays welded to the navbar.
+
+   NOTE: mixtape.css is also loaded by index.html, so every navbar override
+   below is scoped to body.games-page — the home page navbar is untouched.
    ========================================================================== */
 
-.category-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: calc(var(--z-navbar) - 1);
-  background: rgba(18, 18, 18, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  /* Hidden above the viewport until the hero scrolls away. */
-  transform: translateY(-130%);
+/* The navbar keeps no padding of its own — each row carries its own, so a
+   row can collapse to nothing. The navbar no longer slides off-screen. */
+.games-page .navbar {
+  padding: 0;
+}
+
+.games-page .navbar.hidden {
+  transform: none;
+}
+
+/* Logo/menu row: carries the navbar's vertical padding and collapses on
+   scroll-down. (On mobile the slide-in menu is position:fixed, so it is
+   unaffected by this collapse.) */
+.games-page .nav-container {
+  padding-top: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+  overflow: hidden;
+  max-height: 120px;
+  transition: max-height var(--transition-normal),
+              padding var(--transition-normal),
+              opacity var(--transition-normal);
+}
+
+.games-page .navbar.hidden .nav-container {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
   opacity: 0;
-  transition: transform var(--transition-normal),
+}
+
+/* Pill row — collapsed until the hero scrolls past, then revealed. */
+.category-nav {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-normal),
               opacity var(--transition-normal),
-              top var(--transition-normal);
+              border-color var(--transition-normal);
 }
 
 .category-nav.visible {
-  transform: translateY(0);
+  max-height: 72px;
   opacity: 1;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-/* Tuck below the main navbar while it's on screen; sit at the very
-   top once the navbar hides on scroll-down. */
-.category-nav.below-navbar {
-  top: var(--navbar-height, 64px);
+/* When the logo/menu row is collapsed, the pill row becomes the top edge —
+   drop the divider line that separated it from the row above. */
+.navbar.hidden .category-nav.visible {
+  border-top-color: transparent;
 }
 
 .category-nav-inner {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px var(--spacing-md);
+  /* Symmetric vertical padding — also gives the active pill's glow room. */
+  padding: 11px var(--spacing-md);
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
