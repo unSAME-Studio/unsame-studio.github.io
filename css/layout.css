@@ -68,7 +68,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-md);
-  align-items: center;
+  align-items: stretch;
 }
 
 @media (min-width: 769px) {
