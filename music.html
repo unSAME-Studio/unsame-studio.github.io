@@ -38,6 +38,16 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   
   <style>
+    :root {
+      --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --spring-soft: cubic-bezier(0.22, 1.2, 0.36, 1);
+      --spring-out: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-bg-hover: rgba(255, 255, 255, 0.16);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --glass-highlight: rgba(255, 255, 255, 0.22);
+    }
+
     /* Custom Scrollbar Style */
     .custom-scrollbar::-webkit-scrollbar {
       width: 6px;
@@ -51,44 +61,39 @@
       border-radius: 10px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.35);
     }
-    
+
     /* Set default font */
     body {
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       background-color: #000;
       overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Audio Spectrum Animation */
+    /* Audio Spectrum Animation — smoother, more organic */
     @keyframes spectrum1 {
-      0%, 100% { height: 16px; }
-      50% { height: 24px; }
+      0%, 100% { height: 10px; }
+      30% { height: 22px; }
+      60% { height: 14px; }
     }
-    
     @keyframes spectrum2 {
-      0%, 100% { height: 24px; }
-      50% { height: 16px; }
+      0%, 100% { height: 22px; }
+      40% { height: 8px; }
+      70% { height: 26px; }
     }
-    
     @keyframes spectrum3 {
-      0%, 100% { height: 20px; }
-      50% { height: 28px; }
+      0%, 100% { height: 16px; }
+      35% { height: 28px; }
+      65% { height: 12px; }
     }
-    
-    .spectrum-bar1 {
-      animation: spectrum1 0.8s ease-in-out infinite;
-    }
-    
-    .spectrum-bar2 {
-      animation: spectrum2 0.85s ease-in-out infinite;
-    }
-    
-    .spectrum-bar3 {
-      animation: spectrum3 0.75s ease-in-out infinite;
-    }
+
+    .spectrum-bar1 { animation: spectrum1 0.9s cubic-bezier(0.45, 0, 0.55, 1) infinite; border-radius: 2px; }
+    .spectrum-bar2 { animation: spectrum2 1.05s cubic-bezier(0.45, 0, 0.55, 1) infinite; border-radius: 2px; }
+    .spectrum-bar3 { animation: spectrum3 0.85s cubic-bezier(0.45, 0, 0.55, 1) infinite; border-radius: 2px; }
 
     /* Loading Throbber Animation */
     @keyframes rotate {
@@ -109,35 +114,53 @@
       animation: pulse 1.5s ease-in-out infinite;
     }
 
-    /* Input Range Styling */
+    /* Input Range Styling — taller hit area, glowing thumb */
     input[type="range"] {
       -webkit-appearance: none;
       height: 6px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 5px;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8));
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.75));
       background-size: 0% 100%;
       background-repeat: no-repeat;
+      transition: height 0.25s var(--spring-soft);
+    }
+    input[type="range"]:hover {
+      height: 8px;
     }
 
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
       background: white;
       cursor: pointer;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0), 0 2px 6px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s var(--spring), box-shadow 0.25s var(--spring-soft);
+    }
+    input[type="range"]:hover::-webkit-slider-thumb {
+      transform: scale(1.3);
+      box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.15), 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+    input[type="range"]:active::-webkit-slider-thumb {
+      transform: scale(1.45);
+      box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.18), 0 2px 12px rgba(0, 0, 0, 0.55);
     }
 
     input[type="range"]::-moz-range-thumb {
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
       background: white;
       cursor: pointer;
       border: none;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s var(--spring), box-shadow 0.25s var(--spring-soft);
+    }
+    input[type="range"]:hover::-moz-range-thumb {
+      transform: scale(1.3);
+      box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.15), 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
     /* Responsive adjustments */
@@ -146,44 +169,191 @@
         transform: scale(1.2);
         margin: 0.75rem 0;
       }
-      
       .mobile-control-scale {
         transform: scale(1.3);
       }
     }
 
-    /* Bouncy Button Animations */
-    @keyframes bounce {
-      0%, 100% { transform: scale(1); }
-      60% { transform: scale(0.9); }
-      80% { transform: scale(1.1); }
+    /* Refined glass surface — layered gradient + inner highlight */
+    .glass-surface {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 100%);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border: 1px solid var(--glass-border);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 10px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .glass-btn {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 100%);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border: 1px solid var(--glass-border);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Bouncy Button Animations — spring-driven */
+    @keyframes spring-press {
+      0%   { transform: scale(1); }
+      35%  { transform: scale(0.88); }
+      70%  { transform: scale(1.08); }
+      100% { transform: scale(1); }
     }
 
     @keyframes wiggle {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(-7deg); }
-      75% { transform: rotate(7deg); }
+      0%, 100% { transform: rotate(0deg) scale(1.05); }
+      25% { transform: rotate(-6deg) scale(1.05); }
+      75% { transform: rotate(6deg) scale(1.05); }
     }
 
     .btn-bounce {
-      transition: all 0.2s;
+      transition: transform 0.35s var(--spring), background-color 0.25s ease, box-shadow 0.25s var(--spring-soft);
+      will-change: transform;
     }
-
-    .btn-bounce:active {
-      animation: bounce 0.4s cubic-bezier(0.36, 0, 0.66, -0.56) both;
-    }
-
     .btn-bounce:hover {
-      transform: scale(1.05);
+      transform: scale(1.08) translateY(-1px);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        0 8px 22px rgba(0, 0, 0, 0.35);
+    }
+    .btn-bounce:active {
+      animation: spring-press 0.45s var(--spring) both;
+    }
+
+    /* Bigger spring for the main play button */
+    @keyframes spring-press-big {
+      0%   { transform: scale(1); }
+      30%  { transform: scale(0.82); }
+      65%  { transform: scale(1.14); }
+      100% { transform: scale(1); }
+    }
+    .btn-play-bounce { transition: transform 0.4s var(--spring), box-shadow 0.3s var(--spring-soft); will-change: transform; }
+    .btn-play-bounce:hover { transform: scale(1.08) translateY(-1px); }
+    .btn-play-bounce:active { animation: spring-press-big 0.55s var(--spring) both; }
+
+    /* Pulsing ring under play button while playing */
+    @keyframes play-ring {
+      0%   { transform: scale(1);   opacity: 0.55; }
+      80%  { transform: scale(1.45); opacity: 0; }
+      100% { transform: scale(1.45); opacity: 0; }
+    }
+    .play-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      pointer-events: none;
+      animation: play-ring 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
 
     .playlist-btn {
-      transition: all 0.3s;
+      transition: transform 0.35s var(--spring), background-color 0.25s ease, box-shadow 0.25s var(--spring-soft);
+    }
+    .playlist-btn:hover {
+      animation: wiggle 0.7s var(--spring) both;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        0 8px 22px rgba(0, 0, 0, 0.35);
     }
 
-    .playlist-btn:hover {
-      animation: wiggle 0.6s cubic-bezier(0.36, 0, 0.66, -0.56) both;
-      transform: scale(1.05);
+    /* Track-change spring slide+fade — direction-aware */
+    @keyframes card-in-forward {
+      0%   { opacity: 0; transform: translateX(48px) scale(0.94); }
+      70%  { opacity: 1; transform: translateX(-6px) scale(1.02); }
+      100% { opacity: 1; transform: translateX(0) scale(1); }
+    }
+    @keyframes card-out-forward {
+      0%   { opacity: 1; transform: translateX(0) scale(1); }
+      100% { opacity: 0; transform: translateX(-48px) scale(0.94); }
+    }
+    @keyframes card-in-backward {
+      0%   { opacity: 0; transform: translateX(-48px) scale(0.94); }
+      70%  { opacity: 1; transform: translateX(6px) scale(1.02); }
+      100% { opacity: 1; transform: translateX(0) scale(1); }
+    }
+    @keyframes card-out-backward {
+      0%   { opacity: 1; transform: translateX(0) scale(1); }
+      100% { opacity: 0; transform: translateX(48px) scale(0.94); }
+    }
+    .card-in-forward   { animation: card-in-forward   0.55s var(--spring) both; }
+    .card-out-forward  { animation: card-out-forward  0.35s var(--spring-out) both; }
+    .card-in-backward  { animation: card-in-backward  0.55s var(--spring) both; }
+    .card-out-backward { animation: card-out-backward 0.35s var(--spring-out) both; }
+
+    /* Playlist row enter stagger */
+    @keyframes row-in {
+      0%   { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .row-in { animation: row-in 0.35s var(--spring-soft) both; }
+
+    .playlist-row {
+      position: relative;
+      transition: transform 0.3s var(--spring), background-color 0.25s ease;
+    }
+    .playlist-row::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 18%;
+      bottom: 18%;
+      width: 3px;
+      border-radius: 999px;
+      background: white;
+      opacity: 0;
+      transform: scaleY(0.3);
+      transform-origin: center;
+      transition: opacity 0.35s var(--spring-soft), transform 0.35s var(--spring);
+    }
+    .playlist-row:hover {
+      transform: translateX(6px);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .playlist-row.is-current::before {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+    .playlist-row.is-current {
+      background: linear-gradient(90deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 100%);
+    }
+
+    /* Game-group header in playlist */
+    .playlist-group-header {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      padding: 14px 4px 8px;
+      font-weight: 600;
+    }
+    .playlist-group-header:first-child { padding-top: 4px; }
+
+    /* Subtle entrance for the logo / header */
+    @keyframes drop-in {
+      0%   { opacity: 0; transform: translateY(-12px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .drop-in { animation: drop-in 0.7s var(--spring) both; }
+
+    /* Layered background crossfade */
+    .bg-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.9s ease;
+      transform: scale(1.06);
+    }
+    .bg-layer > video,
+    .bg-layer > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   </style>
 </head>
@@ -733,17 +903,21 @@
     const UnSAMEMusicPlayer = () => {
       const completeData = getCompleteSongData();
       const [currentTrack, setCurrentTrack] = useState(completeData[0]);
+      const [bgGameId, setBgGameId] = useState(completeData[0].gameId);
+      const [bgDimmed, setBgDimmed] = useState(false);
       const [isPlaying, setIsPlaying] = useState(false);
       const [progress, setProgress] = useState(0);
       const [duration, setDuration] = useState(0);
       const [volume, setVolume] = useState(0.7);
+      const previousVolumeRef = useRef(0.7);
       const [showPlaylist, setShowPlaylist] = useState(false);
       const [transitioning, setTransitioning] = useState(false);
+      const [direction, setDirection] = useState('forward');
       const [isLoading, setIsLoading] = useState(true);
       const [isChanging, setIsChanging] = useState(false);
-      const [showVideo, setShowVideo] = useState(true); // Add this line
-      const [showFloatingIcons, setShowFloatingIcons] = useState(true); // Add this line
-      const [isShuffle, setIsShuffle] = useState(false); // Add this line
+      const [showVideo, setShowVideo] = useState(true);
+      const [showFloatingIcons, setShowFloatingIcons] = useState(true);
+      const [isShuffle, setIsShuffle] = useState(false);
       
       const audioRef = useRef(null);
       const intervalRef = useRef(null);
@@ -814,31 +988,40 @@
         };
       }, [showPlaylist]);
 
-      const handleTrackChange = (track) => {
-        if (isChanging) return; // Prevent changing while already changing
-        
+      const handleTrackChange = (track, dir = 'forward') => {
+        if (isChanging) return;
+        if (track.id === currentTrack.id) return;
+
+        const gameChanged = track.gameId !== currentTrack.gameId;
+
         setIsChanging(true);
+        setDirection(dir);
         setTransitioning(true);
         setIsLoading(true);
         setProgress(0);
         setDuration(0);
-        
-        // Update URL with the song ID
+
         updateURLWithSongId(track.id);
-        
-        // Delay changing track to allow for transition animation
+
+        // Cross-game: dip background to black, swap source mid-dip, fade back in.
+        // Same game: leave background untouched.
+        if (gameChanged) {
+          setBgDimmed(true);
+          setTimeout(() => setBgGameId(track.gameId), 280);
+          setTimeout(() => setBgDimmed(false), 360);
+        }
+
         setTimeout(() => {
           setCurrentTrack(track);
           if (progressBarRef.current) {
             progressBarRef.current.style.backgroundSize = "0% 100%";
           }
-          
+
           setIsPlaying(true);
-          
-          // Need to manually call play after setting new src
+
           setTimeout(() => {
             if (!audioRef.current) return;
-            
+
             const playPromise = audioRef.current.play();
             if (playPromise !== undefined) {
               playPromise
@@ -853,26 +1036,25 @@
                 });
             }
           }, 100);
-          
+
           setTransitioning(false);
-        }, 500);
+        }, 350);
       };
 
       const playNextTrack = useCallback(() => {
         const currentIndex = completeData.findIndex(track => track.id === currentTrack.id);
         let nextIndex;
-        
+
         if (isShuffle) {
-          // Generate random index excluding current song
           let availableIndices = Array.from({length: completeData.length}, (_, i) => i)
             .filter(i => i !== currentIndex);
           nextIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
         } else {
           nextIndex = (currentIndex + 1) % completeData.length;
         }
-        
-        handleTrackChange(completeData[nextIndex]);
-      }, [currentTrack.id, completeData, isShuffle]); // Add isShuffle to dependencies
+
+        handleTrackChange(completeData[nextIndex], 'forward');
+      }, [currentTrack.id, completeData, isShuffle]);
 
       const onAudioEnded = useCallback(() => {
         clearInterval(intervalRef.current);
@@ -920,7 +1102,7 @@
       const playPrevTrack = () => {
         const currentIndex = completeData.findIndex(track => track.id === currentTrack.id);
         const prevIndex = (currentIndex - 1 + completeData.length) % completeData.length;
-        handleTrackChange(completeData[prevIndex]);
+        handleTrackChange(completeData[prevIndex], 'backward');
       };
 
       const formatTime = (time) => {
@@ -977,39 +1159,61 @@
 
       return (
         <div ref={containerRef} className="flex flex-col items-center justify-center h-screen w-full overflow-hidden relative">
-          {/* Background Media (Image/Video) with blur effect */}
-          <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-md z-10"></div>
-            <div className={`w-full h-full transition-opacity duration-1000 ${transitioning ? 'opacity-0' : 'opacity-100'}`}>
-              {currentTrack.game.hasVideo && showVideo ? (
-                <video 
-                  src={currentTrack.game.videoUrl} 
-                  poster={currentTrack.game.coverArt}
-                  muted
-                  loop
-                  autoPlay
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <img 
-                  src={currentTrack.game.coverArt} 
-                  alt={`${currentTrack.game.title} background`} 
-                  className="w-full h-full object-cover"
-                />
-              )}
-            </div>
+          {/* Background Media — single layer keyed by game; dip-to-black on game change */}
+          <div className="absolute inset-0 z-0 overflow-hidden bg-black">
+            {(() => {
+              const bgGame = games.find(g => g.id === bgGameId);
+              if (!bgGame) return null;
+              return (
+                <div
+                  key={`${bgGameId}-${bgGame.hasVideo && showVideo ? 'v' : 'i'}`}
+                  className="bg-layer"
+                  style={{ opacity: 1 }}
+                >
+                  {bgGame.hasVideo && showVideo ? (
+                    <video
+                      src={bgGame.videoUrl}
+                      poster={bgGame.coverArt}
+                      muted
+                      loop
+                      autoPlay
+                      playsInline
+                    />
+                  ) : (
+                    <img src={bgGame.coverArt} alt={`${bgGame.title} background`} />
+                  )}
+                </div>
+              );
+            })()}
+            {/* Black dip overlay — fades in during cross-game transitions */}
+            <div
+              className="absolute inset-0 z-[5] pointer-events-none bg-black"
+              style={{
+                opacity: bgDimmed ? 1 : 0,
+                transition: bgDimmed ? 'opacity 0.28s ease-out' : 'opacity 0.45s ease-in'
+              }}
+            ></div>
+            {/* Dark gradient + blur overlay */}
+            <div
+              className="absolute inset-0 z-10 pointer-events-none"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.85) 100%)',
+                backdropFilter: 'blur(14px) saturate(120%)',
+                WebkitBackdropFilter: 'blur(14px) saturate(120%)'
+              }}
+            ></div>
           </div>
           
           {/* Company Logo */}
-          <div className={`z-10 mb-4 md:mb-8 ${isMobile ? 'mt-4' : ''} flex items-center space-x-4`}>
-            <img 
-              src="images/unSAMEMusic.png" 
-              alt="unSAME Music" 
-              className="w-12 md:w-14"
+          <div className={`z-10 mb-4 md:mb-8 ${isMobile ? 'mt-4' : ''} flex items-center space-x-4 drop-in`}>
+            <img
+              src="images/unSAMEMusic.png"
+              alt="unSAME Music"
+              className="w-12 md:w-14 drop-shadow-lg"
             />
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold tracking-wider text-white">unSAME</h1>
-              <p className="text-gray-300 text-sm mt-1">GAME SOUNDTRACKS</p>
+              <h1 className="text-3xl md:text-4xl font-bold tracking-wider text-white drop-shadow-lg">unSAME</h1>
+              <p className="text-gray-300 text-xs md:text-sm mt-1 tracking-[0.2em]">GAME SOUNDTRACKS</p>
             </div>
           </div>
           
@@ -1017,20 +1221,23 @@
           <div className={`z-10 w-full max-w-3xl px-4 md:px-6 flex flex-col items-center ${isMobile ? 'scale-110 py-4' : ''}`}>
             {/* Track Info */}
             <div className="mb-6 md:mb-12 text-center w-full">
-              <div className={`bg-white bg-opacity-10 backdrop-blur-md px-6 md:px-12 py-4 md:py-8 rounded-xl transition-all duration-500 w-full max-w-2xl mx-auto ${transitioning ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}
-                   style={{ maxWidth: 'calc(100% - 2rem)', margin: '0 auto', boxSizing: 'border-box' }}>
-                <h2 className="text-xl md:text-2xl font-medium text-white mb-2 md:mb-3">
+              <div
+                key={currentTrack.id}
+                className={`glass-surface px-6 md:px-12 py-5 md:py-8 rounded-2xl w-full max-w-2xl mx-auto ${transitioning ? (direction === 'backward' ? 'card-out-backward' : 'card-out-forward') : (direction === 'backward' ? 'card-in-backward' : 'card-in-forward')}`}
+                style={{ maxWidth: 'calc(100% - 2rem)', margin: '0 auto', boxSizing: 'border-box' }}
+              >
+                <h2 className="text-xl md:text-3xl font-semibold text-white mb-2 md:mb-3 tracking-tight drop-shadow-md">
                   {currentTrack.title}
                 </h2>
-                <a 
-                  href={currentTrack.game.url} 
-                  className="text-gray-300 block mb-1 md:mb-2 hover:text-white transition-colors hover:underline"
+                <a
+                  href={currentTrack.game.url}
+                  className="text-gray-200 block mb-1 md:mb-2 hover:text-white transition-colors hover:underline"
                 >
                   {currentTrack.game.title}
                 </a>
-                <a 
+                <a
                   href={currentTrack.composer.url}
-                  className="text-gray-400 text-sm hover:text-white transition-colors inline-flex"
+                  className="text-gray-400 text-xs md:text-sm hover:text-white transition-colors inline-flex tracking-wide"
                 >
                   <span className="mr-1">Composed by</span>
                   <span className="hover:underline">{currentTrack.composer.name}</span>
@@ -1090,41 +1297,45 @@
             
             {/* Controls */}
             <div className={`flex justify-center items-center space-x-4 md:space-x-6 mb-4 md:mb-8 ${isMobile ? 'mobile-control-scale' : ''}`}>
-              <button 
+              <button
                 onClick={playPrevTrack}
-                className="btn-bounce text-white p-3 md:p-4 rounded-full bg-white bg-opacity-20 backdrop-blur-md hover:bg-opacity-30 transition-colors w-10 h-10 md:w-12 md:h-12 flex items-center justify-center"
+                className="btn-bounce glass-btn text-white rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center"
+                aria-label="Previous track"
               >
-                {/* Previous Track Icon */}
                 <svg xmlns="http://www.w3.org/2000/svg" width={isMobile ? "18" : "20"} height={isMobile ? "18" : "20"} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polygon points="19 20 9 12 19 4 19 20"></polygon>
                   <line x1="5" y1="19" x2="5" y2="5"></line>
                 </svg>
               </button>
-              
-              <button 
-                onClick={togglePlay}
-                className="btn-bounce text-white p-4 rounded-full bg-white bg-opacity-20 backdrop-blur-md hover:bg-opacity-30 transition-colors w-14 h-14 md:w-16 md:h-16 flex items-center justify-center"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <LoadingThrobber size={isMobile ? 20 : 24} />
-                ) : isPlaying ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" width={isMobile ? "22" : "24"} height={isMobile ? "22" : "24"} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="6" y="4" width="4" height="16"></rect>
-                    <rect x="14" y="4" width="4" height="16"></rect>
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" width={isMobile ? "22" : "24"} height={isMobile ? "22" : "24"} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                )}
-              </button>
-              
-              <button 
+
+              <div className="relative">
+                {isPlaying && !isLoading && <span className="play-ring"></span>}
+                <button
+                  onClick={togglePlay}
+                  className="btn-play-bounce glass-btn text-white rounded-full w-14 h-14 md:w-16 md:h-16 flex items-center justify-center relative"
+                  disabled={isLoading}
+                  aria-label={isPlaying ? "Pause" : "Play"}
+                >
+                  {isLoading ? (
+                    <LoadingThrobber size={isMobile ? 20 : 24} />
+                  ) : isPlaying ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width={isMobile ? "22" : "24"} height={isMobile ? "22" : "24"} viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                      <rect x="6" y="4" width="4" height="16" rx="1.5"></rect>
+                      <rect x="14" y="4" width="4" height="16" rx="1.5"></rect>
+                    </svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width={isMobile ? "22" : "24"} height={isMobile ? "22" : "24"} viewBox="0 0 24 24" fill="currentColor" stroke="none" style={{ marginLeft: '2px' }}>
+                      <path d="M6 4.5v15a1 1 0 0 0 1.55.83l11.5-7.5a1 1 0 0 0 0-1.66l-11.5-7.5A1 1 0 0 0 6 4.5z"></path>
+                    </svg>
+                  )}
+                </button>
+              </div>
+
+              <button
                 onClick={playNextTrack}
-                className="btn-bounce text-white p-3 md:p-4 rounded-full bg-white bg-opacity-20 backdrop-blur-md hover:bg-opacity-30 transition-colors w-10 h-10 md:w-12 md:h-12 flex items-center justify-center"
+                className="btn-bounce glass-btn text-white rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center"
+                aria-label="Next track"
               >
-                {/* Next Track Icon */}
                 <svg xmlns="http://www.w3.org/2000/svg" width={isMobile ? "18" : "20"} height={isMobile ? "18" : "20"} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polygon points="5 4 15 12 5 20 5 4"></polygon>
                   <line x1="19" y1="5" x2="19" y2="19"></line>
@@ -1134,12 +1345,18 @@
             
             {/* Volume Control */}
             <div className="flex items-center justify-center space-x-2 mb-4 md:mb-8">
-              <button 
+              <button
                 onClick={() => {
-                  const newVolume = volume > 0 ? 0 : 0.7;
-                  setVolume(newVolume);
+                  if (volume > 0) {
+                    previousVolumeRef.current = volume;
+                    setVolume(0);
+                  } else {
+                    const restore = previousVolumeRef.current > 0 ? previousVolumeRef.current : 0.7;
+                    setVolume(restore);
+                  }
                 }}
-                className="btn-bounce text-white p-2 rounded-full bg-white bg-opacity-20 backdrop-blur-md hover:bg-opacity-30 transition-colors w-8 h-8 flex items-center justify-center"
+                className="btn-bounce glass-btn text-white rounded-full w-8 h-8 flex items-center justify-center"
+                aria-label={volume > 0 ? "Mute" : "Unmute"}
               >
                 {volume > 0 ? (
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1161,7 +1378,11 @@
                 max="1"
                 step="0.01"
                 value={volume}
-                onChange={(e) => setVolume(parseFloat(e.target.value))}
+                onChange={(e) => {
+                  const v = parseFloat(e.target.value);
+                  setVolume(v);
+                  if (v > 0) previousVolumeRef.current = v;
+                }}
                 className="w-24 md:w-32 h-1 bg-white bg-opacity-20 rounded-full appearance-none cursor-pointer"
               />
             </div>
@@ -1169,22 +1390,24 @@
           
           {/* Playlist and Settings Controls */}
           <div className="z-10 flex items-center justify-center space-x-3">
-            <button 
+            <button
               onClick={() => setShowPlaylist(!showPlaylist)}
-              className={`playlist-btn px-4 py-2 rounded-full
-                      bg-white bg-opacity-10 backdrop-blur-md hover:bg-opacity-20 transition-colors text-white ${isMobile ? 'text-base' : ''}`}
+              className={`playlist-btn glass-btn px-5 py-2 rounded-full text-white tracking-wide ${isMobile ? 'text-base' : 'text-sm'}`}
             >
               {showPlaylist ? "Hide Playlist" : "Show Playlist"}
             </button>
 
-            <button 
-              onClick={() => setShowVideo(!showVideo)}
-              className={`btn-bounce px-2 py-2 rounded-full flex items-center justify-center
-                      bg-white bg-opacity-10 backdrop-blur-md hover:bg-opacity-20 transition-colors text-white ${isMobile ? 'text-base' : ''}`}
+            <button
+              onClick={() => {
+                setBgDimmed(true);
+                setTimeout(() => setShowVideo(v => !v), 280);
+                setTimeout(() => setBgDimmed(false), 360);
+              }}
+              className="btn-bounce glass-btn rounded-full flex items-center justify-center text-white"
               title="Toggle Video Background"
               style={{ width: '40px', height: '40px' }}
             >
-              <img 
+              <img
                 src={showVideo ? "images/icons/icons8-video-call-48.png" : "images/icons/icons8-no-video-48.png"}
                 alt={showVideo ? "Video On" : "Video Off"}
                 width="20"
@@ -1193,14 +1416,13 @@
               />
             </button>
 
-            <button 
+            <button
               onClick={() => setShowFloatingIcons(!showFloatingIcons)}
-              className={`btn-bounce px-2 py-2 rounded-full flex items-center justify-center
-                      bg-white bg-opacity-10 backdrop-blur-md hover:bg-opacity-20 transition-colors text-white ${isMobile ? 'text-base' : ''}`}
+              className="btn-bounce glass-btn rounded-full flex items-center justify-center text-white"
               title="Toggle Floating Icons"
               style={{ width: '40px', height: '40px' }}
             >
-              <img 
+              <img
                 src={showFloatingIcons ? "images/icons/icons8-happy-48.png" : "images/icons/icons8-no-entry-48.png"}
                 alt={showFloatingIcons ? "Floating Icons On" : "Floating Icons Off"}
                 width="20"
@@ -1209,98 +1431,139 @@
               />
             </button>
 
-            <button 
-                onClick={() => setIsShuffle(!isShuffle)}
-                className={`btn-bounce text-white p-2 rounded-full transition-colors flex items-center justify-center
-                          ${isShuffle ? 'bg-white bg-opacity-30' : 'bg-white bg-opacity-20'} 
-                          hover:bg-opacity-30`}
-                title="Toggle Shuffle"
-                style={{ width: '40px', height: '40px' }}
-              >
-                <img 
-                  src={isShuffle ? "images/icons/icons8-shuffle-48.png" : "images/icons/icons8-repeat-48.png"}
-                  alt={isShuffle ? "Shuffle On" : "Repeat Mode"}
-                  width="20"
-                  height="20"
-                  style={{ filter: 'brightness(0) invert(1)' }}
-                />
-              </button>
+            <button
+              onClick={() => setIsShuffle(!isShuffle)}
+              className={`btn-bounce glass-btn rounded-full flex items-center justify-center text-white ${isShuffle ? 'ring-2 ring-white ring-opacity-40' : ''}`}
+              title="Toggle Shuffle"
+              style={{ width: '40px', height: '40px' }}
+            >
+              <img
+                src={isShuffle ? "images/icons/icons8-shuffle-48.png" : "images/icons/icons8-repeat-48.png"}
+                alt={isShuffle ? "Shuffle On" : "Repeat Mode"}
+                width="20"
+                height="20"
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+            </button>
           </div>
           
           {/* Playlist */}
-          <div 
+          <div
             ref={playlistRef}
-            className={`fixed bottom-0 left-0 right-0 bg-black bg-opacity-70 backdrop-blur-lg z-20 transition-transform duration-300 ease-in-out ${showPlaylist ? 'translate-y-0' : 'translate-y-full'}`}
-            style={{maxHeight: '60vh'}}
+            className={`fixed left-0 right-0 z-20 ${showPlaylist ? 'translate-y-0' : 'translate-y-full'}`}
+            style={{
+              bottom: '-60px',
+              paddingBottom: '60px',
+              maxHeight: 'calc(65vh + 60px)',
+              background: 'linear-gradient(180deg, rgba(10,10,12,0.85) 0%, rgba(0,0,0,0.92) 100%)',
+              backdropFilter: 'blur(28px) saturate(150%)',
+              WebkitBackdropFilter: 'blur(28px) saturate(150%)',
+              borderTop: '1px solid rgba(255,255,255,0.08)',
+              boxShadow: '0 -24px 70px rgba(0,0,0,0.5)',
+              borderTopLeftRadius: '24px',
+              borderTopRightRadius: '24px',
+              transition: 'transform 0.38s cubic-bezier(0.22, 1.2, 0.36, 1)'
+            }}
           >
-            <div className="w-full max-w-3xl mx-auto p-4 md:p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg md:text-xl font-medium text-white">Game Soundtracks</h3>
-                <button 
+            <div className="w-full max-w-3xl mx-auto p-5 md:p-7">
+              {/* Drag handle */}
+              <div className="flex justify-center mb-3">
+                <div style={{ width: '40px', height: '4px', borderRadius: '999px', background: 'rgba(255,255,255,0.2)' }}></div>
+              </div>
+
+              <div className="flex justify-between items-center mb-5">
+                <div>
+                  <h3 className="text-lg md:text-xl font-semibold text-white tracking-wide">Game Soundtracks</h3>
+                  <p className="text-xs text-gray-400 mt-0.5">{completeData.length} tracks · {games.filter(g => completeData.some(t => t.gameId === g.id)).length} games</p>
+                </div>
+                <button
                   onClick={() => setShowPlaylist(false)}
-                  className="btn-bounce text-white p-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 transition-colors"
+                  className="btn-bounce glass-btn text-white p-2 rounded-full"
+                  aria-label="Close playlist"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>
                 </button>
               </div>
-              
-              <div className="overflow-y-auto custom-scrollbar" style={{maxHeight: 'calc(60vh - 80px)'}}>
-                <ul>
-                  {completeData.map(track => (
-                    <li 
-                      key={track.id}
-                      className={`flex items-center p-3 rounded-lg mb-2 cursor-pointer hover:bg-white hover:bg-opacity-10 transition-colors
-                                ${currentTrack.id === track.id ? 'bg-white bg-opacity-10' : ''}`}
-                      onClick={() => handleTrackChange(track)}
-                    >
-                      <img 
-                        src={track.game.coverArt} 
-                        alt={track.title} 
-                        className="w-12 h-12 object-cover rounded mr-4"
-                      />
-                      <div>
-                        <h4 className="font-medium text-white">{track.title}</h4>
-                        <div className="flex text-sm space-x-2">
-                          <a 
-                            href={track.game.url}
-                            onClick={(e) => e.stopPropagation()}
-                            className="text-gray-400 hover:text-white transition-colors hover:underline"
-                          >
-                            {track.game.title}
-                          </a>
-                          <span className="text-gray-600">•</span>
-                          <a 
-                            href={track.composer.url}
-                            onClick={(e) => e.stopPropagation()}
-                            className="text-gray-400 hover:text-white transition-colors hover:underline"
-                          >
-                            {track.composer.name}
-                          </a>
-                        </div>
+
+              <div className="overflow-y-auto custom-scrollbar pr-2" style={{maxHeight: 'calc(65vh - 130px)'}}>
+                {(() => {
+                  // Group tracks by game, preserving game order
+                  const grouped = [];
+                  const seenGames = new Set();
+                  completeData.forEach(track => {
+                    if (!seenGames.has(track.gameId)) {
+                      seenGames.add(track.gameId);
+                      grouped.push({
+                        game: track.game,
+                        tracks: completeData.filter(t => t.gameId === track.gameId)
+                      });
+                    }
+                  });
+
+                  let rowIdx = 0;
+                  return grouped.map((group, groupIdx) => (
+                    <div key={group.game.id}>
+                      <div className="playlist-group-header flex items-center gap-2">
+                        <span>{group.game.title}</span>
+                        <span style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }}></span>
+                        <span style={{ opacity: 0.7 }}>{group.tracks.length}</span>
                       </div>
-                      {currentTrack.id === track.id && (
-                        <div className="ml-auto flex items-center h-12">
-                          {isLoading ? (
-                            <LoadingThrobber size={16} />
-                          ) : isPlaying ? (
-                            <div className="flex space-x-1">
-                              <div className="w-1 bg-white spectrum-bar1 transform origin-bottom"></div>
-                              <div className="w-1 bg-white spectrum-bar2 transform origin-bottom"></div>
-                              <div className="w-1 bg-white spectrum-bar3 transform origin-bottom"></div>
-                            </div>
-                          ) : (
-                            <div className="w-6 h-6 flex items-center justify-center">
-                              <div className="w-2 h-2 rounded-full bg-white"></div>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                      <ul>
+                        {group.tracks.map((track) => {
+                          const isCurrent = currentTrack.id === track.id;
+                          const myIdx = rowIdx++;
+                          return (
+                            <li
+                              key={track.id}
+                              className={`playlist-row flex items-center pl-4 pr-3 py-2.5 rounded-xl mb-1 cursor-pointer
+                                        ${isCurrent ? 'is-current' : ''}
+                                        ${showPlaylist ? 'row-in' : ''}`}
+                              style={showPlaylist ? { animationDelay: `${Math.min(myIdx, 10) * 15}ms` } : undefined}
+                              onClick={() => handleTrackChange(track, 'forward')}
+                            >
+                              <img
+                                src={track.game.coverArt}
+                                alt=""
+                                className="w-11 h-11 object-cover rounded-lg mr-4"
+                                style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
+                              />
+                              <div className="min-w-0 flex-1">
+                                <h4 className={`font-medium truncate ${isCurrent ? 'text-white' : 'text-gray-100'}`} style={{ fontSize: '0.95rem' }}>
+                                  {track.title}
+                                </h4>
+                                <a
+                                  href={track.composer.url}
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="text-xs text-gray-500 hover:text-white transition-colors hover:underline"
+                                >
+                                  {track.composer.name}
+                                </a>
+                              </div>
+                              <div className="ml-3 flex items-center justify-center" style={{ width: '28px', height: '28px' }}>
+                                {isCurrent ? (
+                                  isLoading ? (
+                                    <LoadingThrobber size={14} />
+                                  ) : isPlaying ? (
+                                    <div className="flex items-end space-x-0.5" style={{ height: '20px' }}>
+                                      <div className="w-0.5 bg-white spectrum-bar1"></div>
+                                      <div className="w-0.5 bg-white spectrum-bar2"></div>
+                                      <div className="w-0.5 bg-white spectrum-bar3"></div>
+                                    </div>
+                                  ) : (
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                                  )
+                                ) : null}
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  ));
+                })()}
               </div>
             </div>
           </div>
