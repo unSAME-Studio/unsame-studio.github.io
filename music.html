@@ -523,28 +523,70 @@
         title: "BAMF -Instrumental-",
         gameId: "runway",
         composerId: "arx",
-        audioUrl: "https://unsame.fun/audios/music/BAMF -instrumental-.mp3"
+        audioUrl: "https://unsame.fun/audios/music/runway/01 BAMF -instrumental-.mp3"
       },
       {
         id: 10,
         title: "Billed By A Box -Game Edit-",
         gameId: "runway",
         composerId: "arx",
-        audioUrl: "https://unsame.fun/audios/music/BilledByABox_Gameedit.mp3"
+        audioUrl: "https://unsame.fun/audios/music/runway/02 Billed By A Box -game edit-.mp3"
       },
       {
         id: 11,
         title: "Game Over -Game Edit-",
         gameId: "runway",
         composerId: "arx",
-        audioUrl: "https://unsame.fun/audios/music/GameOver_Game Edit.mp3"
+        audioUrl: "https://unsame.fun/audios/music/runway/03 游戏结束 -game edit-.mp3"
+      },
+      {
+        id: 34,
+        title: "DoubleDouble -Runway Mix-",
+        gameId: "runway",
+        composerId: "arx",
+        audioUrl: "https://unsame.fun/audios/music/runway/04 DoubleDouble -Runway™ mix-.mp3"
       },
       {
         id: 12,
         title: "Signal -Game Edit-",
         gameId: "runway",
         composerId: "arx",
-        audioUrl: "https://unsame.fun/audios/music/Signal_Game Edit.mp3"
+        audioUrl: "https://unsame.fun/audios/music/runway/05 Signal -game edit-.mp3"
+      },
+      {
+        id: 35,
+        title: "Digital Rain",
+        gameId: "runway",
+        composerId: "arx",
+        audioUrl: "https://unsame.fun/audios/music/runway/06 Digital Rain.mp3"
+      },
+      {
+        id: 36,
+        title: "Late Night",
+        gameId: "runway",
+        composerId: "arx",
+        audioUrl: "https://unsame.fun/audios/music/runway/07 Late Night.mp3"
+      },
+      {
+        id: 37,
+        title: "GameGame -Instrumental-",
+        gameId: "runway",
+        composerId: "arx",
+        audioUrl: "https://unsame.fun/audios/music/runway/08 GameGame -instrumental-.mp3"
+      },
+      {
+        id: 38,
+        title: "Tea Time -Instrumental-",
+        gameId: "runway",
+        composerId: "arx",
+        audioUrl: "https://unsame.fun/audios/music/runway/09 Tea Time -instrumental-.mp3"
+      },
+      {
+        id: 39,
+        title: "I forgot the math quiz",
+        gameId: "runway",
+        composerId: "arx",
+        audioUrl: "https://unsame.fun/audios/music/runway/10 I forgot the math quiz.mp3"
       },
 
       // Songs from "Love Stickin'"
@@ -889,10 +931,23 @@
       );
     };
 
+    const slugify = (value) => {
+      return value
+        .toString()
+        .toLowerCase()
+        .replace(/™/g, '')
+        .replace(/&/g, ' and ')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    };
+
+    const getSongSlug = (song) => song.slug || `${song.gameId}/${slugify(song.title)}`;
+
     // Helper function to get complete song information
     const getCompleteSongData = () => {
       return songData.map(song => ({
         ...song,
+        slug: getSongSlug(song),
         game: games.find(game => game.id === song.gameId),
         composer: composers.find(composer => composer.id === song.composerId)
       }));
@@ -944,8 +999,11 @@
 
     const UnSAMEMusicPlayer = () => {
       const completeData = getCompleteSongData();
-      const [currentTrack, setCurrentTrack] = useState(completeData[0]);
-      const [bgGameId, setBgGameId] = useState(completeData[0].gameId);
+      const initialTrack = (() => {
+        return getTrackFromURL(completeData) || completeData[0];
+      })();
+      const [currentTrack, setCurrentTrack] = useState(initialTrack);
+      const [bgGameId, setBgGameId] = useState(initialTrack.gameId);
       const [bgDimmed, setBgDimmed] = useState(false);
       const [isPlaying, setIsPlaying] = useState(false);
       const [progress, setProgress] = useState(0);
@@ -968,30 +1026,32 @@
       
       const isMobile = useMobileDetect();
 
-      // 1. Add this after your useState declarations to get the initial song from URL
+      // Load initial track from #track=game/track-slug, with #song=ID kept as legacy support.
       useEffect(() => {
-        const songIdFromURL = getSongIdFromURL();
-        if (songIdFromURL) {
-          const songFromURL = completeData.find(song => song.id.toString() === songIdFromURL);
-          if (songFromURL) {
-            setCurrentTrack(songFromURL);
-            // Auto-play when someone arrives via a shared link (optional)
-            setTimeout(() => {
-              if (audioRef.current) {
-                const playPromise = audioRef.current.play();
-                if (playPromise !== undefined) {
-                  playPromise
-                    .then(() => {
-                      startTimer();
-                      setIsPlaying(true);
-                    })
-                    .catch(error => {
-                      console.error("Error auto-playing audio:", error);
-                    });
-                }
-              }
-            }, 1000);
+        const trackFromURL = getTrackFromURL(completeData);
+        if (trackFromURL) {
+          setCurrentTrack(trackFromURL);
+          setBgGameId(trackFromURL.gameId);
+          if (window.location.hash.includes('song=')) {
+            updateURLWithTrackSlug(trackFromURL.slug);
           }
+
+          // Auto-play when someone arrives via a shared link (optional)
+          setTimeout(() => {
+            if (audioRef.current) {
+              const playPromise = audioRef.current.play();
+              if (playPromise !== undefined) {
+                playPromise
+                  .then(() => {
+                    startTimer();
+                    setIsPlaying(true);
+                  })
+                  .catch(error => {
+                    console.error("Error auto-playing audio:", error);
+                  });
+              }
+            }
+          }, 1000);
         }
       }, []);
       
@@ -1043,7 +1103,7 @@
         setProgress(0);
         setDuration(0);
 
-        updateURLWithSongId(track.id);
+        updateURLWithTrackSlug(track.slug);
 
         // Cross-game: dip background to black, swap source mid-dip, fade back in.
         // Same game: leave background untouched.
@@ -1637,19 +1697,30 @@
       );
     };
 
-    // Function to update URL with the current song ID
-    const updateURLWithSongId = (songId) => {
+    // Function to update URL with the current track slug
+    const updateURLWithTrackSlug = (trackSlug) => {
       const url = new URL(window.location);
-      url.hash = `song=${songId}`;
+      url.hash = `track=${encodeURI(trackSlug)}`;
       window.history.replaceState({}, '', url);
     };
 
-    // Function to get song ID from URL hash
-    const getSongIdFromURL = () => {
-      const hash = window.location.hash;
-      if (hash && hash.includes('song=')) {
-        return hash.split('song=')[1];
+    // Function to get track from URL hash. Supports legacy #song=ID links.
+    const getTrackFromURL = (tracks) => {
+      const hash = window.location.hash.replace(/^#/, '');
+      if (!hash) return null;
+
+      const params = new URLSearchParams(hash);
+      const trackSlug = params.get('track');
+      if (trackSlug) {
+        const decodedSlug = decodeURIComponent(trackSlug);
+        return tracks.find(track => track.slug === decodedSlug) || null;
       }
+
+      const legacySongId = params.get('song');
+      if (legacySongId) {
+        return tracks.find(track => track.id.toString() === legacySongId) || null;
+      }
+
       return null;
     };
 
