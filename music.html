@@ -1544,7 +1544,12 @@
                   return grouped.map((group, groupIdx) => (
                     <div key={group.game.id}>
                       <div className="playlist-group-header flex items-center gap-2">
-                        <span>{group.game.title}</span>
+                        <a
+                          href={group.game.url}
+                          className="hover:text-white transition-colors hover:underline"
+                        >
+                          {group.game.title}
+                        </a>
                         <span style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }}></span>
                         <span style={{ opacity: 0.7 }}>{group.tracks.length}</span>
                       </div>
