@@ -389,6 +389,13 @@
         hasVideo: true,
         videoUrl: "https://unsame.fun/videos/previews/runway.mp4"
       },
+      {
+        id: "hop-hop-donut",
+        title: "Hop Hop! Donut",
+        url: "https://store.steampowered.com/app/4189000/Hop_Hop_Donut/",
+        coverArt: "https://unsame.fun/images/covers/hophopdonut.png",
+        hasVideo: false
+      },
       { 
         id: "love-stickin", 
         title: "Love Stickin'", 
@@ -670,6 +677,36 @@
         gameId: "problematic-train",
         composerId: "shawntrrttll",
         audioUrl: "https://unsame.fun/audios/music/train of thought.mp3"
+      },
+
+      // Songs from "Hop Hop! Donut"
+      {
+        id: 30,
+        title: "Brand New Day",
+        gameId: "hop-hop-donut",
+        composerId: "arx",
+        audioUrl: "https://unsame.fun/audios/music/hophopdonut/1 Brand New Day.mp3"
+      },
+      {
+        id: 31,
+        title: "Donut's Adventure",
+        gameId: "hop-hop-donut",
+        composerId: "arx",
+        audioUrl: "https://unsame.fun/audios/music/hophopdonut/2 Donut's Adventure.mp3"
+      },
+      {
+        id: 32,
+        title: "Lost In The Woods",
+        gameId: "hop-hop-donut",
+        composerId: "arx",
+        audioUrl: "https://unsame.fun/audios/music/hophopdonut/3 Lost In The Woods.mp3"
+      },
+      {
+        id: 33,
+        title: "Helium Race",
+        gameId: "hop-hop-donut",
+        composerId: "arx",
+        audioUrl: "https://unsame.fun/audios/music/hophopdonut/4 Helium Race.mp3"
       },
     ];
 
@@ -1527,8 +1564,8 @@
                               <img
                                 src={track.game.coverArt}
                                 alt=""
-                                className="w-11 h-11 object-cover rounded-lg mr-4"
-                                style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
+                                className="object-cover rounded-lg mr-4"
+                                style={{ width: '63px', height: '50px', boxShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
                               />
                               <div className="min-w-0 flex-1">
                                 <h4 className={`font-medium truncate ${isCurrent ? 'text-white' : 'text-gray-100'}`} style={{ fontSize: '0.95rem' }}>
