@@ -5,22 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO & Discovery -->
-    <meta name="description" content="Gulltastrophe is a 3D seagull action sandbox — fly, dive-bomb, and poop your way to reclaiming your island from humans. Coming 2026 on PC &amp; Switch.">
+    <meta name="description" content="Gulltastrophe is a funny 3D seagull action game. Reclaim your island home: fly, dash and combine foods to deliver hilarious poop combos — solo or co-op with friends. Coming 2026 on PC &amp; Switch.">
+    <meta name="keywords" content="Gulltastrophe, seagull game, funny animal game, co-op, family friendly, physics sandbox, third person, 3D action, unSAME Studio">
     <link rel="canonical" href="https://unsame.fun/seagull">
 
     <!-- Open Graph -->
     <meta property="og:type" content="game">
     <meta property="og:site_name" content="unSAME Studio">
-    <meta property="og:title" content="Gulltastrophe — A 3D Seagull Action Sandbox">
-    <meta property="og:description" content="Fly, dive-bomb, and poop your way to reclaiming your island from humans. A chaotic 3D seagull action sandbox. Coming 2026 on PC &amp; Switch.">
-    <meta property="og:image" content="https://unsame.fun/images/gulltastrophe.png">
+    <meta property="og:title" content="Gulltastrophe — It's time to cause a Gulltastrophe!">
+    <meta property="og:description" content="Reclaim your island home: fly, dash and combine foods to deliver hilarious poop combos! Play solo or with friends. And yes... you can steal chips.">
+    <meta property="og:image" content="https://unsame.fun/images/covers/gulltastrophe.png">
     <meta property="og:url" content="https://unsame.fun/seagull">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Gulltastrophe — A 3D Seagull Action Sandbox">
-    <meta name="twitter:description" content="Fly, dive-bomb, and poop your way to reclaiming your island from humans. A chaotic 3D seagull action sandbox. Coming 2026 on PC &amp; Switch.">
-    <meta name="twitter:image" content="https://unsame.fun/images/gulltastrophe.png">
+    <meta name="twitter:title" content="Gulltastrophe — It's time to cause a Gulltastrophe!">
+    <meta name="twitter:description" content="Reclaim your island home: fly, dash and combine foods to deliver hilarious poop combos! Play solo or with friends. And yes... you can steal chips.">
+    <meta name="twitter:image" content="https://unsame.fun/images/covers/gulltastrophe.png">
 
     <!-- add font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -634,6 +635,356 @@
             }
         }
 
+        /* Hero hook */
+        .hero-hook {
+            font-size: clamp(1.6em, 5vw, 2.2em);
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 0 0 12px;
+        }
+
+        .hero-sub {
+            margin: 0;
+            opacity: 0.95;
+        }
+
+        /* Tag chips */
+        .tag-chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+        }
+
+        .tag-chip {
+            border: 2px solid white;
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.95em;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.15);
+            transition: transform 0.2s;
+        }
+
+        .tag-chip:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        /* Section headings */
+        .section-title {
+            font-size: clamp(1.6em, 6vw, 2.4em);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 80px 0 10px;
+        }
+
+        .intro-lead {
+            font-weight: 700;
+            font-size: 1.15em;
+        }
+
+        /* Feature rows: text + looping visual, alternating sides */
+        .features {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 70px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            text-align: left;
+        }
+
+        .feature:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .feature-text {
+            flex: 1 1 0;
+        }
+
+        .feature-text h3 {
+            font-size: 1.9em;
+            font-weight: 800;
+            margin: 0 0 12px;
+        }
+
+        .feature-text p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .feature-media {
+            flex: 1.1 1 0;
+            aspect-ratio: 16/9;
+            border: 4px solid white;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 0 rgba(0, 0, 0, 0.15);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:nth-child(even) .feature-media {
+            transform: rotate(2deg);
+        }
+
+        .feature .feature-media:hover {
+            transform: scale(1.05) rotate(0deg);
+        }
+
+        .feature-media video,
+        .feature-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Co-op visual: two gulls, P1 and P2 */
+        .coop-visual {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4%;
+            background: linear-gradient(#5bb6f0 0 62%, #f3e2b8 62% 100%);
+        }
+
+        .coop-gull {
+            position: relative;
+            width: 42%;
+        }
+
+        .coop-gull img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            animation: bob 1.6s ease-in-out infinite;
+        }
+
+        .coop-gull.p2 img {
+            transform: scaleX(-1);
+            animation-name: bob-flipped;
+            animation-delay: 0.4s;
+        }
+
+        .coop-tag {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: #1774bc;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 2px 12px;
+            font-size: clamp(0.8em, 2vw, 1.1em);
+        }
+
+        .coop-gull.p2 .coop-tag {
+            background: #ffd23f;
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8%); }
+        }
+
+        @keyframes bob-flipped {
+            0%, 100% { transform: scaleX(-1) translateY(0); }
+            50% { transform: scaleX(-1) translateY(-8%); }
+        }
+
+        /* Key features card */
+        .key-features {
+            max-width: 640px;
+            margin: 80px auto 40px;
+            padding: 30px 40px;
+            background: white;
+            color: #1774bc;
+            border-radius: 20px;
+            text-align: left;
+            box-shadow: 0 10px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .key-features h3 {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 1.6em;
+            font-weight: 800;
+            margin: 0 0 16px;
+        }
+
+        .key-features ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .key-features li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1.2em;
+            font-weight: 600;
+            padding: 8px 0;
+        }
+
+        .key-features li + li {
+            border-top: 2px dashed rgba(23, 116, 188, 0.2);
+        }
+
+        .key-features li::before {
+            content: '';
+            flex: 0 0 32px;
+            height: 32px;
+            background: url('images/seagull/segullicon.png') center / contain no-repeat;
+            border-radius: 50%;
+        }
+
+        /* Community CTA */
+        .community-cta {
+            max-width: 700px;
+            margin: 60px auto 0;
+            padding: 0 20px;
+            font-size: 1.25em;
+            line-height: 1.5;
+        }
+
+        .community-cta strong {
+            display: block;
+            font-size: 1.4em;
+            font-weight: 800;
+        }
+
+        /* More from unSAME (family shot) */
+        .more-games {
+            margin: 60px auto 20px;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        /* keep the studio name's casing ("unSAME") intact */
+        .more-games .section-title {
+            text-transform: none;
+            letter-spacing: 1px;
+        }
+
+        .more-games-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 20px 0 30px;
+        }
+
+        .more-game-card {
+            background: white;
+            color: #1774bc !important;
+            border-radius: 14px;
+            overflow: hidden;
+            text-decoration: none !important;
+            transition: transform 0.3s;
+            box-shadow: 0 6px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .more-game-card:hover {
+            transform: scale(1.08) rotate(3deg);
+        }
+
+        .more-game-card:nth-child(even):hover {
+            transform: scale(1.08) rotate(-3deg);
+        }
+
+        .more-game-card img {
+            width: 100%;
+            aspect-ratio: 315/250;
+            object-fit: cover;
+            display: block;
+        }
+
+        .more-game-card h4 {
+            margin: 10px 12px 2px;
+            font-size: 1.1em;
+            font-weight: 800;
+        }
+
+        .more-game-card p {
+            margin: 0 12px 12px;
+            font-size: 0.9em;
+            line-height: 1.3;
+        }
+
+        .see-all-link {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .studio-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.9;
+        }
+
+        .studio-badge img {
+            height: 28px;
+            width: auto;
+        }
+
+        @media (max-width: 768px) {
+            .feature,
+            .feature:nth-child(even) {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .feature-media {
+                width: 100%;
+                flex: none;
+            }
+
+            .feature-text h3 {
+                font-size: 1.6em;
+            }
+
+            .features {
+                gap: 60px;
+            }
+
+            .key-features {
+                padding: 24px 20px;
+            }
+
+            .key-features li {
+                font-size: 1.05em;
+            }
+
+            .more-games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-title {
+                margin-top: 60px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .coop-gull img { animation: none; }
+        }
+
     </style>
 
   <script type="application/ld+json">
@@ -643,12 +994,13 @@
     "name": "Gulltastrophe",
     "alternateName": "鸥买嘎",
     "url": "https://unsame.fun/seagull",
-    "description": "A 3D seagull action sandbox — fly, dive-bomb, and poop your way to reclaiming your island from humans.",
-    "genre": ["Action", "Sandbox", "Comedy"],
+    "description": "A funny 3D seagull action game. Reclaim your island home: fly, dash and combine foods to deliver hilarious poop combos. Play solo or co-op with friends.",
+    "genre": ["Action", "Adventure", "Sandbox", "Comedy", "Physics"],
+    "playMode": ["SinglePlayer", "CoOp"],
     "gamePlatform": ["PC", "Nintendo Switch"],
     "applicationCategory": "Game",
     "operatingSystem": "Windows",
-    "image": "https://unsame.fun/images/gulltastrophe.png",
+    "image": "https://unsame.fun/images/covers/gulltastrophe.png",
     "author": {
       "@type": "Organization",
       "name": "unSAME Studio",
@@ -803,7 +1155,18 @@
 
         <!-- Description -->
         <div class="description">
-            <p data-translate="description1">It's time to cause a Gulltastrophe...</p>
+            <p class="hero-hook" data-translate="heroHook">It's time to cause a Gulltastrophe!</p>
+            <p class="hero-sub" data-translate="heroSub">Reclaim your island home: Fly, Dash and combine foods to deliver hilarious Poop combos! Play solo or with friends. And yes... you can steal chips.</p>
+        </div>
+
+        <!-- Tags (mirrors Steam tags) -->
+        <div class="tag-chips">
+            <span class="tag-chip" data-translate="tagFunny">Funny</span>
+            <span class="tag-chip" data-translate="tagAnimals">Animals</span>
+            <span class="tag-chip" data-translate="tagCoop">Co-op</span>
+            <span class="tag-chip" data-translate="tagFamily">Family Friendly</span>
+            <span class="tag-chip" data-translate="tagSandbox">Physics Sandbox</span>
+            <span class="tag-chip" data-translate="tagThirdPerson">Third Person</span>
         </div>
 
         <!-- Wishlist Button -->
@@ -856,10 +1219,62 @@
             </div> -->
         </div>
 
-        <!-- Description -->
+        <!-- About -->
+        <h2 class="section-title" data-translate="aboutTitle">Take Back Your Island</h2>
         <div class="description">
-            <p data-translate="description2">Gulltastrophe is a 3D Seagull Action Game where you play as the Seagull.</p>
-            <p data-translate="description3">Humans have taken over your island as a vacation spot. Fly, Dash, and Poop on people. Kick all of them out and take back your island</p>
+            <p class="intro-lead" data-translate="about1">The humans are turning your island into their vacation spot — it's time to cause a Gulltastrophe!</p>
+            <p data-translate="about2">Fly, Dash and Poop your way to victory in this funny 3D seagull action game. Explore the island, steal food and wage gullrilla warfare against the invaders.</p>
+            <p data-translate="about3">Combine unique sequences of food to unleash hilarious Poop combos, or show who's top of the pecking order by turning your environment to your advantage. But watch out for the police — they're out in numbers and only too eager to send you squawking!</p>
+        </div>
+
+        <!-- Feature pillars, each with a visual (GIF-style loops break up the text) -->
+        <div class="features">
+            <div class="feature">
+                <div class="feature-text">
+                    <h3 data-translate="feature1Title">Crappy Gameplay</h3>
+                    <p data-translate="feature1Body">At the core of Gulltastrophe is its highly sophisticated pooping mechanic. Discover different sequences of foods and their ramifications when dropped from a great height. Discharge scorching and spicy, thunderously explosive or wonderfully whiffy deliveries down below and watch the chaos unfurl. Bombs away!</p>
+                </div>
+                <div class="feature-media">
+                    <video src="videos/previews/seagull.mp4" poster="images/seagull/screenshots/gulltastrophe-2.webp" autoplay muted loop playsinline preload="metadata" aria-label="Gulltastrophe gameplay: eating food and pooping combos"></video>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-text">
+                    <h3 data-translate="feature2Title">Physics Sandbox Adventure</h3>
+                    <p data-translate="feature2Body">Use your inherent knowledge of the island to turn the tide against these beachcombers. Kick over sandcastles, blow away picnics and send coconuts tumbling onto unsuspecting holidaymakers. Anyone would think you're enjoying this!</p>
+                </div>
+                <div class="feature-media">
+                    <img src="images/seagull/screenshots/gulltastrophe-7.webp" alt="The seagull soaring over the island's beaches, cliffs, farm and lighthouse" loading="lazy">
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-text">
+                    <h3 data-translate="feature3Title">Two Gulls, One Coup</h3>
+                    <p data-translate="feature3Body">What's more intimidating than a seagull at the beach? A flock of seagulls. Swoop in with your pals and play solo or co-op across all game modes!</p>
+                </div>
+                <div class="feature-media coop-visual" role="img" aria-label="Two seagulls, player 1 and player 2">
+                    <div class="coop-gull">
+                        <span class="coop-tag">P1</span>
+                        <img src="images/playericons/seagull.png" alt="">
+                    </div>
+                    <div class="coop-gull p2">
+                        <span class="coop-tag">P2</span>
+                        <img src="images/playericons/seagull.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="key-features">
+            <h3 data-translate="keyFeaturesTitle">Key Features</h3>
+            <ul>
+                <li data-translate="keyFeature1">You're a cute seagull.</li>
+                <li data-translate="keyFeature2">Play solo or co-op.</li>
+                <li data-translate="keyFeature3">3 sandbox levels filled with fun surprises to discover.</li>
+                <li data-translate="keyFeature4">Unlock special abilities with unique poop combos.</li>
+                <li data-translate="keyFeature5">Dedicated Squawk! button.</li>
+            </ul>
         </div>
 
         <!-- Coming Soon -->
@@ -883,9 +1298,15 @@
             </div>
         </div>
 
+        <!-- Community -->
+        <div class="community-cta">
+            <strong data-translate="communityTitle">Join the Flock!</strong>
+            <span data-translate="communityBody">Hang out with the devs on Discord for devlogs, behind-the-scenes peeks and first news on playtests.</span>
+        </div>
+
         <!-- Social Media Links (now without press kit) -->
         <div class="social-links">
-            <a href="https://discord.gg/7whezUZwGY" target=”_blank” class="social-icon">
+            <a href="https://discord.gg/7whezUZwGY" target="_blank" class="social-icon">
                 <img src="images/platforms/discord.png" alt="Discord">
             </a>
             <a href="https://x.com/unsamestudio" target="_blank" class="social-icon">
@@ -929,13 +1350,45 @@
 
         <!-- New Press Kit Button -->
         <div class="press-kit-container">
-            <a href="https://drive.google.com/drive/folders/1_nrp297O69YjLQjUSkdXWRJmTegTdpO7?usp=sharing" target=”_blank” class="press-kit-button">
+            <a href="https://drive.google.com/drive/folders/1_nrp297O69YjLQjUSkdXWRJmTegTdpO7?usp=sharing" target="_blank" class="press-kit-button">
                 <img src="images/seagull/presskitbtn.png" alt="Press Kit">
             </a>
         </div>
 
 
+        <!-- More from unSAME (family shot / cross-sell) -->
+        <section class="more-games">
+            <h2 class="section-title" data-translate="moreGamesTitle">More from unSAME</h2>
+            <div class="more-games-grid">
+                <a href="/runway" class="more-game-card">
+                    <img src="images/covers/runway.png" alt="Runway™" loading="lazy">
+                    <h4>Runway™</h4>
+                    <p data-translate="moreRunway">Fashion-themed action with model-kicking mechanics</p>
+                </a>
+                <a href="https://store.steampowered.com/app/4189000/Hop_Hop_Donut/" target="_blank" class="more-game-card">
+                    <img src="images/covers/hophopdonut.png" alt="Hop Hop! Donut" loading="lazy">
+                    <h4>Hop Hop! Donut</h4>
+                    <p data-translate="moreDonut">2D platformer inspired by Balloon Fight</p>
+                </a>
+                <a href="https://unsame.itch.io/plug-it-in" target="_blank" class="more-game-card">
+                    <img src="images/covers/plugitin.png" alt="PLUG IT IN" loading="lazy">
+                    <h4>PLUG IT IN</h4>
+                    <p data-translate="morePlug">A juicy puzzle game about plugs and outlets</p>
+                </a>
+                <a href="/solara" class="more-game-card">
+                    <img src="images/covers/solara.png" alt="Solara" loading="lazy">
+                    <h4>Solara</h4>
+                    <p data-translate="moreSolara">A heartfelt puzzle adventure about connection</p>
+                </a>
+            </div>
+            <a href="/games.html" class="see-all-link" data-translate="seeAllGames">See all our games →</a>
+        </section>
+
         <div class="description">
+            <a href="https://unsame.fun" class="studio-badge">
+                <img src="images/Logo White (Small).png" alt="unSAME Studio">
+                <span data-translate="studioBadge">An unSAME Studio game</span>
+            </a>
             <p><span data-translate="copyright">© 2026</span> <a href="https://unsame.fun">unSAME Studio LLC</a></p>
         </div>
     </div>
