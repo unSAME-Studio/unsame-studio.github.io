@@ -4,4 +4,20 @@ Allow: /
 Disallow: /index_old.html
 Disallow: /elements.html
 
+# AI assistants and search crawlers are welcome.
+# A plain-text summary of the studio for LLMs lives at https://unsame.fun/llms.txt
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: anthropic-ai
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /index_old.html
+Disallow: /elements.html
+
 Sitemap: https://unsame.fun/sitemap.xml

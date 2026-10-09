@@ -1,0 +1,37 @@
+# unSAME Studio
+
+> unSAME Studio (unSAME Studio LLC) is an independent game studio that makes weird, heartfelt games unlike anything you have played before. It started in 2019 as a group of UC Santa Cruz students and has since built 50+ games and demos. Its games include Gulltastrophe, Runway™, Hop Hop! Donut, and PLUG IT IN. Slogan: "unSAME is Fun!"
+
+The studio's style is built on game feel: polished, highly interactive experiences where every button press feels satisfying. The team is spread across the world and works with a wider circle of artists, musicians, and writers. Its games ship on PC (Steam, Epic Games Store, itch.io), and Gulltastrophe is also coming to Nintendo Switch.
+
+## Studio
+
+- [About](https://unsame.fun/about): Studio story, core team, and collaborators
+- [Games](https://unsame.fun/games): Full catalog, organized as New Release, Coming Next, Action, Story, Casual, and Experimental
+- [Press & Contact](https://unsame.fun/press): Press kits, contact emails, and social links
+
+## Featured games
+
+- [Gulltastrophe](https://unsame.fun/seagull): Funny 3D seagull action game (Chinese title: 鸥买嘎). Reclaim your island home: fly, dash, and combine foods to deliver hilarious poop combos, solo or in co-op. Coming 2026 to PC and Nintendo Switch. [Wishlist on Steam](https://store.steampowered.com/app/3532810/Gulltastrophe)
+- [Runway™](https://unsame.fun/runway): Y2K arcade action game (Chinese title: 秀台™). Play as fashion robot Lisa and kick every uninspired model off the runway. Out now on [Steam](https://store.steampowered.com/app/3879500/Runway/), [Epic Games Store](https://store.epicgames.com/en-US/p/runway-088714), and [itch.io](https://unsame.itch.io/runway)
+- [Hop Hop! Donut](https://store.steampowered.com/app/4189000/Hop_Hop_Donut/): 2D platformer inspired by Balloon Fight. Out now on Steam and [itch.io](https://unsame.itch.io/hop-hop-donut)
+- [PLUG IT IN](https://unsame.itch.io/plug-it-in): A juicy puzzle game about plugs and outlets
+- [Solara](https://unsame.fun/solara): A heartfelt puzzle adventure about connection. Follow Sora and Ray deeper into the ruins to uncover the truth
+
+## Team
+
+- Yiyang Lu: Programming
+- Sam Feng: Art, Design, Programming
+- Eizi Yu: Design, Programming
+- Yukiqioqio: 3D Art
+
+## Contact
+
+- Business & press: unsamestudio@gmail.com
+- Player support: play@unsame.fun
+
+## Optional
+
+- [Soundtracks](https://unsame.fun/music): Original music from unSAME Studio games
+- [Privacy Policy](https://unsame.fun/privacy)
+- [itch.io](https://unsame.itch.io), [X](https://x.com/unsamestudio), [YouTube](https://www.youtube.com/@unsamestudio), [TikTok](https://www.tiktok.com/@unsame_studio), [Instagram](https://www.instagram.com/unsamestudio), [Bilibili](https://space.bilibili.com/12186485), [RedNote](https://www.xiaohongshu.com/user/profile/6772d1d6000000001801638e)
