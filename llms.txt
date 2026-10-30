@@ -24,6 +24,7 @@ The studio's style is built on game feel: polished, highly interactive experienc
 - Sam Feng: Art, Design, Programming
 - Eizi Yu: Design, Programming
 - Yukiqioqio: 3D Art
+- 四蛋: Marketing
 
 ## Contact
 
